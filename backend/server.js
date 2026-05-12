@@ -2,11 +2,11 @@ const express = require('express');
 const path = require('path');
 
 // Conexión MySQL
-require('./backend/database/db');
+const conexion = require('./database/db');
 
 const app = express();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Permite trabajar con JSON
 app.use(express.json());
@@ -20,6 +20,29 @@ app.get('/', (req, res) => {
     res.sendFile(
         path.join(__dirname, 'views', 'index.html')
     );
+
+});
+
+// Ruta usuarios
+app.get('/usuarios', (req, res) => {
+
+    const sql = 'SELECT * FROM Usuario';
+
+    conexion.query(sql, (error, resultados) => {
+
+        if (error) {
+
+            console.error(error);
+
+            return res.status(500).json({
+                error: 'Error al consultar usuarios'
+            });
+
+        }
+
+        res.json(resultados);
+
+    });
 
 });
 
