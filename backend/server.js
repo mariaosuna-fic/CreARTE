@@ -22,14 +22,23 @@ app.use(express.json());
 
 // Carpeta frontend
 app.use(express.static(
-    path.join(__dirname, '..', 'frontend')
+    path.join(__dirname, '..', 'public')
 ));
 
 // Ruta principal
 app.get('/', (req, res) => {
     res.sendFile(
-        path.join(__dirname, '..', 'frontend', 'index.html')
+        path.join(__dirname, '..', 'views', 'index.html')
     );
+});
+
+// Ruta CRUD Clases
+app.get('/clases-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'clases.html')
+    );
+
 });
 
 // Rutas
