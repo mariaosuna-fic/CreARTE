@@ -1,54 +1,51 @@
 const express = require('express');
 const path = require('path');
 
-// Conexión MySQL
-const conexion = require('./database/db');
+const usuariosRoutes = require('./routes/usuarios.routes');
+const alumnosRoutes = require('./routes/alumnos.routes');
+const profesoresRoutes = require('./routes/profesores.routes');
+const clasesRoutes = require('./routes/clases.routes');
+const horariosRoutes = require('./routes/horarios.routes');
+const salonesRoutes = require('./routes/salones.routes');
+const clasesProgramadasRoutes = require('./routes/clases_programadas.routes');
+const inscripcionesRoutes = require('./routes/inscripciones.routes');
+const asistenciasRoutes = require('./routes/asistencias.routes');
+const mensualidadesRoutes = require('./routes/mensualidades.routes');
+const pagosRoutes = require('./routes/pagos.routes');
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
-// Permite trabajar con JSON
+// Permite JSON
 app.use(express.json());
 
-// Carpeta de archivos estáticos
-app.use(express.static('public'));
+// Carpeta frontend
+app.use(express.static(
+    path.join(__dirname, '..', 'frontend')
+));
 
 // Ruta principal
 app.get('/', (req, res) => {
-
     res.sendFile(
-        path.join(__dirname, 'views', 'index.html')
+        path.join(__dirname, '..', 'frontend', 'index.html')
     );
-
 });
 
-// Ruta usuarios
-app.get('/usuarios', (req, res) => {
+// Rutas
+app.use('/usuarios', usuariosRoutes);
+app.use('/alumnos', alumnosRoutes);
+app.use('/profesores', profesoresRoutes);
+app.use('/clases', clasesRoutes);
+app.use('/horarios', horariosRoutes);
+app.use('/salones', salonesRoutes);
+app.use('/clases-programadas', clasesProgramadasRoutes);
+app.use('/inscripciones', inscripcionesRoutes);
+app.use('/asistencias', asistenciasRoutes);
+app.use('/mensualidades', mensualidadesRoutes);
+app.use('/pagos', pagosRoutes);
 
-    const sql = 'SELECT * FROM Usuario';
-
-    conexion.query(sql, (error, resultados) => {
-
-        if (error) {
-
-            console.error(error);
-
-            return res.status(500).json({
-                error: 'Error al consultar usuarios'
-            });
-
-        }
-
-        res.json(resultados);
-
-    });
-
-});
-
-// Inicializa el servidor
+// Inicializa servidor
 app.listen(PORT, () => {
-
     console.log(`Servidor corriendo en puerto ${PORT}`);
-
 });
