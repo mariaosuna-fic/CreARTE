@@ -12,6 +12,7 @@ const inscripcionesRoutes = require('./routes/inscripciones.routes');
 const asistenciasRoutes = require('./routes/asistencias.routes');
 const mensualidadesRoutes = require('./routes/mensualidades.routes');
 const pagosRoutes = require('./routes/pagos.routes');
+const autenticacionRoutes = require('./routes/autenticacion.routes');
 
 const app = express();
 
@@ -53,6 +54,7 @@ app.use('/inscripciones', inscripcionesRoutes);
 app.use('/asistencias', asistenciasRoutes);
 app.use('/mensualidades', mensualidadesRoutes);
 app.use('/pagos', pagosRoutes);
+app.use('/', autenticacionRoutes);
 
 // Inicializa servidor
 app.listen(PORT, () => {
