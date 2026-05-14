@@ -36,7 +36,16 @@ formLogin.addEventListener('submit', async (e) => {
 
             alert('Bienvenido/a ' + resultado.usuario.nombre);
 
-            formLogin.reset();
+            // Redirección según rol
+            if (resultado.usuario.rol === 'admin') {
+
+                window.location.href = '/clases-admin';
+
+            } else {
+
+                window.location.href = '/';
+
+            }
 
         }
 
