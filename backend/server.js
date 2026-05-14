@@ -42,6 +42,29 @@ app.get('/clases-admin', (req, res) => {
 
 });
 
+// Ruta CRUD Alumnos
+app.get('/alumnos-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'alumnos.html')
+    );
+
+});
+
+// Ruta CRUD Profesores
+app.get('/profesores-admin', (req, res) => {
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'profesores.html')
+    );
+});
+
+// Ruta CRUD Salones
+app.get('/salones-admin', (req, res) => {
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'salones.html')
+    );
+});
+
 // Rutas de autenticación
 app.get('/login', (req, res) => {
     res.sendFile(
@@ -55,7 +78,7 @@ app.get('/registro', (req, res) => {
     );
 });
 
-// Rutas
+// Rutas API
 app.use('/usuarios', usuariosRoutes);
 app.use('/alumnos', alumnosRoutes);
 app.use('/profesores', profesoresRoutes);
