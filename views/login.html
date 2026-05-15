@@ -4,44 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - CREARTE</title>
+
+    <link rel="stylesheet" href="/css/login.css">
 </head>
+
 <body>
 
-    <h1>Iniciar Sesión</h1>
+    <div class="container">
 
-    <form id="formLogin">
+        <!-- LADO IZQUIERDO -->
+        <div class="left-section">
 
-        <label>Correo</label>
-        <br>
-        <input 
-            type="email" 
-            id="correo" 
-            placeholder="correo@gmail.com"
-            required
-        >
+            <img 
+                src="/assets/fondo azul login.svg" 
+                alt="Fondo Azul"
+                class="bg-blue"
+            >
 
-        <br><br>
+            <img 
+                src="/assets/Fondo de esculturas.svg" 
+                alt="Esculturas"
+                class="sculpture"
+            >
 
-        <label>Contraseña</label>
-        <br>
-        <input 
-            type="password" 
-            id="contraseña"
-            placeholder="********"
-            required
-        >
+        </div>
 
-        <br><br>
+        <!-- LADO DERECHO -->
+        <div class="right-section">
 
-        <button type="submit">
-            Iniciar Sesión
-        </button>
+            <div class="login-card">
 
-    </form>
+                <!-- LOGO -->
+                <img 
+                    src="/assets/logo crearte azul.svg" 
+                    alt="Logo CreArte"
+                    class="logo"
+                >
 
-    <br>
+                <!-- TITULO -->
+                <h1>Bienvenido de nuevo</h1>
 
-    <p id="mensaje"></p>
+                <p class="subtitle">
+                    Inicia sesión para continuar tu camino creativo.
+                </p>
+
+                <!-- FORMULARIO -->
+                <form id="formLogin">
+
+                    <!-- CORREO -->
+                    <input 
+                        type="email" 
+                        id="correo"
+                        placeholder="Ingresa tu correo electrónico"
+                        required
+                    >
+
+                    <!-- CONTRASEÑA -->
+                    <input 
+                        type="password" 
+                        id="contraseña"
+                        placeholder="Contraseña"
+                        required
+                    >
+
+                    <!-- BOTON -->
+                    <button type="submit">
+                        Iniciar sesión
+                    </button>
+
+                    <!-- OPCIONES -->
+                    <div class="options">
+
+                        <label class="remember">
+                            <input type="checkbox">
+                            Recuérdame
+                        </label>
+
+                        <a href="#">
+                            ¿Olvidaste tu contraseña?
+                        </a>
+
+                    </div>
+
+                    <!-- MENSAJE -->
+                    <p id="mensaje"></p>
+
+                    <!-- DIVISOR -->
+                    <div class="divider">
+
+                        <span></span>
+
+                        <p>O continua con</p>
+
+                        <span></span>
+
+                    </div>
+
+                    <!-- LOGIN SOCIAL -->
+                    <div class="social-login">
+
+                        <button type="button" class="social-btn">
+
+                            <img 
+                                src="/assets/icono logo google.svg" 
+                                alt="Google"
+                            >
+
+                        </button>
+
+                        <button type="button" class="social-btn">
+
+                            <img 
+                                src="/assets/icono logo facebook.svg" 
+                                alt="Facebook"
+                            >
+
+                        </button>
+
+                        <button type="button" class="social-btn">
+
+                            <img 
+                                src="/assets/icono logo apple.svg" 
+                                alt="Apple"
+                            >
+
+                        </button>
+
+                    </div>
+
+                    <!-- REGISTRO -->
+                    <p class="register">
+                        ¿Todavía no tienes una cuenta?
+                        <a href="#">
+                            Regístrate
+                        </a>
+                    </p>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
 
     <script src="/js/login.js"></script>
 

@@ -1,0 +1,230 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #f5f5f5;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+}
+
+/* =========================
+   LADO IZQUIERDO
+========================= */
+
+.left-section {
+  width: 58%;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-blue {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.sculpture {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* =========================
+   LADO DERECHO
+========================= */
+
+.right-section {
+  width: 42%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f3ef;
+  position: relative;
+}
+
+.login-card {
+  width: 78%;
+  max-width: 450px;
+  background: #ffffff;
+  border-radius: 30px;
+  padding: 40px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  width: 180px;
+  display: block;
+  margin: 0 auto 30px;
+}
+
+h1 {
+  font-size: 42px;
+  color: #1f4d7a;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  color: #32618f;
+  font-size: 18px;
+  margin-bottom: 35px;
+  line-height: 1.5;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 18px 20px;
+  border: none;
+  border-radius: 50px;
+  background: #d9d9d9;
+  margin-bottom: 22px;
+  font-size: 15px;
+  outline: none;
+}
+
+input::placeholder {
+  color: #2e5f8c;
+}
+
+button[type="submit"] {
+  width: 100%;
+  padding: 18px;
+  border: none;
+  border-radius: 50px;
+  background: #9bb7c2;
+  color: white;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: 0.3s;
+}
+
+button[type="submit"]:hover {
+  background: #89a8b5;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  font-size: 14px;
+}
+
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #555;
+}
+
+.options a {
+  text-decoration: none;
+  color: #1f4d7a;
+  font-weight: 500;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 35px 0 25px;
+}
+
+.divider span {
+  flex: 1;
+  height: 2px;
+  background: #d9d9d9;
+}
+
+.divider p {
+  color: #666;
+  font-size: 15px;
+}
+
+.social-login {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.social-btn {
+  width: 95px;
+  height: 60px;
+  border: 1px solid #1f4d7a;
+  border-radius: 10px;
+  background: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.social-btn:hover {
+  transform: translateY(-2px);
+}
+
+.social-btn img {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.register {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 15px;
+  color: #444;
+}
+
+.register a {
+  color: #1f4d7a;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 1024px) {
+
+  .left-section {
+    display: none;
+  }
+
+  .right-section {
+    width: 100%;
+  }
+
+  .login-card {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 34px;
+  }
+
+  button[type="submit"] {
+    font-size: 22px;
+  }
+}
