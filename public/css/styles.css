@@ -12,6 +12,9 @@
     --color-claro: #f5f1ea;
     --color-texto: #333;
     --color-blanco: #ffffff;
+    --login-gradient: linear-gradient(180deg, #ff8c00 0%, #ff4500 100%);
+    --color-morado: #9d8df1;
+    --color-rosa-claro: #ffd1dc;
 }
 
 html{
@@ -40,6 +43,75 @@ body{
     font-size: 1.8rem;
     letter-spacing: 2px;
     color: var(--color-blanco) !important;
+}
+
+/* --- AJUSTES PARA EL PANEL ADMIN --- */
+
+.navbar-admin {
+    background-color: var(--color-secundario);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    min-height: 70px; /* Altura fija para que no se vea gigante */
+}
+
+.logo-container-admin {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-admin {
+    height: 50px; /* ESTO ES LO IMPORTANTE: Ajusta el tamaño del logo */
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-admin span {
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+/* Ajuste del contenedor principal para que no se pegue al logo */
+.admin-container {
+    padding: 40px 10% 40px 10%; /* Más espacio arriba para que no choque con la navbar fija */
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Arreglo de los textos que se ven amontonados */
+.admin-header h1 {
+    font-size: 2.2rem;
+    color: var(--color-secundario);
+    margin-bottom: 30px;
+}
+
+.admin-header h1 span {
+    font-size: 1rem;
+    color: var(--color-morado);
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+/* Estilo para los botones de la Navbar Admin */
+.btn-logout {
+    color: #ff4500 !important;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border: 1px solid #ff4500;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #ff4500;
+    color: white !important;
 }
 
 .nav-link{
@@ -243,3 +315,149 @@ footer{
     }
 
 }
+
+/* ========================= */
+/* LOGIN SECTION (NUEVO) */
+/* ========================= */
+
+.login-page-container {
+    display: flex;
+    min-height: 90vh; /* Ajustado para que quepa debajo de tu navbar */
+    padding: 40px 10%;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--color-blanco);
+}
+
+/* Sección Izquierda */
+.login-info-side {
+    flex: 1;
+    padding-right: 50px;
+}
+
+.login-info-side h1 {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--color-secundario);
+    line-height: 1.1;
+}
+
+.login-info-side h1 span {
+    color: var(--color-morado);
+    display: block;
+    padding-bottom: 5px;
+    border-bottom: 5px solid #ff69b4; /* Línea rosa del diseño */
+    width: fit-content;
+}
+
+.feature-list {
+    margin: 30px 0;
+    list-style: none;
+}
+
+.feature-item {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+}
+
+.dot-indicator {
+    height: 35px;
+    width: 35px;
+    background-color: var(--color-rosa-claro);
+    border-radius: 50%;
+    margin-right: 15px;
+}
+
+/* Sección Derecha (El formulario naranja) */
+.login-form-side {
+    flex: 0 0 450px; /* Ancho fijo para el cuadro naranja */
+}
+
+.orange-card {
+    background: var(--login-gradient);
+    padding: 50px 40px;
+    border-radius: 30px;
+    color: var(--color-blanco);
+    text-align: center;
+    box-shadow: 0 15px 35px rgba(255, 69, 0, 0.3);
+}
+
+.user-avatar {
+    font-size: 60px;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.orange-card h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.orange-card p {
+    font-size: 0.9rem;
+    margin-bottom: 30px;
+    opacity: 0.9;
+}
+
+.custom-input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+.custom-input-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.custom-input-group input {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 25px;
+    border: none;
+    background-color: #e8e8e8; /* Gris claro del diseño */
+    font-family: 'Poppins', sans-serif;
+}
+
+.btn-submit-login {
+    background-color: var(--color-morado);
+    color: white;
+    border: none;
+    padding: 12px 50px;
+    border-radius: 25px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.3s ease;
+}
+
+.btn-submit-login:hover {
+    transform: scale(1.05);
+    background-color: #8a7ae0;
+}
+
+/* Responsivo para el Login */
+@media(max-width: 992px) {
+    .login-page-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 40px 20px;
+    }
+    .login-info-side {
+        padding-right: 0;
+        margin-bottom: 40px;
+    }
+    .login-info-side h1 span {
+        margin: 0 auto;
+    }
+    .feature-item {
+        justify-content: center;
+    }
+}
+

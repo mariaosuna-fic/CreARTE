@@ -3,47 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CREARTE</title>
+    <title>CreARTE - Iniciar Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css"> 
 </head>
 <body>
 
-    <h1>Iniciar Sesión</h1>
+    <nav class="navbar" style="display: flex; justify-content: space-between; align-items: center; padding: 18px 50px; position: fixed; width: 100%; top: 0; z-index: 1000;">
+        <div class="logo-container" style="display: flex; align-items: center;">
+            <img src="/img/logo_crearte.png" alt="CreARTE" style="height: 50px; margin-right: 10px;">
+            <span class="navbar-brand">CreARTE</span>
+        </div>
+        <div class="nav-links">
+            <a href="/" class="nav-link">Inicio</a>
+            <a href="#" class="nav-link">Nosotros</a>
+            <a href="#" class="nav-link">Cursos</a>
+            <a href="#" class="nav-link">Horario</a>
+            <a href="#" class="nav-link">Contacto</a>
+        </div>
+    </nav>
 
-    <form id="formLogin">
+    <main class="login-page-container" style="margin-top: 100px;">
+        
+        <section class="login-info-side">
+            <h2>Inicia sesión <br> <span>y continúa tu viaje artístico</span></h1>
+            <p style="margin-top: 20px; font-size: 1.1rem; color: #666;">
+                Accede a CreARTE para gestionar tus cursos y talento.
+            </p>
+            
 
-        <label>Correo</label>
-        <br>
-        <input 
-            type="email" 
-            id="correo" 
-            placeholder="correo@gmail.com"
-            required
-        >
+            <div class="image-wrapper" style="margin-top: 30px;">
+                <img src="/img/brushes.png" alt="Pinceles" style="width: 100%; max-width: 350px;">
+            </div>
+        </section>
 
-        <br><br>
+        <section class="login-form-side">
+            <div class="orange-card">
+                <span class="user-avatar" style="display: block; font-size: 50px; margin-bottom: 10px;">👤</span>
+                <h2>Iniciar sesión</h2>
+                <p>Ingresa tus datos para acceder</p>
 
-        <label>Contraseña</label>
-        <br>
-        <input 
-            type="password" 
-            id="contraseña"
-            placeholder="********"
-            required
-        >
+                <form action="/login" method="POST">
+                    <div class="custom-input-group">
+                        <label for="correo">Correo Electrónico</label>
+                        <input type="email" id="correo" name="correo" placeholder="tu@correo.com" required>
+                    </div>
 
-        <br><br>
+                    <div class="custom-input-group">
+                        <label for="contraseña">Contraseña</label>
+                        <input type="password" id="contraseña" name="contraseña" placeholder="••••••••" required>
+                    </div>
 
-        <button type="submit">
-            Iniciar Sesión
-        </button>
+                    <button type="submit" class="btn-submit-login">
+                        Iniciar sesión
+                    </button>
+                </form>
+            </div>
+        </section>
 
-    </form>
+    </main>
 
-    <br>
-
-    <p id="mensaje"></p>
-
-    <script src="/js/login.js"></script>
+    <footer style="margin-top: 50px;">
+        <p>&copy; 2026 CreARTE - Facultad de Informática UAS.</p>
+    </footer>
 
 </body>
 </html>
