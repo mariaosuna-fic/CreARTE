@@ -20,6 +20,7 @@ const PORT = process.env.PORT || 3000;
 
 // Permite JSON
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Carpeta frontend
 app.use(express.static(

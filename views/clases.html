@@ -2,53 +2,171 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>CRUD Clases - CREARTE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CreARTE - Administración de Clases</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/styles.css">
 </head>
-<body>
+<body class="admin-body">
 
-    <h1>Administración de Clases</h1>
+<nav class="navbar-admin">
+    <div class="logo-container-admin"> <img src="/img/logo_crearte.png" alt="CreARTE" class="logo-admin">
+        <span>CreARTE Admin</span>
+    </div>
+    <div class="nav-links">
+        <a href="/clases-admin" class="active">Clases</a>
+        <a href="/login" class="btn-logout">Cerrar Sesión</a>
+    </div>
+</nav>
 
-    <form id="formClase">
-        <input type="hidden" id="id_clase">
+    <main class="admin-container">
+        <header class="admin-header">
+            <h1>Panel de Control <span>Gestión de Clases</span></h1>
+        </header>
 
-        <label>Nombre de la clase:</label>
-        <input type="text" id="nombre_clase" required>
+        <section class="form-section" style="margin-bottom: 40px;">
+            <div style="background: linear-gradient(180deg, #ff8c00 0%, #ff4500 100%); padding: 35px; border-radius: 20px; color: white; box-shadow: 0 10px 25px rgba(255, 69, 0, 0.2);">
+                <h3 style="margin-bottom: 25px; font-size: 1.5rem; font-weight: 600; border-bottom: 2px solid rgba(255,255,255,0.2); padding-bottom: 10px;">Registro de Nuevas Clases</h3>
+                
+                <form id="claseForm" style="display: flex; flex-direction: column; gap: 20px;">
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label style="font-size: 0.9rem; font-weight: 500;">Nombre de la clase</label>
+                            <input type="text" id="nombre" placeholder="Ej: Pintura al Óleo" required style="width: 100%; padding: 12px 15px; border-radius: 10px; border: none; background-color: #ffffff; color: #333; font-family: 'Poppins', sans-serif;">
+                        </div>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label style="font-size: 0.9rem; font-weight: 500;">Tipo de Arte</label>
+                            <input type="text" id="tipo" placeholder="Ej: Arte Visual" required style="width: 100%; padding: 12px 15px; border-radius: 10px; border: none; background-color: #ffffff; color: #333; font-family: 'Poppins', sans-serif;">
+                        </div>
 
-        <label>Tipo:</label>
-        <input type="text" id="tipo" required>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label style="font-size: 0.9rem; font-weight: 500;">Nivel</label>
+                            <select id="nivel" style="width: 100%; padding: 12px 15px; border-radius: 10px; border: none; background-color: #ffffff; color: #333; font-family: 'Poppins', sans-serif; height: 45px; -webkit-appearance: none;">
+                                <option value="Principiante">Principiante</option>
+                                <option value="Intermedio">Intermedio</option>
+                                <option value="Avanzado">Avanzado</option>
+                            </select>
+                        </div>
 
-        <label>Nivel:</label>
-        <input type="text" id="nivel" required>
+                        <div style="display: flex; flex-direction: column; gap: 8px;">
+                            <label style="font-size: 0.9rem; font-weight: 500;">Cupo Disponible</label>
+                            <input type="number" id="cupo" placeholder="15" required style="width: 100%; padding: 12px 15px; border-radius: 10px; border: none; background-color: #ffffff; color: #333; font-family: 'Poppins', sans-serif;">
+                        </div>
+                    </div>
 
-        <label>Descripción:</label>
-        <textarea id="descripcion" required></textarea>
+                    <div style="display: flex; flex-direction: column; gap: 8px;">
+                        <label style="font-size: 0.9rem; font-weight: 500;">Descripción detallada de la clase</label>
+                        <textarea id="descripcion" rows="3" placeholder="Describe los materiales, objetivos o temas que se abordarán en este taller..." style="width: 100%; padding: 15px; border-radius: 10px; border: none; background-color: #ffffff; color: #333; font-family: 'Poppins', sans-serif; resize: vertical;"></textarea>
+                    </div>
 
-        <label>Cupo máximo:</label>
-        <input type="number" id="cupo_maximo" required>
+                    <div style="display: flex; gap: 15px; margin-top: 10px;">
+                        <button type="submit" style="background-color: #9d8df1; color: white; border: none; padding: 12px 35px; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 10px rgba(0,0,0,0.15);">
+                            Guardar Clase
+                        </button>
+                        <button type="button" class="btn-cancel" style="display:none; background-color: rgba(255,255,255,0.2); color: white; border: 1px solid white; padding: 12px 35px; border-radius: 25px; font-size: 1rem; font-weight: 600; cursor: pointer;">
+                            Cancelar Edición
+                        </button>
+                    </div>
 
-        <button type="submit">Guardar clase</button>
-        <button type="button" id="btnCancelar">Cancelar edición</button>
-    </form>
+                </form>
+            </div>
+        </section>
 
-    <hr>
+        <section class="table-section">
+            <div class="table-card">
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Tipo</th>
+                            <th>Nivel</th>
+                            <th>Cupo</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tablaClases">
+                        </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
 
-    <h2>Lista de clases</h2>
+    <script>
+        const claseForm = document.getElementById('claseForm');
+        const tablaClases = document.getElementById('tablaClases');
 
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Tipo</th>
-                <th>Nivel</th>
-                <th>Descripción</th>
-                <th>Cupo</th>
-                <th>Acciones</th>
-            </tr>
-        </thead>
-        <tbody id="tablaClases"></tbody>
-    </table>
+        // 1. ESCUCHAR EL ENVÍO DEL FORMULARIO (GUARDAR EN BD)
+        claseForm.addEventListener('submit', async (e) => {
+            e.preventDefault(); 
 
-    <script src="js/clases.js"></script>
+            // AQUÍ ESTÁ EL CAMBIO: Los nombres coinciden exactamente con tus columnas de MySQL
+            const datos = {
+                nombre_clase: document.getElementById('nombre').value,
+                tipo: document.getElementById('tipo').value,
+                nivel: document.getElementById('nivel').value,
+                descripcion: document.getElementById('descripcion').value,
+                cupo_maximo: document.getElementById('cupo').value
+            };
+
+            try {
+                // Usamos la ruta típica de tu CRUD automático. 
+                // Si en server.js usas un prefijo como '/api', cámbialo a '/api/clases'
+                const respuesta = await fetch('/clases', { 
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(datos)
+                });
+
+                if (respuesta.ok) {
+                    alert('¡Clase registrada con éxito en la base de datos!');
+                    claseForm.reset(); 
+                    cargarClases();    // Recarga la tabla automáticamente
+                } else {
+                    alert('Hubo un error al guardar la clase. Revisa la consola del servidor.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('No se pudo conectar con el servidor.');
+            }
+        });
+
+        // 2. FUNCIÓN PARA MOSTRAR LAS CLASES EN LA TABLA
+        async function cargarClases() {
+            try {
+                const respuesta = await fetch('/clases'); 
+                const clases = await respuesta.json();
+                
+                tablaClases.innerHTML = ''; 
+
+                clases.forEach(clase => {
+                    const fila = document.createElement('tr');
+                    fila.innerHTML = `
+                        <td>${clase.id_clase}</td>
+                        <td>${clase.nombre_clase}</td>
+                        <td>${clase.tipo}</td>
+                        <td>${clase.nivel}</td>
+                        <td>${clase.cupo_maximo}</td>
+                        <td>
+                            <button class="btn-edit" onclick="editarClase(${clase.id_clase})">✏️ Editar</button>
+                            <button class="btn-delete" onclick="eliminarClase(${clase.id_clase})">🗑️ Borrar</button>
+                        </td>
+                    `;
+                    tablaClases.appendChild(fila);
+                });
+            } catch (error) {
+                console.error('Error al cargar clases:', error);
+            }
+        }
+
+        // Cargar las clases automáticamente al abrir la página
+        document.addEventListener('DOMContentLoaded', cargarClases);
+    </script>
+
 </body>
 </html>
+

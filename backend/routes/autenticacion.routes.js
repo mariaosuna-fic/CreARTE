@@ -95,6 +95,8 @@ router.post('/login', async (req, res) => {
 
             }
 
+            delete usuario.contraseña;
+
             res.json({
                 mensaje: 'Inicio de sesión exitoso',
                 usuario
