@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Clases - CREARTE</title>
+</head>
+<body>
+
+    <h1>Administración de Clases</h1>
+
+    <form id="formClase">
+        <input type="hidden" id="id_clase">
+
+        <label>Nombre de la clase:</label>
+        <input type="text" id="nombre_clase" required>
+
+        <label>Tipo:</label>
+        <input type="text" id="tipo" required>
+
+        <label>Nivel:</label>
+        <input type="text" id="nivel" required>
+
+        <label>Descripción:</label>
+        <textarea id="descripcion" required></textarea>
+
+        <label>Cupo máximo:</label>
+        <input type="number" id="cupo_maximo" required>
+
+        <button type="submit">Guardar clase</button>
+        <button type="button" id="btnCancelar">Cancelar edición</button>
+    </form>
+
+    <hr>
+
+    <h2>Lista de clases</h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Nivel</th>
+                <th>Descripción</th>
+                <th>Cupo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody id="tablaClases"></tbody>
+    </table>
+
+    <script src="js/clases.js"></script>
+</body>
+</html>

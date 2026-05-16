@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro - CREARTE</title>
+</head>
+<body>
+
+    <h1>Registro de Usuario</h1>
+
+    <form id="formRegistro">
+
+        <label>Nombre</label>
+        <br>
+        <input 
+            type="text" 
+            id="nombre"
+            placeholder="Nombre completo"
+            required
+        >
+
+        <br><br>
+
+        <label>Correo</label>
+        <br>
+        <input 
+            type="email" 
+            id="correo"
+            placeholder="correo@gmail.com"
+            required
+        >
+
+        <br><br>
+
+        <label>Contraseña</label>
+        <br>
+        <input 
+            type="password" 
+            id="contraseña"
+            placeholder="********"
+            required
+        >
+
+        <br><br>
+
+        <label>Rol</label>
+        <br>
+
+        <select id="rol" required>
+
+            <option value="">
+                Selecciona un rol
+            </option>
+
+            <option value="alumno">
+                Alumno
+            </option>
+
+            <option value="profesor">
+                Profesor
+            </option>
+
+            <option value="admin">
+                Administrador
+            </option>
+
+        </select>
+
+        <br><br>
+
+        <button type="submit">
+            Registrarse
+        </button>
+
+    </form>
+
+    <br>
+
+    <p id="mensaje"></p>
+
+    <script src="/js/registro.js"></script>
+
+</body>
+</html>
