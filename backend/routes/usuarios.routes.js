@@ -6,7 +6,7 @@ const conexion = require('../database/db');
 
 // CRUD general
 const crudUsuarios = crearCRUD({
-    tabla: 'Usuario',
+    tabla: 'usuario',
     id: 'id_usuario',
     columnas: ['nombre', 'correo', 'contraseña', 'rol', 'estado']
 });
@@ -17,7 +17,7 @@ router.get('/', (req, res) => {
 
     const sql = `
         SELECT id_usuario, nombre, correo, rol, estado
-        FROM Usuario
+        FROM usuario
     `;
 
     conexion.query(sql, (error, resultados) => {
