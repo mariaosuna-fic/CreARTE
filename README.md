@@ -1,70 +1,98 @@
-# CreARTE
 # Introducción
-CREARTE es una aplicación web desarrollada con el objetivo de mejorar la gestión académica y administrativa de una academia de artes. El sistema busca solucionar los problemas derivados del manejo manual de información, como registros desactualizados, confusión en horarios, dificultad para controlar pagos y poca organización administrativa.
 
-La plataforma permite administrar información relacionada con alumnos, profesores, clases, horarios, inscripciones y pagos, centralizando todos los datos en un solo sistema accesible desde internet. Además, incorpora un acceso para alumnos donde pueden consultar información relacionada con sus clases, horarios y estado de pagos.
+CREARTE es un sistema web desarrollado para apoyar la administración académica y administrativa de una academia de artes. El proyecto surge como una solución para organizar de mejor manera la información relacionada con alumnos, profesores, clases, horarios, inscripciones y pagos.
 
-El proyecto fue desarrollado utilizando tecnologías web modernas para frontend, backend y base de datos, implementando una arquitectura organizada y escalable que facilita el mantenimiento y futuras mejoras del sistema.
+El sistema busca reducir el uso de registros manuales, evitar errores en la administración de datos y permitir que la información pueda consultarse de forma más rápida, clara y ordenada desde una plataforma web.
+
+---
 
 # Resumen del Sistema
-CREARTE es un sistema web orientado a la administración académica y administrativa de una academia de artes. La plataforma permite gestionar de manera organizada la información relacionada con alumnos, profesores, clases, horarios, inscripciones y pagos.
 
-El sistema cuenta con diferentes módulos que facilitan las actividades principales de la academia, permitiendo automatizar procesos que normalmente se realizan de forma manual. Entre sus principales funcionalidades se encuentran el registro y autenticación de usuarios, el control de clases y horarios, la administración de alumnos y profesores, así como el seguimiento de mensualidades y pagos.
+CREARTE permite gestionar la información principal de una academia artística mediante una aplicación web conectada a una base de datos MySQL. El sistema cuenta con una interfaz visual para los usuarios y un backend encargado de procesar las solicitudes, conectarse con la base de datos y responder a las operaciones realizadas desde el frontend.
 
-La aplicación fue desarrollada bajo una arquitectura web en tres capas, separando el frontend, backend y base de datos para mantener una estructura modular, organizada y escalable. Para el desarrollo se utilizaron tecnologías como HTML, CSS y JavaScript para la interfaz visual, Node.js y Express.js para el servidor backend, y MySQL como sistema gestor de base de datos.
+Entre sus funciones principales se encuentran el registro de usuarios, inicio de sesión, administración de clases, consulta de cursos y manejo de información académica relacionada con alumnos, profesores y pagos.
 
-Además, el sistema incorpora acceso por roles, permitiendo que administradores, profesores y alumnos interactúen con diferentes funciones según sus permisos dentro de la plataforma.
+El proyecto está diseñado bajo una arquitectura cliente-servidor, donde el frontend se encarga de la interacción con el usuario y el backend procesa la lógica del sistema mediante rutas y servicios conectados a la base de datos.
 
-# Requisitos
-## Requisitos Funcionales
-El sistema debe permitir:
+---
 
-- Registrar alumnos, profesores y administradores.
-- Iniciar sesión mediante autenticación de usuarios.
-- Registrar nuevos usuarios dentro del sistema.
-- Crear, consultar, actualizar y eliminar clases.
-- Gestionar horarios y salones.
-- Registrar inscripciones de alumnos a clases.
-- Registrar y consultar pagos y mensualidades.
-- Consultar información según el rol del usuario.
-- Registrar asistencias de alumnos.
-- Visualizar clases, horarios y pagos desde la cuenta del alumno.
-- Generar reportes básicos administrativos.
+# Requisitos Funcionales
 
-## Requisitos No Funcionales
 | Requisito | Descripción |
 |---|---|
-| Usabilidad | El sistema debe contar con una interfaz sencilla y fácil de utilizar. |
-| Disponibilidad | El sistema debe ser accesible desde cualquier navegador web con conexión a internet. |
-| Seguridad | El acceso debe estar protegido mediante autenticación de usuarios. |
-| Rendimiento | Las consultas y operaciones deben ejecutarse de manera rápida y eficiente. |
-| Escalabilidad | El sistema debe permitir futuras mejoras y módulos adicionales. |
-| Mantenimiento | El código debe mantenerse organizado y modularizado. |
+| Registro de usuarios | El sistema debe permitir registrar usuarios con información básica como nombre, correo, contraseña y rol. |
+| Inicio de sesión | El sistema debe permitir que los usuarios accedan mediante correo electrónico y contraseña. |
+| Gestión de roles | El sistema debe diferenciar el acceso según el tipo de usuario: administrador, alumno o profesor. |
+| Gestión de clases | El administrador debe poder registrar, consultar, editar y eliminar clases. |
+| Consulta de cursos | Los usuarios deben poder visualizar información sobre los cursos disponibles. |
+| Gestión de alumnos | El sistema debe permitir almacenar información relacionada con los alumnos. |
+| Gestión de profesores | El sistema debe permitir registrar información de profesores y su especialidad. |
+| Gestión de horarios | El sistema debe organizar los horarios relacionados con las clases. |
+| Gestión de pagos | El sistema debe permitir registrar y consultar información relacionada con mensualidades y pagos. |
+| Navegación del sitio | El sistema debe contar con páginas principales como inicio, nosotros, cursos, contacto, login y registro. |
+| Conexión con base de datos | El sistema debe guardar y consultar la información desde una base de datos MySQL. |
+
+---
+
+# Requisitos No Funcionales
+
+| Requisito | Descripción |
+|---|---|
+| Seguridad | El sistema debe proteger el acceso mediante autenticación de usuarios y separación de roles. |
+| Disponibilidad | El sistema debe estar disponible desde un navegador web con conexión a internet. |
+| Usabilidad | La interfaz debe ser clara, sencilla y fácil de utilizar. |
+| Rendimiento | Las consultas y operaciones deben ejecutarse de forma eficiente. |
+| Escalabilidad | El sistema debe permitir agregar nuevos módulos en el futuro. |
+| Mantenimiento | El código debe estar organizado para facilitar correcciones y mejoras. |
 | Compatibilidad | El sistema debe funcionar en navegadores modernos. |
+| Integridad de datos | La información almacenada debe mantenerse correcta y relacionada entre tablas. |
+| Accesibilidad | El sistema debe ser fácil de navegar para usuarios con diferentes niveles de conocimiento tecnológico. |
 
-## Requisitos Técnicos
-| Tecnología | Uso |
+---
+
+# Requisitos Técnicos
+
+| Tecnología | Uso en el proyecto |
 |---|---|
-| HTML | Estructura de las páginas web |
-| CSS | Diseño visual e interfaz |
-| JavaScript | Interacción del frontend |
-| Node.js | Desarrollo del backend |
-| Express.js | Creación de servidor y rutas |
-| MySQL | Base de datos relacional |
-| MySQL Workbench | Administración de la base de datos |
-| Git y GitHub | Control de versiones |
-| Postman | Pruebas de endpoints |
+| HTML5 | Estructura de las páginas web. |
+| CSS3 | Diseño visual y estilos del sistema. |
+| JavaScript | Interactividad del frontend y consumo de rutas del backend. |
+| Node.js | Entorno de ejecución para el backend. |
+| Express.js | Creación del servidor y manejo de rutas. |
+| MySQL | Base de datos relacional del sistema. |
+| MySQL Workbench | Administración y visualización de la base de datos. |
+| Git | Control de versiones del proyecto. |
+| GitHub | Almacenamiento remoto del repositorio. |
+| Render | Despliegue del backend en servidor remoto. |
+| Visual Studio Code | Editor de código utilizado para el desarrollo. |
+| Postman | Prueba de rutas y endpoints del backend. |
 
-## Requisitos de Arquitectura del Sistema
-El sistema utiliza una arquitectura web en tres capas:
+---
 
-| Capa | Función |
-|---|---|
-| Frontend | Interfaz visual e interacción con el usuario |
-| Backend | Procesamiento de solicitudes y lógica de negocio |
-| Base de Datos | Almacenamiento y administración de la información |
+# Diseño del Sistema
 
-### Flujo general de funcionamiento
+El diseño visual y la estructura de navegación de CREARTE fueron planificados utilizando Figma. Esta etapa permitió organizar la experiencia de usuario, distribución de componentes y estructura general de las interfaces antes del desarrollo del sistema.
+
+## Prototipo en Figma
+
+[Visualizar diseño del sistema en Figma](AQUI_COLOCA_EL_LINK_DE_TU_FIGMA)
+
+---
+
+## Vista previa del diseño
+
+![Diseño en Figma](./assets/figma-diseno.png)
+
+---
+
+# Arquitectura del Sistema
+
+![Arquitectura del sistema](./assets/arquitectura-sistema.png)
+
+---
+
+El sistema CREARTE utiliza una arquitectura web cliente-servidor dividida en tres capas principales:
+
 ```text
 Usuario
 ↓
@@ -75,204 +103,227 @@ Backend / API
 Base de Datos MySQL
 ```
 
-La arquitectura modular permite mantener el sistema organizado, facilitar el mantenimiento y mejorar la escalabilidad del proyecto.
+## Capas del sistema
+
+| Capa | Descripción |
+|---|---|
+| Frontend | Es la parte visual del sistema. Permite al usuario interactuar con las páginas, formularios, botones y secciones del sitio. |
+| Backend | Procesa las solicitudes del frontend, maneja la lógica del sistema y se comunica con la base de datos. |
+| Base de Datos | Almacena la información de usuarios, alumnos, profesores, clases, horarios, pagos e inscripciones. |
+
+## Funcionamiento general
+
+```text
+1. El usuario interactúa con la interfaz web.
+2. El frontend envía solicitudes al backend.
+3. El backend procesa la solicitud mediante rutas creadas con Express.js.
+4. El backend consulta o modifica la información en MySQL.
+5. La base de datos devuelve la información solicitada.
+6. El backend responde al frontend.
+7. El frontend muestra el resultado al usuario.
+```
+
+---
+
+## Diagrama de clases
+
+El siguiente diagrama representa la estructura lógica y las relaciones principales entre las entidades del sistema CREARTE.
+
+![Diagrama de clases](./assets/diagrama-clases.png)
+
+# Requerimientos del Proyecto
+
+Para que el sistema funcione correctamente, se requiere contar con los siguientes elementos:
+
+## Requerimientos de software
+
+- Navegador web moderno.
+- Node.js instalado.
+- Git instalado.
+- Visual Studio Code o editor de código similar.
+- Acceso al repositorio de GitHub.
+- Acceso al servidor remoto donde se encuentra desplegado el backend.
+- Acceso a la base de datos MySQL utilizada por el sistema.
+
+## Requerimientos de conexión
+
+- Conexión a internet.
+- Acceso al servidor remoto del backend.
+- Acceso a la base de datos configurada para el proyecto.
+
+## Requerimientos para desarrollo
+
+- Conocimiento básico de HTML, CSS y JavaScript.
+- Conocimiento básico de Node.js y Express.js.
+- Conocimiento básico de MySQL.
+- Uso básico de Git y GitHub.
+- Uso de herramientas como Postman para probar rutas del backend.
+
+---
 
 # Instalación
-## Requisitos previos
-Para instalar y ejecutar el sistema CREARTE es necesario contar con las siguientes herramientas:
 
-- Node.js
-- MySQL Server
-- MySQL Workbench
-- Visual Studio Code
-- Git
-- Navegador web
-- Postman para pruebas de endpoints
+## 1. Clonar el repositorio
 
-
-## Clonar el repositorio
 ```bash
 git clone https://github.com/mariaosuna-fic/CreARTE.git
 ```
 
-## Entrar a la carpeta del proyecto
+## 2. Entrar a la carpeta del proyecto
 
 ```bash
 cd CreARTE
 ```
 
-## Entrar a la carpeta del backend
+## 3. Instalar dependencias
+
+Dependiendo de la estructura del proyecto, entrar a la carpeta donde se encuentra el archivo `package.json`.
+
 ```bash
 cd backend
 ```
 
-## Instalar dependencias
+Después instalar las dependencias:
+
 ```bash
 npm install
 ```
 
-## Configurar variables de entorno
-Crear un archivo llamado `.env` dentro de la carpeta `backend`.
+## 4. Verificar conexión con el servidor remoto
 
-### Estructura del archivo `.env`
-```env
-DB_HOST=localhost
-DB_USER=root
-DB_PASSWORD=tu_contraseña
-DB_NAME=CREARTE
-DB_PORT=3306
-PORT=3000
+El proyecto utiliza un backend desplegado en un servidor remoto, por lo que las rutas del frontend deben apuntar a la URL correspondiente del servidor.
+
+```text
+https://crearte-or0f.onrender.com
 ```
 
-## Ejecutar el servidor
+## 5. Ejecutar el servidor en desarrollo
+
 ```bash
 node server.js
 ```
 
-## Ejecutar el servidor con nodemon
+También puede ejecutarse con nodemon:
+
 ```bash
 npx nodemon server.js
 ```
 
-## Abrir la aplicación en el navegador
+## 6. Abrir la aplicación
+
+Desde el navegador se puede acceder a las rutas principales del sistema.
+
+### Servidor remoto
+
 ```text
-http://localhost:3000
+https://crearte-or0f.onrender.com
 ```
 
-## Rutas principales del sistema
-```text
-http://localhost:3000/login
-http://localhost:3000/registro
-http://localhost:3000/clases-admin
-```
+---
 
 # Uso del Sistema
+
 ## Página principal
-La página principal funciona como la interfaz inicial del sistema CREARTE. Desde ella, los usuarios pueden acceder a las diferentes secciones de la plataforma, conocer información de la academia y navegar hacia los módulos principales.
+
+La página principal funciona como la primera vista del sistema CREARTE. Desde esta sección, los usuarios pueden conocer información general sobre la academia, sus cursos y las opciones principales de navegación.
+
+## Registro de usuario
+
+El sistema permite registrar usuarios proporcionando información básica. Estos datos son enviados al backend y almacenados en la base de datos.
 
 ## Inicio de sesión
-El sistema cuenta con un módulo de autenticación que permite a los usuarios iniciar sesión utilizando un correo electrónico y una contraseña.
 
-### Proceso de login
-1. Ingresar correo electrónico.
-2. Ingresar contraseña.
-3. Presionar el botón de iniciar sesión.
-4. El sistema valida las credenciales registradas en la base de datos.
+Los usuarios pueden iniciar sesión utilizando su correo electrónico y contraseña. Dependiendo del rol asignado, el sistema puede redirigirlos a una sección específica.
 
-## Registro de usuarios
-El sistema permite registrar nuevos usuarios mediante un formulario de registro.
+## Módulo de clases
 
-### Datos solicitados
-- Nombre
-- Correo electrónico
-- Contraseña
-- Rol del usuario
+El administrador puede gestionar las clases disponibles en la academia. Este módulo permite:
 
-Una vez completado el formulario, la información se almacena en la base de datos mediante el backend desarrollado con Node.js y Express.js.
+- Registrar nuevas clases.
+- Consultar clases existentes.
+- Editar información de una clase.
+- Eliminar clases registradas.
 
-## CRUD de clases
-El sistema incorpora un formulario CRUD para la gestión de clases.
+## Consulta de cursos
 
-### Funciones disponibles
-| Función | Descripción |
-|---|---|
-| Crear | Registrar nuevas clases |
-| Leer | Consultar clases registradas |
-| Actualizar | Modificar información de una clase |
-| Eliminar | Borrar clases existentes |
+Los usuarios pueden visualizar los cursos disponibles de la academia, como:
 
-## Consulta de información
-Dependiendo del rol del usuario, el sistema permite visualizar información relacionada con:
+- Pintura
+- Teatro
+- Danza
+- Escultura
 
-- Clases registradas
-- Horarios
-- Profesores
-- Pagos
-- Mensualidades
+## Gestión administrativa
 
-## Funcionamiento general
-El usuario interactúa con el frontend mediante formularios y botones. Las solicitudes son enviadas al backend mediante peticiones HTTP, donde se procesan y posteriormente se almacenan o consultan desde la base de datos MySQL.
+El sistema está pensado para facilitar el control de información académica y administrativa, permitiendo que los datos se almacenen de forma organizada en la base de datos.
 
-### Flujo del sistema
+---
+
+# Base de Datos
+
+La base de datos del sistema se llama:
+
 ```text
-Usuario
-↓
-Frontend
-↓
-Backend
-↓
-Base de Datos
+CREARTE
 ```
 
-# Base de Datos (Modelado)
-La base de datos del sistema CREARTE fue diseñada utilizando un modelo relacional en MySQL con el objetivo de mantener una estructura organizada, escalable y segura para la administración de la información académica y administrativa de la academia.
+CREARTE utiliza una base de datos relacional en MySQL para almacenar la información del sistema. Esta base de datos contiene tablas relacionadas entre sí para organizar usuarios, alumnos, profesores, clases, horarios, salones, inscripciones, asistencias, mensualidades y pagos.
 
-El modelo de datos permite gestionar usuarios, alumnos, profesores, clases, horarios, pagos e inscripciones mediante tablas relacionadas entre sí a través de llaves primarias y foráneas.
+---
 
-## Entidades principales
-| Entidad | Descripción |
+## Diagrama entidad-relación
+
+El siguiente diagrama muestra la estructura de la base de datos y las relaciones entre las tablas del sistema.
+
+![Diagrama entidad-relación](./assets/diagrama-entidad-relacion.png)
+
+## Tablas principales
+
+| Tabla | Descripción |
 |---|---|
-| Usuario | Controla el acceso y autenticación dentro del sistema |
-| Alumno | Almacena información específica de estudiantes |
-| Profesor | Registra información de los docentes |
-| Administrador | Gestiona el sistema y los módulos administrativos |
-| Clase | Registra las clases disponibles |
-| Horario | Define días y horarios de las clases |
-| Salon | Registra los espacios físicos disponibles |
-| Clase_Programada | Relaciona clases, profesores, horarios y salones |
-| Inscripcion | Registra alumnos inscritos en clases |
-| Asistencia | Controla la asistencia de alumnos |
-| Mensualidad | Gestiona obligaciones de pago |
-| Pago | Registra pagos realizados |
+| Usuario | Almacena la información general de los usuarios del sistema. |
+| Alumno | Guarda los datos específicos de los alumnos. |
+| Profesor | Guarda los datos específicos de los profesores. |
+| Administrador | Guarda la información relacionada con usuarios administradores. |
+| Clase | Almacena la información de las clases disponibles. |
+| Horario | Guarda los días y horas en que se imparten las clases. |
+| Salon | Almacena los salones o espacios disponibles para las clases. |
+| Clase_Programada | Relaciona clases, profesores, horarios y salones. |
+| Inscripcion | Registra la inscripción de alumnos a clases programadas. |
+| Asistencia | Controla la asistencia de los alumnos a las clases. |
+| Mensualidad | Almacena la información de pagos pendientes o realizados por mes. |
+| Pago | Registra los pagos realizados por los alumnos. |
 
 ## Relaciones principales
-| Relación | Cardinalidad |
-|---|---|
-| Usuario - Alumno | 1 : 1 |
-| Usuario - Profesor | 1 : 1 |
-| Usuario - Administrador | 1 : 1 |
-| Clase - Clase_Programada | 1 : N |
-| Profesor - Clase_Programada | 1 : N |
-| Horario - Clase_Programada | 1 : N |
-| Salon - Clase_Programada | 1 : N |
-| Alumno - Clase | N : M |
-| Alumno - Mensualidad | 1 : N |
-| Mensualidad - Pago | 1 : N |
 
-## Características del modelo
-- Uso de llaves primarias para identificar registros únicos.
-- Uso de llaves foráneas para mantener integridad referencial.
-- Separación de módulos académicos, administrativos y financieros.
-- Organización modular para facilitar escalabilidad y mantenimiento.
-- Control de acceso mediante roles de usuario.
+- Un usuario puede estar asociado a un alumno, profesor o administrador.
+- Un profesor puede impartir una o varias clases.
+- Una clase puede tener horarios y salones asignados.
+- Un alumno puede inscribirse a una o varias clases programadas.
+- Una mensualidad pertenece a un alumno.
+- Un pago pertenece a una mensualidad.
+- La asistencia se registra por alumno y clase programada.
 
-## Módulos representados en la base de datos
-### Gestión de usuarios
-Permite administrar:
-- Alumnos
-- Profesores
-- Administradores
-- Autenticación y acceso al sistema
+## Objetivo de la base de datos
 
-### Gestión académica
-Incluye:
-- Clases
-- Horarios
-- Salones
-- Clases programadas
-- Inscripciones
+La base de datos permite mantener organizada la información del sistema y facilita operaciones como:
 
-### Gestión administrativa
-Incluye:
-- Mensualidades
-- Pagos
-- Control financiero
+- Consultar usuarios.
+- Registrar alumnos y profesores.
+- Administrar clases.
+- Controlar inscripciones.
+- Revisar pagos y mensualidades.
+- Consultar horarios y salones.
+- Mantener la información relacionada de forma estructurada.
 
-### Control y seguimiento
-Incluye:
-- Asistencias
-- Historial académico
-- Consultas de información
+## Seguridad en la base de datos
 
-## Sistema gestor de base de datos
-El sistema utiliza MySQL como motor de base de datos y MySQL Workbench para la administración y modelado del sistema relacional.
+Para proteger la información almacenada, el sistema considera las siguientes medidas:
+
+- Uso de claves primarias para identificar registros.
+- Uso de claves foráneas para mantener relaciones correctas entre tablas.
+- Restricciones de datos para evitar información inválida.
+- Separación de roles de usuario.
+- Manejo de credenciales desde el servidor remoto.
+- Evitar exponer datos sensibles directamente en el código público.
+- Validación de datos antes de enviarlos a la base de datos.
