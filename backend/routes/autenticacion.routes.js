@@ -3,6 +3,7 @@ const router = express.Router();
 
 const conexion = require('../database/db');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // ======================
 // REGISTRO
@@ -95,11 +96,23 @@ router.post('/login', async (req, res) => {
 
             }
 
+            const token = jwt.sign(
+                {
+                    id_usuario: usuario.id_usuario,
+                    rol: usuario.rol
+                },
+                process.env.JWT_SECRET,
+                {
+                    expiresIn: '2h'
+                }
+            );
+
             delete usuario.contraseña;
 
             res.json({
                 mensaje: 'Inicio de sesión exitoso',
-                usuario
+                usuario,
+                token
             });
 
         }
