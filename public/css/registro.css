@@ -1,0 +1,320 @@
+/* =========================
+   RESET
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   BODY
+========================= */
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background:
+        url('/assets/fondo morado de registro.svg') no-repeat center center/cover;
+    overflow: hidden;
+    position: relative;
+}
+
+/* =========================
+   CONTENEDOR PRINCIPAL
+========================= */
+
+.container {
+    width: 92%;
+    max-width: 1450px;
+    height: 90vh;
+    background: rgba(255,255,255,0.92);
+    border-radius: 30px;
+    display: flex;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+}
+
+/* =========================
+   PANEL IZQUIERDO
+========================= */
+
+.left-panel {
+    width: 42%;
+    padding: 50px;
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Logo */
+
+.logo {
+    width: 350px;
+    margin-bottom: 30px;
+}
+
+/* Texto */
+
+.slogan {
+    text-align: center;
+    font-size: 3rem;
+    color: #2e2e2e;
+    line-height: 1.3;
+    margin-bottom: 40px;
+    font-family: Georgia, serif;
+}
+
+.slogan span {
+    color: #5B2384;
+    font-weight: bold;
+}
+
+/* Imagen artística */
+
+.art-image {
+    width: 320px;
+    margin-top: 20px;
+}
+
+/* =========================
+   PANEL DERECHO
+========================= */
+
+.right-panel {
+    width: 58%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+/* Fondo detrás del formulario */
+
+.right-panel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+        url('/assets/Fondo de brochas.svg')
+        no-repeat center;
+    background-size: cover;
+    opacity: 0.18;
+    z-index: 0;
+}
+
+/* =========================
+   FORMULARIO
+========================= */
+
+.form-container {
+    width: 80%;
+    max-width: 720px;
+    background: rgba(255,255,255,0.92);
+    border-radius: 25px;
+    padding: 50px;
+    position: relative;
+    z-index: 1;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.06);
+}
+
+/* Título */
+
+.form-container h1 {
+    text-align: center;
+    color: #5B2384;
+    font-size: 3rem;
+    margin-bottom: 15px;
+    font-family: Georgia, serif;
+}
+
+/* Texto */
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    font-size: 1.1rem;
+    margin-bottom: 35px;
+    line-height: 1.6;
+}
+
+/* =========================
+   LABELS
+========================= */
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    color: #222;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* =========================
+   INPUTS
+========================= */
+
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.input-group input,
+.input-group select {
+    width: 100%;
+    height: 58px;
+    border-radius: 14px;
+    border: 1px solid #ddd;
+    padding-left: 55px;
+    padding-right: 20px;
+    font-size: 1rem;
+    background: white;
+    transition: 0.3s;
+}
+
+.input-group input:focus,
+.input-group select:focus {
+    outline: none;
+    border-color: #6C2AA6;
+    box-shadow: 0 0 0 4px rgba(108,42,166,0.12);
+}
+
+/* =========================
+   ICONOS INPUTS
+========================= */
+
+.input-group::before {
+    content: "";
+    position: absolute;
+    width: 22px;
+    height: 22px;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+/* Usuario */
+
+.input-user::before {
+    background-image: url('/assets/icono usuario gris.svg');
+}
+
+/* Correo */
+
+.input-email::before {
+    background-image: url('/assets/icono correo.svg');
+}
+
+/* Password */
+
+.input-password::before {
+    background-image: url('/assets/icono candado.svg');
+}
+
+/* =========================
+   CHECKBOX
+========================= */
+
+.terms {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.terms a {
+    color: #5B2384;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+/* =========================
+   BOTÓN
+========================= */
+
+button {
+    width: 100%;
+    height: 58px;
+    border: none;
+    border-radius: 14px;
+    background: linear-gradient(90deg, #5B2384, #7E3BB5);
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(91,35,132,0.3);
+}
+
+/* =========================
+   LOGIN
+========================= */
+
+.login-link {
+    margin-top: 25px;
+    text-align: center;
+    color: #555;
+}
+
+.login-link a {
+    color: #5B2384;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width: 1100px){
+
+    .container{
+        flex-direction: column;
+        height: auto;
+    }
+
+    .left-panel{
+        width: 100%;
+        padding: 40px 20px;
+    }
+
+    .right-panel{
+        width: 100%;
+        padding: 20px;
+    }
+
+    .logo{
+        width: 250px;
+    }
+
+    .slogan{
+        font-size: 2.2rem;
+    }
+
+    .art-image{
+        width: 220px;
+    }
+
+    .form-container{
+        width: 100%;
+        padding: 35px;
+    }
+}
