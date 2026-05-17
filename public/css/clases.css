@@ -1,0 +1,277 @@
+/* RESET GENERAL */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: #fcfbfa; /* Fondo beige ultra suave de la maqueta */
+    color: #333333;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* BANDA SUPERIOR */
+.navbar-admin {
+    background-color: #cfc8cb;
+    height: 70px;
+    padding: 0 40px 0 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #eae7e2;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-admin {
+    height: 70px;
+    width: auto;
+    display: block;
+    object-fit: cover;
+}
+
+.btn-logout {
+    background-color: #556b82; /* Azul pizarra de la maqueta */
+    color: #ffffff;
+    text-decoration: none;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.btn-logout:hover {
+    background-color: #3f5164;
+}
+
+/* CONTENEDOR PRINCIPAL LAYOUT */
+.layout-container {
+    display: flex;
+    flex: 1;
+}
+
+/* MENÚ LATERAL IZQUIERDO */
+.sidebar-admin {
+    width: 240px;
+    background-color: #ffffff;
+    border-right: 1px solid #eae7e2;
+    padding: 30px 15px;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sidebar-link {
+    display: block;
+    color: #4a4a4a;
+    text-decoration: none;
+    padding: 12px 20px;
+    border-radius: 20px; /* Botones ovalados institucionales */
+    font-size: 0.95rem;
+    font-weight: 500;
+    text-align: center;
+    background-color: #e2daf7; /* Tono lila suave de fondo */
+    transition: all 0.2s;
+}
+
+.sidebar-link:hover, .sidebar-link.active {
+    background-color: #bcacf6; /* Lila oscuro enfocado */
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* ÁREA DE CONTENIDO */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.content-header {
+    margin-bottom: 25px;
+}
+
+.content-header h1 {
+    font-size: 2rem;
+    color: #222222;
+    font-weight: 700;
+}
+
+.content-header p {
+    color: #777777;
+    font-size: 0.95rem;
+}
+
+/* TARJETA DEL FORMULARIO (COLOR NARANJA SUAVE INSTITUCIONAL) */
+.form-card {
+    background-color: #f2ba8c; /* El tono naranja-arena de las imágenes */
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(242, 186, 140, 0.2);
+    margin-bottom: 35px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group.full-width {
+    grid-column: 1 / -1;
+}
+
+.form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #513824; /* Café oscuro armónico con el naranja */
+}
+
+.form-group input, 
+.form-group select, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px 14px;
+    border-radius: 8px;
+    border: 1px solid rgba(0,0,0,0.08);
+    background-color: #53758a; /* Azul grisáceo de los inputs */
+    color: #ffffff;
+    font-size: 0.9rem;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #cbd5e1;
+}
+
+.form-group select {
+    height: 42px;
+}
+
+/* BOTONES DEL FORMULARIO */
+.form-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary {
+    background-color: #9d8df1; /* Color lila del botón principal */
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #8572ed;
+}
+
+.btn-cancel {
+    background-color: #e63946;
+    color: white;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* SECCIÓN DE LA TABLA */
+.table-title {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.table-card {
+    background: #ffffff;
+    border-radius: 12px;
+    border: 1px solid #eae7e2;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+}
+
+.custom-table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.custom-table th {
+    background-color: #ffffff;
+    color: #111111;
+    font-weight: 600;
+    padding: 14px 18px;
+    border-bottom: 2px solid #eae7e2;
+    font-size: 0.9rem;
+}
+
+.custom-table td {
+    padding: 14px 18px;
+    border-bottom: 1px solid #f4f2ee;
+    font-size: 0.9rem;
+    color: #444444;
+}
+
+/* BOTONES DENTRO DE LA TABLA */
+.btn-table-edit {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e1;
+    color: #334155;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-right: 5px;
+    font-size: 0.8rem;
+}
+
+.btn-table-edit:hover {
+    background-color: #f1f5f9;
+}
+
+.btn-table-delete {
+    background-color: #ffffff;
+    border: 1px solid #fca5a5;
+    color: #dc2626;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-table-delete:hover {
+    background-color: #fef2f2;
+}
+
+/* BADGES DE NIVEL */
+.badge-nivel {
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.badge-nivel.principiante { background-color: #e0f2fe; color: #0369a1; }
+.badge-nivel.intermedio { background-color: #fef3c7; color: #b45309; }
+.badge-nivel.avanzado { background-color: #fee2e2; color: #b91c1c; }
