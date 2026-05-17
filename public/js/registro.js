@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 const formRegistro = document.getElementById('formRegistro');
 
 const mensaje = document.getElementById('mensaje');
@@ -20,7 +22,7 @@ formRegistro.addEventListener('submit', async (e) => {
 
     try {
 
-        const respuesta = await fetch('/registro', {
+        const respuesta = await fetch(`${API_URL}/registro`, {
 
             method: 'POST',
 

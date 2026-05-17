@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 const formLogin = document.getElementById('formLogin');
 
 const mensaje = document.getElementById('mensaje');
@@ -16,7 +18,7 @@ formLogin.addEventListener('submit', async (e) => {
 
     try {
 
-        const respuesta = await fetch('/login', {
+        const respuesta = await fetch(`${API_URL}/login`, {
 
             method: 'POST',
 
@@ -39,11 +41,13 @@ formLogin.addEventListener('submit', async (e) => {
             // Redirección según rol
             if (resultado.usuario.rol === 'admin') {
 
-                window.location.href = '/clases-admin';
+                window.location.href =
+                    'https://crearte-or0f.onrender.com/clases-admin';
 
             } else {
 
-                window.location.href = '/';
+                window.location.href =
+                    'https://crearte-or0f.onrender.com/';
 
             }
 

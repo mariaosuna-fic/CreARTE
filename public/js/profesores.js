@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 let idProfesorEditando = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function cargarUsuariosProfesores() {
-    const respuesta = await fetch('/usuarios');
+    const respuesta = await fetch(`${API_URL}/usuarios`);
     const usuarios = await respuesta.json();
 
     const select = document.getElementById('id_usuario');
@@ -23,7 +25,7 @@ async function cargarUsuariosProfesores() {
 }
 
 async function cargarProfesores() {
-    const respuesta = await fetch('/profesores');
+    const respuesta = await fetch(`${API_URL}/profesores`);
     const profesores = await respuesta.json();
 
     const tabla = document.getElementById('tablaProfesores');
@@ -72,11 +74,11 @@ document.getElementById('formProfesor').addEventListener('submit', async (e) => 
         id_usuario: document.getElementById('id_usuario').value
     };
 
-    let url = '/profesores';
+    let url = `${API_URL}/profesores`;
     let metodo = 'POST';
 
     if (idProfesorEditando !== null) {
-        url = `/profesores/${idProfesorEditando}`;
+        url = `${API_URL}/profesores/${idProfesorEditando}`;
         metodo = 'PUT';
     }
 
@@ -105,7 +107,7 @@ async function eliminarProfesor(id) {
 
     if (!confirmar) return;
 
-    const respuesta = await fetch(`/profesores/${id}`, {
+    const respuesta = await fetch(`${API_URL}/profesores/${id}`, {
         method: 'DELETE'
     });
 

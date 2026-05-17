@@ -1,4 +1,4 @@
-const API_URL = 'http://localhost:3000/clases';
+const API_URL = 'https://crearte-or0f.onrender.com/clases';
 
 const formClase = document.getElementById('formClase');
 const tablaClases = document.getElementById('tablaClases');

@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 let idSalonEditando = null;
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -6,7 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function cargarSalones() {
     try {
-        const respuesta = await fetch('/salones');
+        const respuesta = await fetch(`${API_URL}/salones`);
         const salones = await respuesta.json();
 
         const tabla = document.getElementById('tablaSalones');
@@ -55,11 +57,11 @@ document.getElementById('formSalon').addEventListener('submit', async (e) => {
         capacidad: document.getElementById('capacidad').value
     };
 
-    let url = '/salones';
+    let url = `${API_URL}/salones`;
     let metodo = 'POST';
 
     if (idSalonEditando !== null) {
-        url = `/salones/${idSalonEditando}`;
+        url = `${API_URL}/salones/${idSalonEditando}`;
         metodo = 'PUT';
     }
 
@@ -95,7 +97,7 @@ async function eliminarSalon(id) {
     if (!confirmar) return;
 
     try {
-        const respuesta = await fetch(`/salones/${id}`, {
+        const respuesta = await fetch(`${API_URL}/salones/${id}`, {
             method: 'DELETE'
         });
 
