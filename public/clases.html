@@ -225,307 +225,192 @@
     </div>
 
     <script>
+    const API_URL = 'https://crearte-or0f.onrender.com';
 
-        const API_URL =
-            'https://crearte-or0f.onrender.com';
+    const token = localStorage.getItem('token');
+    const rol = localStorage.getItem('rol');
 
-        const claseForm =
-            document.getElementById('claseForm');
+    if (!token || rol !== 'admin') {
+        alert('Debes iniciar sesión como administrador');
+        window.location.href = '/login.html';
+    }
 
-        const tablaClases =
-            document.getElementById('tablaClases');
+    const claseForm = document.getElementById('claseForm');
+    const tablaClases = document.getElementById('tablaClases');
+    const idEdicionInput = document.getElementById('id_clase_edicion');
+    const btnGuardar = document.getElementById('btnGuardar');
+    const btnCancelar = document.getElementById('btnCancelar');
 
-        const idEdicionInput =
-            document.getElementById('id_clase_edicion');
+    let listaClasesLocal = [];
 
-        const btnGuardar =
-            document.getElementById('btnGuardar');
+    claseForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
 
-        const btnCancelar =
-            document.getElementById('btnCancelar');
+        const idEdicion = idEdicionInput.value;
 
-        let listaClasesLocal = [];
+        const datos = {
+            nombre_clase: document.getElementById('nombre').value,
+            tipo: document.getElementById('tipo').value,
+            nivel: document.getElementById('nivel').value,
+            descripcion: document.getElementById('descripcion').value,
+            cupo_maximo: document.getElementById('cupo').value
+        };
 
-        claseForm.addEventListener(
-            'submit',
-            async (e) => {
+        try {
+            let url = `${API_URL}/clases`;
+            let metodo = 'POST';
 
-                e.preventDefault();
+            if (idEdicion) {
+                url = `${API_URL}/clases/${idEdicion}`;
+                metodo = 'PUT';
+            }
 
-                const idEdicion =
-                    idEdicionInput.value;
+            const respuesta = await fetch(url, {
+                method: metodo,
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(datos)
+            });
 
-                const datos = {
+            if (respuesta.status === 401 || respuesta.status === 403) {
+                alert('Tu sesión no es válida o no tienes permisos.');
+                localStorage.clear();
+                window.location.href = '/login.html';
+                return;
+            }
 
-                    nombre_clase:
-                        document.getElementById('nombre').value,
+            if (respuesta.ok) {
+                alert(idEdicion ? '¡Clase actualizada con éxito!' : '¡Clase registrada con éxito!');
+                resetearFormulario();
+                cargarClases();
+            } else {
+                alert('Hubo un error en el servidor al procesar la solicitud.');
+            }
 
-                    tipo:
-                        document.getElementById('tipo').value,
+        } catch (error) {
+            console.error('Error:', error);
+            alert('No se pudo conectar con el servidor.');
+        }
+    });
 
-                    nivel:
-                        document.getElementById('nivel').value,
+    async function cargarClases() {
+        try {
+            const respuesta = await fetch(`${API_URL}/clases`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            });
 
-                    descripcion:
-                        document.getElementById('descripcion').value,
+            if (respuesta.status === 401 || respuesta.status === 403) {
+                alert('Debes iniciar sesión como administrador');
+                localStorage.clear();
+                window.location.href = '/login.html';
+                return;
+            }
 
-                    cupo_maximo:
-                        document.getElementById('cupo').value
+            listaClasesLocal = await respuesta.json();
 
-                };
+            tablaClases.innerHTML = '';
 
-                try {
+            listaClasesLocal.forEach(clase => {
+                const fila = document.createElement('tr');
 
-                    let url =
-                        `${API_URL}/clases`;
+                fila.innerHTML = `
+                    <td>${clase.id_clase}</td>
+                    <td><strong>${clase.nombre_clase}</strong></td>
+                    <td>${clase.tipo}</td>
+                    <td>
+                        <span class="badge-nivel ${clase.nivel.toLowerCase()}">
+                            ${clase.nivel}
+                        </span>
+                    </td>
+                    <td>${clase.cupo_maximo}</td>
+                    <td>
+                        <button class="btn-table-edit" onclick="editarClase(${clase.id_clase})">
+                            ✏️ Editar
+                        </button>
 
-                    let metodo = 'POST';
+                        <button class="btn-table-delete" onclick="eliminarClase(${clase.id_clase})">
+                            🗑️ Borrar
+                        </button>
+                    </td>
+                `;
 
-                    if (idEdicion) {
+                tablaClases.appendChild(fila);
+            });
 
-                        url =
-                            `${API_URL}/clases/${idEdicion}`;
+        } catch (error) {
+            console.error('Error al cargar clases:', error);
+        }
+    }
 
-                        metodo = 'PUT';
+    function editarClase(id) {
+        const claseSeleccionada = listaClasesLocal.find(c => c.id_clase === id);
 
+        if (claseSeleccionada) {
+            idEdicionInput.value = claseSeleccionada.id_clase;
+            document.getElementById('nombre').value = claseSeleccionada.nombre_clase;
+            document.getElementById('tipo').value = claseSeleccionada.tipo;
+            document.getElementById('nivel').value = claseSeleccionada.nivel;
+            document.getElementById('descripcion').value = claseSeleccionada.descripcion || '';
+            document.getElementById('cupo').value = claseSeleccionada.cupo_maximo;
+
+            btnGuardar.textContent = "Actualizar Clase";
+            btnGuardar.style.backgroundColor = "#2a9d8f";
+            btnCancelar.style.display = "inline-block";
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    }
+
+    async function eliminarClase(id) {
+        if (confirm('¿Estás seguro de que deseas eliminar esta clase de forma permanente?')) {
+            try {
+                const respuesta = await fetch(`${API_URL}/clases/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
                     }
+                });
 
-                    const respuesta =
-                        await fetch(url, {
-
-                            method: metodo,
-
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-
-                            body: JSON.stringify(datos)
-
-                        });
-
-                    if (respuesta.ok) {
-
-                        alert(
-                            idEdicion
-                                ? '¡Clase actualizada con éxito!'
-                                : '¡Clase registrada con éxito!'
-                        );
-
-                        resetearFormulario();
-
-                        cargarClases();
-
-                    } else {
-
-                        alert(
-                            'Hubo un error en el servidor al procesar la solicitud.'
-                        );
-
-                    }
-
-                } catch (error) {
-
-                    console.error('Error:', error);
-
-                    alert('No se pudo conectar con el servidor.');
-
+                if (respuesta.status === 401 || respuesta.status === 403) {
+                    alert('Tu sesión no es válida o no tienes permisos.');
+                    localStorage.clear();
+                    window.location.href = '/login.html';
+                    return;
                 }
 
-            }
-        );
-
-        async function cargarClases() {
-
-            try {
-
-                const respuesta =
-                    await fetch(`${API_URL}/clases`);
-
-                listaClasesLocal =
-                    await respuesta.json();
-
-                tablaClases.innerHTML = '';
-
-                listaClasesLocal.forEach(clase => {
-
-                    const fila =
-                        document.createElement('tr');
-
-                    fila.innerHTML = `
-                        <td>${clase.id_clase}</td>
-
-                        <td>
-                            <strong>${clase.nombre_clase}</strong>
-                        </td>
-
-                        <td>${clase.tipo}</td>
-
-                        <td>
-                            <span class="badge-nivel ${clase.nivel.toLowerCase()}">
-                                ${clase.nivel}
-                            </span>
-                        </td>
-
-                        <td>${clase.cupo_maximo}</td>
-
-                        <td>
-
-                            <button
-                                class="btn-table-edit"
-                                onclick="editarClase(${clase.id_clase})">
-
-                                ✏️ Editar
-
-                            </button>
-
-                            <button
-                                class="btn-table-delete"
-                                onclick="eliminarClase(${clase.id_clase})">
-
-                                🗑️ Borrar
-
-                            </button>
-
-                        </td>
-                    `;
-
-                    tablaClases.appendChild(fila);
-
-                });
+                if (respuesta.ok) {
+                    alert('Clase eliminada con éxito.');
+                    cargarClases();
+                } else {
+                    alert('No se pudo eliminar la clase. Revisa las restricciones.');
+                }
 
             } catch (error) {
-
-                console.error(
-                    'Error al cargar clases:',
-                    error
-                );
-
+                console.error('Error al eliminar:', error);
+                alert('Error de conexión.');
             }
-
         }
+    }
 
-        function editarClase(id) {
+    function resetearFormulario() {
+        claseForm.reset();
+        idEdicionInput.value = "";
+        btnGuardar.textContent = "Guardar Clase";
+        btnGuardar.style.backgroundColor = "#9d8df1";
+        btnCancelar.style.display = "none";
+    }
 
-            const claseSeleccionada =
-                listaClasesLocal.find(
-                    c => c.id_clase === id
-                );
+    btnCancelar.addEventListener('click', resetearFormulario);
 
-            if (claseSeleccionada) {
-
-                idEdicionInput.value =
-                    claseSeleccionada.id_clase;
-
-                document.getElementById('nombre').value =
-                    claseSeleccionada.nombre_clase;
-
-                document.getElementById('tipo').value =
-                    claseSeleccionada.tipo;
-
-                document.getElementById('nivel').value =
-                    claseSeleccionada.nivel;
-
-                document.getElementById('descripcion').value =
-                    claseSeleccionada.descripcion || '';
-
-                document.getElementById('cupo').value =
-                    claseSeleccionada.cupo_maximo;
-
-                btnGuardar.textContent =
-                    "Actualizar Clase";
-
-                btnGuardar.style.backgroundColor =
-                    "#2a9d8f";
-
-                btnCancelar.style.display =
-                    "inline-block";
-
-                window.scrollTo({
-                    top: 0,
-                    behavior: 'smooth'
-                });
-
-            }
-
-        }
-
-        async function eliminarClase(id) {
-
-            if (
-                confirm(
-                    '¿Estás seguro de que deseas eliminar esta clase de forma permanente?'
-                )
-            ) {
-
-                try {
-
-                    const respuesta =
-                        await fetch(
-                            `${API_URL}/clases/${id}`,
-                            {
-                                method: 'DELETE'
-                            }
-                        );
-
-                    if (respuesta.ok) {
-
-                        alert(
-                            'Clase eliminada con éxito.'
-                        );
-
-                        cargarClases();
-
-                    } else {
-
-                        alert(
-                            'No se pudo eliminar la clase. Revisa las restricciones.'
-                        );
-
-                    }
-
-                } catch (error) {
-
-                    console.error(
-                        'Error al eliminar:',
-                        error
-                    );
-
-                    alert('Error de conexión.');
-
-                }
-
-            }
-
-        }
-
-        function resetearFormulario() {
-
-            claseForm.reset();
-
-            idEdicionInput.value = "";
-
-            btnGuardar.textContent =
-                "Guardar Clase";
-
-            btnGuardar.style.backgroundColor =
-                "#9d8df1";
-
-            btnCancelar.style.display =
-                "none";
-
-        }
-
-        btnCancelar.addEventListener(
-            'click',
-            resetearFormulario
-        );
-
-        document.addEventListener(
-            'DOMContentLoaded',
-            cargarClases
-        );
-
-    </script>
+    document.addEventListener('DOMContentLoaded', cargarClases);
+</script>
 
 </body>
 </html>

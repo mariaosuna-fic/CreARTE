@@ -29,6 +29,10 @@ formLogin.addEventListener('submit', async (e) => {
 
         if (respuesta.ok) {
 
+            localStorage.setItem('token', resultado.token);
+            localStorage.setItem('rol', resultado.usuario.rol);
+            localStorage.setItem('nombre', resultado.usuario.nombre);
+
             alert('Bienvenido/a ' + resultado.usuario.nombre);
 
             if (resultado.usuario.rol === 'admin') {
