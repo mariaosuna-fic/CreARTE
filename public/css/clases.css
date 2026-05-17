@@ -275,3 +275,156 @@ body {
 .badge-nivel.principiante { background-color: #e0f2fe; color: #0369a1; }
 .badge-nivel.intermedio { background-color: #fef3c7; color: #b45309; }
 .badge-nivel.avanzado { background-color: #fee2e2; color: #b91c1c; }
+
+/* RESPONSIVE TABLETS */
+@media (max-width: 1024px) {
+    .navbar-admin {
+        padding: 0 24px 0 0;
+    }
+
+    .sidebar-admin {
+        width: 200px;
+        padding: 25px 12px;
+    }
+
+    .main-content {
+        padding: 30px;
+    }
+
+    .content-header h1 {
+        font-size: 1.7rem;
+    }
+
+    .form-card {
+        padding: 24px;
+    }
+
+    .custom-table th,
+    .custom-table td {
+        padding: 12px;
+        font-size: 0.85rem;
+    }
+}
+
+/* RESPONSIVE CELULARES */
+@media (max-width: 768px) {
+    .navbar-admin {
+        height: auto;
+        padding: 10px 16px;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .logo-admin {
+        height: 55px;
+    }
+
+    .btn-logout {
+        padding: 7px 14px;
+        font-size: 0.8rem;
+    }
+
+    .layout-container {
+        flex-direction: column;
+    }
+
+    .sidebar-admin {
+        width: 100%;
+        border-right: none;
+        border-bottom: 1px solid #eae7e2;
+        padding: 15px;
+    }
+
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 8px;
+        padding-bottom: 5px;
+    }
+
+    .sidebar-link {
+        min-width: 120px;
+        font-size: 0.85rem;
+        padding: 10px 14px;
+        white-space: nowrap;
+    }
+
+    .main-content {
+        padding: 22px 16px;
+        max-width: 100%;
+    }
+
+    .content-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .content-header p {
+        font-size: 0.9rem;
+    }
+
+    .form-card {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .form-buttons {
+        flex-direction: column;
+    }
+
+    .btn-primary,
+    .btn-cancel {
+        width: 100%;
+    }
+
+    .table-card {
+        overflow-x: auto;
+    }
+
+    .custom-table {
+        min-width: 700px;
+    }
+}
+
+/* RESPONSIVE CELULARES PEQUEÑOS */
+@media (max-width: 480px) {
+    .navbar-admin {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .logo-container-admin {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .logo-admin {
+        height: 50px;
+    }
+
+    .btn-logout {
+        width: 100%;
+        text-align: center;
+    }
+
+    .main-content {
+        padding: 18px 12px;
+    }
+
+    .content-header h1 {
+        font-size: 1.3rem;
+    }
+
+    .form-card {
+        padding: 16px;
+    }
+
+    .table-title {
+        font-size: 1.1rem;
+    }
+}
