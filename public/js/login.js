@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 const formLogin = document.getElementById('formLogin');
 
 const mensaje = document.getElementById('mensaje');
@@ -7,25 +9,18 @@ formLogin.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const datos = {
-
         correo: document.getElementById('correo').value,
-
         contraseña: document.getElementById('contraseña').value
-
     };
 
     try {
 
-        const respuesta = await fetch('/login', {
-
+        const respuesta = await fetch(`${API_URL}/login`, {
             method: 'POST',
-
             headers: {
                 'Content-Type': 'application/json'
             },
-
             body: JSON.stringify(datos)
-
         });
 
         const resultado = await respuesta.json();
@@ -36,15 +31,10 @@ formLogin.addEventListener('submit', async (e) => {
 
             alert('Bienvenido/a ' + resultado.usuario.nombre);
 
-            // Redirección según rol
             if (resultado.usuario.rol === 'admin') {
-
-                window.location.href = '/clases-admin';
-
+                window.location.href = '/clases.html';
             } else {
-
-                window.location.href = '/';
-
+                window.location.href = '/index.html';
             }
 
         }
@@ -52,7 +42,6 @@ formLogin.addEventListener('submit', async (e) => {
     } catch (error) {
 
         console.error(error);
-
         mensaje.textContent = 'Error al iniciar sesión';
 
     }
