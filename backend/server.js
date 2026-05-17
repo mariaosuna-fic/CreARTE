@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const cors = require('cors');
 
 const usuariosRoutes = require('./routes/usuarios.routes');
 const alumnosRoutes = require('./routes/alumnos.routes');
@@ -15,6 +16,8 @@ const pagosRoutes = require('./routes/pagos.routes');
 const autenticacionRoutes = require('./routes/autenticacion.routes');
 
 const app = express();
+
+app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
@@ -54,29 +57,37 @@ app.get('/alumnos-admin', (req, res) => {
 
 // Ruta CRUD Profesores
 app.get('/profesores-admin', (req, res) => {
+
     res.sendFile(
         path.join(__dirname, '..', 'views', 'profesores.html')
     );
+
 });
 
 // Ruta CRUD Salones
 app.get('/salones-admin', (req, res) => {
+
     res.sendFile(
         path.join(__dirname, '..', 'views', 'salones.html')
     );
+
 });
 
 // Rutas de autenticación
 app.get('/login', (req, res) => {
+
     res.sendFile(
         path.join(__dirname, '..', 'views', 'login.html')
     );
+
 });
 
 app.get('/registro', (req, res) => {
+
     res.sendFile(
         path.join(__dirname, '..', 'views', 'registro.html')
     );
+
 });
 
 // Rutas API
@@ -95,5 +106,7 @@ app.use('/', autenticacionRoutes);
 
 // Inicializa servidor
 app.listen(PORT, () => {
+
     console.log(`Servidor corriendo en puerto ${PORT}`);
+
 });
