@@ -18,7 +18,7 @@
             <img src="/img/logo_crearte2.png" alt="CreARTE" class="logo-admin">
         </div>
 
-        <a href="/login.html" class="btn-logout">
+        <a href="#" class="btn-logout" onclick="cerrarSesion()">
             Cerrar sesión ➔
         </a>
 
@@ -224,15 +224,19 @@
 
     </div>
 
-    <script>
+<script>
+
     const API_URL = 'https://crearte-or0f.onrender.com';
 
     const token = localStorage.getItem('token');
     const rol = localStorage.getItem('rol');
 
     if (!token || rol !== 'admin') {
+
         alert('Debes iniciar sesión como administrador');
+
         window.location.href = '/login.html';
+
     }
 
     const claseForm = document.getElementById('claseForm');
@@ -244,70 +248,109 @@
     let listaClasesLocal = [];
 
     claseForm.addEventListener('submit', async (e) => {
+
         e.preventDefault();
 
         const idEdicion = idEdicionInput.value;
 
         const datos = {
+
             nombre_clase: document.getElementById('nombre').value,
             tipo: document.getElementById('tipo').value,
             nivel: document.getElementById('nivel').value,
             descripcion: document.getElementById('descripcion').value,
             cupo_maximo: document.getElementById('cupo').value
+
         };
 
         try {
+
             let url = `${API_URL}/clases`;
             let metodo = 'POST';
 
             if (idEdicion) {
+
                 url = `${API_URL}/clases/${idEdicion}`;
                 metodo = 'PUT';
+
             }
 
             const respuesta = await fetch(url, {
+
                 method: metodo,
+
                 headers: {
+
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${token}`
+
                 },
+
                 body: JSON.stringify(datos)
+
             });
 
             if (respuesta.status === 401 || respuesta.status === 403) {
+
                 alert('Tu sesión no es válida o no tienes permisos.');
+
                 localStorage.clear();
+
                 window.location.href = '/login.html';
+
                 return;
+
             }
 
             if (respuesta.ok) {
-                alert(idEdicion ? '¡Clase actualizada con éxito!' : '¡Clase registrada con éxito!');
+
+                alert(idEdicion
+                    ? '¡Clase actualizada con éxito!'
+                    : '¡Clase registrada con éxito!'
+                );
+
                 resetearFormulario();
+
                 cargarClases();
+
             } else {
-                alert('Hubo un error en el servidor al procesar la solicitud.');
+
+                alert('Hubo un error en el servidor.');
+
             }
 
         } catch (error) {
+
             console.error('Error:', error);
+
             alert('No se pudo conectar con el servidor.');
+
         }
+
     });
 
     async function cargarClases() {
+
         try {
+
             const respuesta = await fetch(`${API_URL}/clases`, {
+
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
+
             });
 
             if (respuesta.status === 401 || respuesta.status === 403) {
+
                 alert('Debes iniciar sesión como administrador');
+
                 localStorage.clear();
+
                 window.location.href = '/login.html';
+
                 return;
+
             }
 
             listaClasesLocal = await respuesta.json();
@@ -315,101 +358,179 @@
             tablaClases.innerHTML = '';
 
             listaClasesLocal.forEach(clase => {
+
                 const fila = document.createElement('tr');
 
                 fila.innerHTML = `
                     <td>${clase.id_clase}</td>
-                    <td><strong>${clase.nombre_clase}</strong></td>
+
+                    <td>
+                        <strong>${clase.nombre_clase}</strong>
+                    </td>
+
                     <td>${clase.tipo}</td>
+
                     <td>
                         <span class="badge-nivel ${clase.nivel.toLowerCase()}">
                             ${clase.nivel}
                         </span>
                     </td>
+
                     <td>${clase.cupo_maximo}</td>
+
                     <td>
-                        <button class="btn-table-edit" onclick="editarClase(${clase.id_clase})">
+
+                        <button
+                            class="btn-table-edit"
+                            onclick="editarClase(${clase.id_clase})"
+                        >
                             ✏️ Editar
                         </button>
 
-                        <button class="btn-table-delete" onclick="eliminarClase(${clase.id_clase})">
+                        <button
+                            class="btn-table-delete"
+                            onclick="eliminarClase(${clase.id_clase})"
+                        >
                             🗑️ Borrar
                         </button>
+
                     </td>
                 `;
 
                 tablaClases.appendChild(fila);
+
             });
 
         } catch (error) {
+
             console.error('Error al cargar clases:', error);
+
         }
+
     }
 
     function editarClase(id) {
-        const claseSeleccionada = listaClasesLocal.find(c => c.id_clase === id);
+
+        const claseSeleccionada =
+            listaClasesLocal.find(c => c.id_clase === id);
 
         if (claseSeleccionada) {
+
             idEdicionInput.value = claseSeleccionada.id_clase;
-            document.getElementById('nombre').value = claseSeleccionada.nombre_clase;
-            document.getElementById('tipo').value = claseSeleccionada.tipo;
-            document.getElementById('nivel').value = claseSeleccionada.nivel;
-            document.getElementById('descripcion').value = claseSeleccionada.descripcion || '';
-            document.getElementById('cupo').value = claseSeleccionada.cupo_maximo;
+
+            document.getElementById('nombre').value =
+                claseSeleccionada.nombre_clase;
+
+            document.getElementById('tipo').value =
+                claseSeleccionada.tipo;
+
+            document.getElementById('nivel').value =
+                claseSeleccionada.nivel;
+
+            document.getElementById('descripcion').value =
+                claseSeleccionada.descripcion || '';
+
+            document.getElementById('cupo').value =
+                claseSeleccionada.cupo_maximo;
 
             btnGuardar.textContent = "Actualizar Clase";
+
             btnGuardar.style.backgroundColor = "#2a9d8f";
+
             btnCancelar.style.display = "inline-block";
 
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth'
             });
+
         }
+
     }
 
     async function eliminarClase(id) {
-        if (confirm('¿Estás seguro de que deseas eliminar esta clase de forma permanente?')) {
+
+        if (confirm('¿Estás seguro de eliminar esta clase?')) {
+
             try {
-                const respuesta = await fetch(`${API_URL}/clases/${id}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
+
+                const respuesta = await fetch(
+                    `${API_URL}/clases/${id}`,
+                    {
+
+                        method: 'DELETE',
+
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        }
+
                     }
-                });
+                );
 
                 if (respuesta.status === 401 || respuesta.status === 403) {
-                    alert('Tu sesión no es válida o no tienes permisos.');
+
+                    alert('Tu sesión no es válida.');
+
                     localStorage.clear();
+
                     window.location.href = '/login.html';
+
                     return;
+
                 }
 
                 if (respuesta.ok) {
+
                     alert('Clase eliminada con éxito.');
+
                     cargarClases();
+
                 } else {
-                    alert('No se pudo eliminar la clase. Revisa las restricciones.');
+
+                    alert('No se pudo eliminar.');
+
                 }
 
             } catch (error) {
+
                 console.error('Error al eliminar:', error);
+
                 alert('Error de conexión.');
+
             }
+
         }
+
     }
 
     function resetearFormulario() {
+
         claseForm.reset();
+
         idEdicionInput.value = "";
+
         btnGuardar.textContent = "Guardar Clase";
+
         btnGuardar.style.backgroundColor = "#9d8df1";
+
         btnCancelar.style.display = "none";
+
+    }
+
+    function cerrarSesion() {
+
+        localStorage.clear();
+
+        alert('Sesión cerrada correctamente');
+
+        window.location.href = '/login.html';
+
     }
 
     btnCancelar.addEventListener('click', resetearFormulario);
 
     document.addEventListener('DOMContentLoaded', cargarClases);
+
 </script>
 
 </body>
