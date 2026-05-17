@@ -5,9 +5,15 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Registro - CREARTE</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/registro.css">
 
 </head>
 
@@ -26,107 +32,252 @@
 
 <body>
 
-    <h1>Registro de Usuario</h1>
+    <!-- CONTENEDOR PRINCIPAL -->
+    <div class="container">
 
-    <form id="formRegistro">
+        <!-- =========================
+             PANEL IZQUIERDO
+        ========================== -->
 
-        <label>Nombre (s)</label>
+        <div class="left-panel">
 
-        <br>
+            <!-- Logo -->
+            <img
+                src="/assets/logo-crearte-morado.svg"
+                alt="Logo CreArte"
+                class="logo"
+            >
 
-        <input 
-            type="text" 
-            id="nombre"
-            placeholder="Ingresa tu nombre completo"
-            required
-        >
+            <!-- Texto -->
+            <h2 class="slogan">
+                Donde tu
+                <span>creatividad</span>
+                <br>
+                cobra forma.
+            </h2>
 
-        <br><br>
+            <!-- Imagen artística -->
+            <img
+                src="/assets/pinceles-lienzo-acuarelas.svg"
+                alt="Arte CreArte"
+                class="art-image"
+            >
 
-        <label>Apellido (s)</label>
+        </div>
 
-        <br>
+        <!-- =========================
+             PANEL DERECHO
+        ========================== -->
 
-        <input 
-            type="text" 
-            id="apellido"
-            placeholder="Ingresa tu apellido completo"
-            required
-        >
+        <div class="right-panel">
 
-        <br><br>
+            <div class="form-container">
 
-        <label>Correo</label>
+                <!-- Título -->
+                <h1>Crea tu cuenta</h1>
 
-        <br>
+                <!-- Subtítulo -->
+                <p class="subtitle">
 
-        <input 
-            type="email" 
-            id="correo"
-            placeholder="Ingresa tu correo electrónico"
-            required
-        >
+                    Únete a la Academia de Arte
+                    <strong>CreArte</strong>
 
-        <br><br>
+                    <br>
 
-        <label>Contraseña</label>
+                    y comienza tu viaje creativo.
 
-        <br>
+                </p>
 
-        <input 
-            type="password" 
-            id="contraseña"
-            placeholder="********"
-            required
-        >
+                <!-- FORMULARIO -->
+                <form id="formRegistro">
 
-        <br><br>
+                    <!-- =========================
+                         NOMBRE
+                    ========================== -->
 
-        <label>Confirmar Contraseña</label>
+                    <label for="nombre">
+                        Nombre (s)
+                    </label>
 
-        <br>
+                    <div class="input-group input-user">
 
-        <input 
-            type="password" 
-            id="confirmar-contraseña"
-            placeholder="********"
-            required
-        >
+                        <input
+                            type="text"
+                            id="nombre"
+                            placeholder="Ingresa tu nombre completo"
+                            required
+                        >
 
-        <br><br>
+                    </div>
 
-        <label>Rol</label>
+                    <!-- =========================
+                         APELLIDOS
+                    ========================== -->
 
-        <br>
+                    <label for="apellido">
+                        Apellido (s)
+                    </label>
 
-        <select id="rol" required>
+                    <div class="input-group input-user">
 
-            <option value="">
-                Selecciona un rol
-            </option>
+                        <input
+                            type="text"
+                            id="apellido"
+                            placeholder="Ingresa tu apellido completo"
+                            required
+                        >
 
-            <option value="alumno">
-                Alumno
-            </option>
+                    </div>
 
-            <option value="profesor">
-                Profesor
-            </option>
+                    <!-- =========================
+                         CORREO
+                    ========================== -->
 
-        </select>
+                    <label for="correo">
+                        Correo electrónico
+                    </label>
 
-        <br><br>
+                    <div class="input-group input-email">
 
-        <button type="submit">
-            Registrarse
-        </button>
+                        <input
+                            type="email"
+                            id="correo"
+                            placeholder="Ingresa tu correo electrónico"
+                            required
+                        >
 
-    </form>
+                    </div>
 
-    <br>
+                    <!-- =========================
+                         CONTRASEÑA
+                    ========================== -->
 
-    <p id="mensaje"></p>
+                    <label for="contraseña">
+                        Contraseña
+                    </label>
 
+                    <div class="input-group input-password">
+
+                        <input
+                            type="password"
+                            id="contraseña"
+                            placeholder="Crea una contraseña"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- =========================
+                         CONFIRMAR CONTRASEÑA
+                    ========================== -->
+
+                    <label for="confirmar-contraseña">
+                        Confirmar contraseña
+                    </label>
+
+                    <div class="input-group input-password">
+
+                        <input
+                            type="password"
+                            id="confirmar-contraseña"
+                            placeholder="Confirma tu contraseña"
+                            required
+                        >
+
+                    </div>
+
+                    <!-- =========================
+                         ROL
+                    ========================== -->
+
+                    <label for="rol">
+                        Rol
+                    </label>
+
+                    <div class="input-group">
+
+                        <select id="rol" required>
+
+                            <option value="">
+                                Selecciona un rol
+                            </option>
+
+                            <option value="alumno">
+                                Alumno
+                            </option>
+
+                            <option value="profesor">
+                                Profesor
+                            </option>
+
+                        </select>
+
+                    </div>
+
+                    <!-- =========================
+                         TÉRMINOS
+                    ========================== -->
+
+                    <div class="terms">
+
+                        <input
+                            type="checkbox"
+                            required
+                        >
+
+                        <p>
+
+                            Acepto los
+
+                            <a href="#">
+                                Términos y Condiciones
+                            </a>
+
+                            y la
+
+                            <a href="#">
+                                Política de Privacidad
+                            </a>
+
+                        </p>
+
+                    </div>
+
+                    <!-- BOTÓN -->
+
+                    <button type="submit">
+
+                        Crear cuenta
+
+                    </button>
+
+                </form>
+
+                <!-- MENSAJE -->
+
+                <p id="mensaje"></p>
+
+                <!-- LOGIN -->
+
+                <div class="login-link">
+
+                    ¿Ya tienes una cuenta?
+
+                    <a href="/login.html">
+
+                        Inicia sesión
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- JS -->
     <script src="/js/registro.js"></script>
 
 </body>
