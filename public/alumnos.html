@@ -11,6 +11,21 @@
 
 <body>
 
+    <script>
+
+        const token = localStorage.getItem('token');
+        const rol = localStorage.getItem('rol');
+
+        if (!token || rol !== 'admin') {
+
+            alert('Debes iniciar sesión como administrador');
+
+            window.location.href = '/login.html';
+
+        }
+
+    </script>
+
     <h1>Gestión de Alumnos</h1>
 
     <form id="formAlumno">

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
 
 *{
     margin: 0;
@@ -9,12 +9,22 @@
 :root{
     --color-principal: #d6a45c;
     --color-secundario: #1f1f1f;
-    --color-claro: #f5f1ea;
-    --color-texto: #333;
+    --color-claro: #f8f5ef;
+    --color-texto: #253047;
     --color-blanco: #ffffff;
-    --login-gradient: linear-gradient(180deg, #ff8c00 0%, #ff4500 100%);
-    --color-morado: #9d8df1;
-    --color-rosa-claro: #ffd1dc;
+
+    --color-morado: #9d63f2;
+    --color-morado-oscuro: #6f3fc4;
+    --color-turquesa: #18c9c9;
+    --color-verde: #8cd957;
+    --color-rosa: #e89ac5;
+    --color-rojo: #ff3d57;
+    --color-amarillo: #f6c44f;
+    --color-azul: #0b4f7d;
+
+    --shadow-suave: 0 18px 45px rgba(0, 0, 0, .10);
+    --shadow-card: 0 12px 30px rgba(0, 0, 0, .12);
+    --radio-grande: 28px;
 }
 
 html{
@@ -28,8 +38,17 @@ body{
     overflow-x: hidden;
 }
 
+img{
+    max-width: 100%;
+    display: block;
+}
+
+a{
+    text-decoration: none;
+}
+
 /* ========================= */
-/* NAVBAR */
+/* NAVBAR - CONSERVA ESTILO BASE */
 /* ========================= */
 
 .navbar{
@@ -45,75 +64,6 @@ body{
     color: var(--color-blanco) !important;
 }
 
-/* --- AJUSTES PARA EL PANEL ADMIN --- */
-
-.navbar-admin {
-    background-color: var(--color-secundario);
-    padding: 10px 5%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    min-height: 70px; /* Altura fija para que no se vea gigante */
-}
-
-.logo-container-admin {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.logo-admin {
-    height: 50px; /* ESTO ES LO IMPORTANTE: Ajusta el tamaño del logo */
-    width: auto;
-    object-fit: contain;
-}
-
-.navbar-admin span {
-    font-weight: 600;
-    font-size: 1.2rem;
-    letter-spacing: 1px;
-}
-
-/* Ajuste del contenedor principal para que no se pegue al logo */
-.admin-container {
-    padding: 40px 10% 40px 10%; /* Más espacio arriba para que no choque con la navbar fija */
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* Arreglo de los textos que se ven amontonados */
-.admin-header h1 {
-    font-size: 2.2rem;
-    color: var(--color-secundario);
-    margin-bottom: 30px;
-}
-
-.admin-header h1 span {
-    font-size: 1rem;
-    color: var(--color-morado);
-    display: block;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-/* Estilo para los botones de la Navbar Admin */
-.btn-logout {
-    color: #ff4500 !important;
-    font-weight: 600;
-    text-decoration: none;
-    margin-left: 20px;
-    padding: 8px 15px;
-    border: 1px solid #ff4500;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-
-.btn-logout:hover {
-    background-color: #ff4500;
-    color: white !important;
-}
-
 .nav-link{
     color: var(--color-blanco) !important;
     margin-left: 18px;
@@ -125,211 +75,560 @@ body{
     color: var(--color-principal) !important;
 }
 
-.btn-login{
-    background-color: var(--color-principal);
-    color: var(--color-blanco) !important;
+.nav-link.btn-warning{
+    background-color: var(--color-principal) !important;
+    border-color: var(--color-principal) !important;
     border-radius: 30px;
-    padding: 10px 22px !important;
+    font-weight: 600;
 }
 
-.btn-login:hover{
-    background-color: #bf8f4d;
+.nav-link.btn-warning:hover{
+    background-color: #bf8f4d !important;
+    border-color: #bf8f4d !important;
+    color: var(--color-blanco) !important;
+}
+
+.nav-link.btn-outline-light{
+    border-radius: 30px;
+    font-weight: 600;
+}
+
+.nav-link.btn-outline-light:hover{
+    color: var(--color-secundario) !important;
 }
 
 /* ========================= */
-/* HERO SECTION */
+/* HERO */
 /* ========================= */
 
 .hero-section{
     min-height: 100vh;
-
+    position: relative;
     background:
-    linear-gradient(rgba(0,0,0,.55), rgba(0,0,0,.55)),
-    url('../img/hero.jpg');
-
+        linear-gradient(rgba(0,0,0,.35), rgba(0,0,0,.45)),
+        url('/imgs/hero-crearte.svg');
     background-size: cover;
     background-position: center;
-
     display: flex;
     align-items: center;
+    padding-top: 90px;
+    overflow: hidden;
+}
+
+.hero-overlay{
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at top right, rgba(24, 201, 201, .24), transparent 30%),
+        radial-gradient(circle at bottom left, rgba(157, 99, 242, .24), transparent 35%);
+    pointer-events: none;
+}
+
+.hero-container{
+    position: relative;
+    z-index: 2;
 }
 
 .hero-content{
-    max-width: 700px;
+    max-width: 720px;
+    padding: 45px;
+    border-radius: var(--radio-grande);
+    color: var(--color-blanco);
+    background-color: rgba(0, 0, 0, .22);
+    backdrop-filter: blur(5px);
 }
 
-.hero-section h1{
-    font-size: 5rem;
-    font-weight: 700;
-    color: var(--color-blanco);
+.hero-logo{
+    width: 180px;
+    margin-bottom: 25px;
+}
+
+.hero-content h1{
+    font-size: clamp(2.8rem, 7vw, 5.8rem);
+    line-height: 1;
+    font-weight: 800;
     margin-bottom: 20px;
 }
 
-.hero-section p{
-    font-size: 1.2rem;
-    color: rgba(255,255,255,.9);
-    margin-bottom: 30px;
+.hero-content p{
+    font-size: 1.25rem;
     line-height: 1.8;
+    max-width: 620px;
+    margin-bottom: 32px;
 }
 
 .hero-btn{
-    background-color: var(--color-principal);
+    background-color: var(--color-turquesa);
+    color: var(--color-blanco);
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-weight: 700;
     border: none;
-    color: white;
-    padding: 14px 35px;
-    border-radius: 40px;
-    font-weight: 600;
     transition: .3s ease;
 }
 
 .hero-btn:hover{
-    transform: translateY(-3px);
-    background-color: #bf8f4d;
+    transform: translateY(-4px);
+    background-color: #10b4b4;
+    color: var(--color-blanco);
+}
+
+/* ========================= */
+/* ESTILOS GENERALES DE SECCIÓN */
+/* ========================= */
+
+section{
+    position: relative;
+}
+
+.welcome-section,
+.courses-section,
+.gallery-section,
+.testimonials-section,
+.faq-section,
+.location-contact-section{
+    padding: 100px 0;
+}
+
+.section-title{
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 55px;
+}
+
+.section-kicker{
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--color-azul);
+    margin-bottom: 4px;
+}
+
+.section-heading,
+.section-title h2{
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: .95;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.section-title p,
+.welcome-text{
+    color: #5e6475;
+    font-size: 1.05rem;
+    line-height: 1.8;
+}
+
+.purple-text{
+    color: var(--color-morado);
+}
+
+.green-text{
+    color: var(--color-verde);
+}
+
+.turquoise-text{
+    color: var(--color-turquesa);
+}
+
+/* ========================= */
+/* BIENVENIDA */
+/* ========================= */
+
+.welcome-section{
+    background-color: var(--color-blanco);
+}
+
+.welcome-text{
+    max-width: 1000px;
+    font-size: 1.12rem;
 }
 
 /* ========================= */
 /* CURSOS */
 /* ========================= */
 
-.courses{
-    padding: 100px 0;
+.courses-section{
+    background-color: #f3f7fb;
 }
 
-.section-title{
-    text-align: center;
-    margin-bottom: 60px;
-}
-
-.section-title h2{
-    font-size: 2.8rem;
-    font-weight: 700;
-    color: var(--color-secundario);
-}
-
-.section-title p{
-    margin-top: 10px;
-    color: #666;
-}
-
-.card{
-    border: none;
-    border-radius: 20px;
-    overflow: hidden;
+.course-card{
+    min-height: 100%;
+    padding: 18px;
+    border-radius: 28px;
+    background-color: var(--color-blanco);
+    box-shadow: var(--shadow-card);
     transition: .3s ease;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    background-color: white;
+    overflow: hidden;
+    border: 3px solid transparent;
 }
 
-.card:hover{
+.course-card:hover{
     transform: translateY(-10px);
 }
 
-.card img{
-    height: 260px;
+.course-card img{
+    width: 100%;
+    height: 210px;
+    object-fit: contain;
+    border-radius: 22px;
+    padding: 18px;
+    background-color: rgba(255,255,255,.65);
+}
+
+.course-card-body{
+    padding: 22px 10px 8px;
+    text-align: center;
+}
+
+.course-card h3{
+    font-size: 1.35rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+}
+
+.course-card p{
+    color: #555d70;
+    line-height: 1.65;
+    margin-bottom: 0;
+}
+
+.course-danza{
+    border-color: var(--color-rojo);
+}
+
+.course-danza h3{
+    color: var(--color-rojo);
+}
+
+.course-escultura{
+    border-color: var(--color-amarillo);
+}
+
+.course-escultura h3{
+    color: #d99a00;
+}
+
+.course-pintura{
+    border-color: var(--color-turquesa);
+}
+
+.course-pintura h3{
+    color: var(--color-turquesa);
+}
+
+.course-teatro{
+    border-color: var(--color-rosa);
+}
+
+.course-teatro h3{
+    color: var(--color-rosa);
+}
+
+/* ========================= */
+/* GALERÍA / COLLAGE */
+/* ========================= */
+
+.gallery-section{
+    background-color: var(--color-blanco);
+    overflow: hidden;
+}
+
+.gallery-collage{
+    display: grid;
+    grid-template-columns: 1.35fr 1fr 1fr;
+    grid-auto-rows: 240px;
+    gap: 22px;
+}
+
+.gallery-item{
+    position: relative;
+    border-radius: 26px;
+    overflow: hidden;
+    box-shadow: var(--shadow-card);
+    background-color: #e9edf5;
+}
+
+.gallery-large{
+    grid-row: span 2;
+}
+
+.gallery-item img{
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    transition: .45s ease;
 }
 
-.card-body{
-    padding: 25px;
+.gallery-item:hover img{
+    transform: scale(1.06);
 }
 
-.card-title{
-    font-weight: 600;
-    margin-bottom: 10px;
+.gallery-label{
+    position: absolute;
+    left: 18px;
+    bottom: 18px;
+    background-color: rgba(255,255,255,.92);
+    color: var(--color-azul);
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-weight: 800;
+    box-shadow: 0 8px 18px rgba(0,0,0,.12);
 }
 
-.card-text{
-    color: #666;
-    line-height: 1.6;
+/* ========================= */
+/* TESTIMONIOS */
+/* ========================= */
+
+.testimonials-section{
+    background-color: #fbfaf7;
+}
+
+.testimonial-card{
+    height: 100%;
+    background-color: var(--color-blanco);
+    border-radius: 28px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: var(--shadow-card);
+}
+
+.testimonial-avatar{
+    width: 88px;
+    height: 88px;
+    margin: 0 auto 24px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--color-morado), var(--color-turquesa));
+    color: var(--color-blanco);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    font-weight: 800;
+}
+
+.testimonial-card p{
+    color: #5a6172;
+    line-height: 1.8;
+    font-size: 1.03rem;
+    margin-bottom: 22px;
+}
+
+.testimonial-card h3{
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: var(--color-azul);
+    margin-bottom: 0;
+}
+
+/* ========================= */
+/* FAQ */
+/* ========================= */
+
+.faq-section{
+    background-color: var(--color-blanco);
+}
+
+.faq-grid{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.faq-item{
+    background-color: #f6f8fc;
+    border-radius: 24px;
+    padding: 28px;
+    border-left: 6px solid var(--color-turquesa);
+    box-shadow: 0 8px 24px rgba(0,0,0,.06);
+}
+
+.faq-item:nth-child(2n){
+    border-left-color: var(--color-morado);
+}
+
+.faq-item:nth-child(3n){
+    border-left-color: var(--color-principal);
+}
+
+.faq-item h3{
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--color-azul);
+    margin-bottom: 12px;
+}
+
+.faq-item p{
+    color: #5e6475;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+/* ========================= */
+/* UBICACIÓN Y CONTACTO */
+/* ========================= */
+
+.location-contact-section{
+    background-color: #f3f7fb;
+}
+
+.map-card,
+.contact-card{
+    height: 100%;
+    background-color: var(--color-blanco);
+    border-radius: 30px;
+    padding: 34px;
+    box-shadow: var(--shadow-card);
+}
+
+.map-card h3,
+.contact-card h3{
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: var(--color-azul);
+    margin-bottom: 12px;
+}
+
+.map-card p,
+.contact-card p{
+    color: #5e6475;
+    line-height: 1.7;
+    margin-bottom: 24px;
+}
+
+.map-card iframe{
+    border-radius: 24px;
+    overflow: hidden;
+}
+
+.contact-form{
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.form-group{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label{
+    font-weight: 700;
+    color: var(--color-texto);
+}
+
+.form-group input,
+.form-group textarea{
+    width: 100%;
+    border: 2px solid #e5e8f0;
+    border-radius: 18px;
+    padding: 14px 18px;
+    font-family: 'Poppins', sans-serif;
+    outline: none;
+    transition: .3s ease;
+    background-color: #fbfcff;
+}
+
+.form-group input:focus,
+.form-group textarea:focus{
+    border-color: var(--color-turquesa);
+    box-shadow: 0 0 0 4px rgba(24,201,201,.13);
+}
+
+.contact-btn{
+    width: fit-content;
+    border: none;
+    background-color: var(--color-morado);
+    color: var(--color-blanco);
+    padding: 14px 34px;
+    border-radius: 999px;
+    font-weight: 800;
+    transition: .3s ease;
+}
+
+.contact-btn:hover{
+    transform: translateY(-3px);
+    background-color: var(--color-morado-oscuro);
 }
 
 /* ========================= */
 /* FOOTER */
 /* ========================= */
 
-footer{
-    background-color: var(--color-secundario);
-    color: white;
+.main-footer{
+    background: linear-gradient(135deg, var(--color-morado), #6d45c9);
+    color: var(--color-blanco);
+    padding: 70px 0 25px;
+}
+
+.footer-grid{
+    display: grid;
+    grid-template-columns: 1.3fr .8fr 1.3fr;
+    gap: 48px;
+}
+
+.footer-column h3{
+    font-size: 1.25rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+}
+
+.footer-column p{
+    color: rgba(255,255,255,.86);
+    line-height: 1.75;
+}
+
+.footer-column ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.footer-column li{
+    margin-bottom: 10px;
+}
+
+.footer-column a{
+    color: rgba(255,255,255,.86);
+    transition: .3s ease;
+}
+
+.footer-column a:hover{
+    color: var(--color-amarillo);
+}
+
+.footer-location{
+    margin-top: 16px;
+    font-weight: 600;
+}
+
+.footer-bottom{
+    border-top: 1px solid rgba(255,255,255,.22);
+    margin-top: 45px;
+    padding-top: 22px;
     text-align: center;
-    padding: 30px 0;
+}
+
+.footer-bottom p{
+    margin-bottom: 0;
+    color: rgba(255,255,255,.92);
+    font-weight: 600;
 }
 
 /* ========================= */
-/* RESPONSIVE */
-/* ========================= */
-
-@media(max-width: 992px){
-
-    .hero-section{
-        text-align: center;
-        padding: 120px 20px;
-    }
-
-    .hero-content{
-        margin: auto;
-    }
-
-    .hero-section h1{
-        font-size: 3.8rem;
-    }
-
-    .nav-link{
-        margin-left: 0;
-        margin-top: 10px;
-    }
-
-}
-
-@media(max-width: 768px){
-
-    .hero-section h1{
-        font-size: 3rem;
-    }
-
-    .hero-section p{
-        font-size: 1rem;
-    }
-
-    .section-title h2{
-        font-size: 2.2rem;
-    }
-
-    .card img{
-        height: 220px;
-    }
-
-}
-
-@media(max-width: 576px){
-
-    .hero-section h1{
-        font-size: 2.4rem;
-    }
-
-    .hero-btn{
-        width: 100%;
-    }
-
-    .navbar-brand{
-        font-size: 1.4rem;
-    }
-
-}
-
-/* ========================= */
-/* LOGIN SECTION (NUEVO) */
+/* LOGIN / ADMIN - CONSERVADO DEL CSS BASE */
 /* ========================= */
 
 .login-page-container {
     display: flex;
-    min-height: 90vh; /* Ajustado para que quepa debajo de tu navbar */
+    min-height: 90vh;
     padding: 40px 10%;
     align-items: center;
     justify-content: space-between;
     background-color: var(--color-blanco);
 }
 
-/* Sección Izquierda */
 .login-info-side {
     flex: 1;
     padding-right: 50px;
@@ -346,7 +645,7 @@ footer{
     color: var(--color-morado);
     display: block;
     padding-bottom: 5px;
-    border-bottom: 5px solid #ff69b4; /* Línea rosa del diseño */
+    border-bottom: 5px solid #ff69b4;
     width: fit-content;
 }
 
@@ -366,18 +665,17 @@ footer{
 .dot-indicator {
     height: 35px;
     width: 35px;
-    background-color: var(--color-rosa-claro);
+    background-color: #ffd1dc;
     border-radius: 50%;
     margin-right: 15px;
 }
 
-/* Sección Derecha (El formulario naranja) */
 .login-form-side {
-    flex: 0 0 450px; /* Ancho fijo para el cuadro naranja */
+    flex: 0 0 450px;
 }
 
 .orange-card {
-    background: var(--login-gradient);
+    background: linear-gradient(180deg, #ff8c00 0%, #ff4500 100%);
     padding: 50px 40px;
     border-radius: 30px;
     color: var(--color-blanco);
@@ -420,7 +718,7 @@ footer{
     padding: 14px 20px;
     border-radius: 25px;
     border: none;
-    background-color: #e8e8e8; /* Gris claro del diseño */
+    background-color: #e8e8e8;
     font-family: 'Poppins', sans-serif;
 }
 
@@ -442,22 +740,203 @@ footer{
     background-color: #8a7ae0;
 }
 
-/* Responsivo para el Login */
-@media(max-width: 992px) {
+.navbar-admin {
+    background-color: var(--color-secundario);
+    padding: 10px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    min-height: 70px;
+}
+
+.logo-container-admin {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-admin {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.navbar-admin span {
+    font-weight: 600;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.admin-container {
+    padding: 40px 10% 40px 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.admin-header h1 {
+    font-size: 2.2rem;
+    color: var(--color-secundario);
+    margin-bottom: 30px;
+}
+
+.admin-header h1 span {
+    font-size: 1rem;
+    color: var(--color-morado);
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.btn-logout {
+    color: #ff4500 !important;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 20px;
+    padding: 8px 15px;
+    border: 1px solid #ff4500;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    background-color: #ff4500;
+    color: white !important;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width: 992px){
+
+    .nav-link{
+        margin-left: 0;
+        margin-top: 10px;
+    }
+
+    .hero-section{
+        text-align: center;
+        padding: 130px 20px 80px;
+    }
+
+    .hero-content{
+        margin: auto;
+        padding: 34px;
+    }
+
+    .hero-logo{
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .gallery-collage{
+        grid-template-columns: 1fr 1fr;
+        grid-auto-rows: 230px;
+    }
+
+    .gallery-large{
+        grid-column: span 2;
+        grid-row: span 1;
+    }
+
+    .faq-grid{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-grid{
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+
     .login-page-container {
         flex-direction: column;
         text-align: center;
         padding: 40px 20px;
     }
+
     .login-info-side {
         padding-right: 0;
         margin-bottom: 40px;
     }
+
     .login-info-side h1 span {
         margin: 0 auto;
     }
+
     .feature-item {
         justify-content: center;
     }
+
 }
 
+@media(max-width: 768px){
+
+    .welcome-section,
+    .courses-section,
+    .gallery-section,
+    .testimonials-section,
+    .faq-section,
+    .location-contact-section{
+        padding: 75px 0;
+    }
+
+    .hero-content{
+        padding: 28px;
+    }
+
+    .hero-content p{
+        font-size: 1rem;
+    }
+
+    .course-card img{
+        height: 190px;
+    }
+
+    .gallery-collage{
+        grid-template-columns: 1fr;
+        grid-auto-rows: 240px;
+    }
+
+    .gallery-large{
+        grid-column: span 1;
+    }
+
+    .faq-grid{
+        grid-template-columns: 1fr;
+    }
+
+    .map-card,
+    .contact-card{
+        padding: 26px;
+    }
+
+    .contact-btn{
+        width: 100%;
+    }
+
+}
+
+@media(max-width: 576px){
+
+    .navbar-brand{
+        font-size: 1.4rem;
+    }
+
+    .hero-logo{
+        width: 140px;
+    }
+
+    .section-kicker{
+        font-size: 1.05rem;
+    }
+
+    .testimonial-card{
+        padding: 28px;
+    }
+
+    .footer-bottom{
+        text-align: left;
+    }
+
+}

@@ -13,6 +13,34 @@ router.post('/registro', async (req, res) => {
 
     const { nombre, correo, contraseña, rol } = req.body;
 
+    if (!nombre || !correo || !contraseña || !rol) {
+        return res.status(400).json({
+            mensaje: 'Todos los campos son obligatorios'
+        });
+    }
+
+    const rolesPermitidos = ['alumno', 'profesor'];
+
+    if (!rolesPermitidos.includes(rol)) {
+        return res.status(400).json({
+            mensaje: 'Rol no permitido'
+        });
+    }
+
+    if (contraseña.length < 6) {
+        return res.status(400).json({
+            mensaje: 'La contraseña debe tener al menos 6 caracteres'
+        });
+    }
+
+    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!correoRegex.test(correo)) {
+        return res.status(400).json({
+            mensaje: 'Correo electrónico inválido'
+        });
+    }
+
     const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
 
     const sql = `
@@ -52,6 +80,12 @@ router.post('/registro', async (req, res) => {
 router.post('/login', async (req, res) => {
 
     const { correo, contraseña } = req.body;
+
+    if (!correo || !contraseña) {
+        return res.status(400).json({
+            mensaje: 'Correo y contraseña son obligatorios'
+        });
+    }
 
     const sql = `
         SELECT * FROM usuario

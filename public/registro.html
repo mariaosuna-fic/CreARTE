@@ -11,6 +11,19 @@
 
 </head>
 
+<script>
+
+    const token = localStorage.getItem('token');
+    const rol = localStorage.getItem('rol');
+
+    if (token && rol === 'admin') {
+
+        window.location.href = '/clases.html';
+
+    }
+
+</script>
+
 <body>
 
     <h1>Registro de Usuario</h1>
@@ -98,10 +111,6 @@
 
             <option value="profesor">
                 Profesor
-            </option>
-
-            <option value="admin">
-                Administrador
             </option>
 
         </select>
