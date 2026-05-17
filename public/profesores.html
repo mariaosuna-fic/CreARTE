@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Profesores - CREARTE</title>
+
 </head>
+
 <body>
 
     <h1>Gestión de Profesores</h1>
@@ -12,15 +18,19 @@
     <form id="formProfesor">
 
         <label>Usuario profesor:</label>
+
         <select id="id_usuario" required>
+
             <option value="">
                 Selecciona un usuario con rol profesor
             </option>
+
         </select>
 
         <br><br>
 
         <label>Especialidad:</label>
+
         <input 
             type="text"
             id="especialidad"
@@ -31,6 +41,7 @@
         <br><br>
 
         <label>Disponibilidad:</label>
+
         <input 
             type="text"
             id="disponibilidad"
@@ -53,13 +64,21 @@
     <table border="1">
 
         <thead>
+
             <tr>
+
                 <th>ID Profesor</th>
+
                 <th>Especialidad</th>
+
                 <th>Disponibilidad</th>
+
                 <th>ID Usuario</th>
+
                 <th>Acciones</th>
+
             </tr>
+
         </thead>
 
         <tbody id="tablaProfesores">
@@ -71,4 +90,5 @@
     <script src="/js/profesores.js"></script>
 
 </body>
+
 </html>

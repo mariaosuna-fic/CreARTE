@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
+
     <title>Alumnos - CREARTE</title>
+
 </head>
+
 <body>
 
     <h1>Gestión de Alumnos</h1>
@@ -11,28 +16,52 @@
     <form id="formAlumno">
 
         <label>Usuario alumno:</label>
+
         <select id="id_usuario" required>
-            <option value="">Selecciona un usuario con rol alumno</option>
+
+            <option value="">
+                Selecciona un usuario con rol alumno
+            </option>
+
         </select>
 
         <br><br>
 
         <label>Matrícula:</label>
-        <input type="text" id="matricula" placeholder="Ej. A001" required>
+
+        <input
+            type="text"
+            id="matricula"
+            placeholder="Ej. A001"
+            required
+        >
 
         <br><br>
 
         <label>Teléfono:</label>
-        <input type="text" id="telefono" placeholder="Ej. 6671234567" required>
+
+        <input
+            type="text"
+            id="telefono"
+            placeholder="Ej. 6671234567"
+            required
+        >
 
         <br><br>
 
         <label>Fecha de registro:</label>
-        <input type="date" id="fecha_registro" required>
+
+        <input
+            type="date"
+            id="fecha_registro"
+            required
+        >
 
         <br><br>
 
-        <button type="submit" id="btnGuardar">Guardar Alumno</button>
+        <button type="submit" id="btnGuardar">
+            Guardar Alumno
+        </button>
 
     </form>
 
@@ -41,23 +70,35 @@
     <h2>Alumnos registrados</h2>
 
     <table border="1">
+
         <thead>
+
             <tr>
+
                 <th>ID Alumno</th>
+
                 <th>Matrícula</th>
+
                 <th>Teléfono</th>
+
                 <th>Fecha Registro</th>
+
                 <th>ID Usuario</th>
+
                 <th>Acciones</th>
+
             </tr>
+
         </thead>
 
         <tbody id="tablaAlumnos">
             <!-- Aquí se cargan los alumnos -->
         </tbody>
+
     </table>
 
     <script src="/js/alumnos.js"></script>
 
 </body>
+
 </html>

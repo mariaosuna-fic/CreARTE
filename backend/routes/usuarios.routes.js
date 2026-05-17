@@ -1,47 +1,47 @@
-const express = require('express');
-const router = express.Router();
+    const express = require('express');
+    const router = express.Router();
 
-const crearCRUD = require('./crud.routes');
-const conexion = require('../database/db');
+    const crearCRUD = require('./crud.routes');
+    const conexion = require('../database/db');
 
-// CRUD general
-const crudUsuarios = crearCRUD({
-    tabla: 'usuario',
-    id: 'id_usuario',
-    columnas: ['nombre', 'correo', 'contraseña', 'rol', 'estado']
-});
+    // CRUD general
+    const crudUsuarios = crearCRUD({
+        tabla: 'usuario',
+        id: 'id_usuario',
+        columnas: ['nombre', 'correo', 'contraseña', 'rol', 'estado']
+    });
 
-// GET Usuarios (Sin contraseña)
+    // GET Usuarios (Sin contraseña)
 
-router.get('/', (req, res) => {
+    router.get('/', (req, res) => {
 
-    const sql = `
-        SELECT id_usuario, nombre, correo, rol, estado
-        FROM usuario
-    `;
+        const sql = `
+            SELECT id_usuario, nombre, correo, rol, estado
+            FROM usuario
+        `;
 
-    conexion.query(sql, (error, resultados) => {
+        conexion.query(sql, (error, resultados) => {
 
-        if (error) {
+            if (error) {
 
-            console.error(error);
+                console.error(error);
 
-            return res.status(500).json({
-                mensaje: 'Error al consultar usuarios'
-            });
+                return res.status(500).json({
+                    mensaje: 'Error al consultar usuarios'
+                });
 
-        }
+            }
 
-        res.json(resultados);
+            res.json(resultados);
+
+        });
 
     });
 
-});
+    /* =========================
+    RESTO CRUD GENERAL
+    ========================= */
 
-/* =========================
-   RESTO CRUD GENERAL
-========================= */
+    router.use('/', crudUsuarios);
 
-router.use('/', crudUsuarios);
-
-module.exports = router;
+    module.exports = router;
