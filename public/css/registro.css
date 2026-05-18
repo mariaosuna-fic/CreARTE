@@ -17,9 +17,12 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background:
-        url('/assets/fondo morado de registro.svg') no-repeat center center/cover;
+
+    /* Fondo principal */
+    background: url('../assets/fondo morado registro.svg')
+                no-repeat center center;
+    background-size: cover;
+
     overflow: hidden;
     position: relative;
 }
@@ -32,11 +35,17 @@ body {
     width: 92%;
     max-width: 1450px;
     height: 90vh;
-    background: rgba(255,255,255,0.92);
+
+    background: rgba(255, 255, 255, 0.92);
+
     border-radius: 30px;
+
     display: flex;
+
     overflow: hidden;
+
     backdrop-filter: blur(10px);
+
     box-shadow: 0 15px 40px rgba(0,0,0,0.08);
 }
 
@@ -45,8 +54,7 @@ body {
 ========================= */
 
 .left-panel {
-    width: 42%;
-    padding: 50px;
+    width: 80%;
     position: relative;
 
     display: flex;
@@ -81,8 +89,9 @@ body {
 /* Imagen artística */
 
 .art-image {
-    width: 320px;
+    width: 512px;
     margin-top: 20px;
+    align-self: baseline;
 }
 
 /* =========================
@@ -90,7 +99,7 @@ body {
 ========================= */
 
 .right-panel {
-    width: 58%;
+    width: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,13 +112,18 @@ body {
     content: "";
     position: absolute;
     inset: 0;
+
     background:
-        url('/assets/Fondo de brochas.svg')
+        url('../assets/Fondo de brochas.svg')
         no-repeat center;
+
     background-size: cover;
-    opacity: 0.18;
+
+    opacity: 1;
+
     z-index: 0;
 }
+
 
 /* =========================
    FORMULARIO
@@ -118,14 +132,20 @@ body {
 .form-container {
     width: 80%;
     max-width: 720px;
+
     background: rgba(255,255,255,0.92);
+
     border-radius: 25px;
+
     padding: 50px;
+
     position: relative;
+
     z-index: 1;
 
     box-shadow: 0 10px 30px rgba(0,0,0,0.06);
 }
+
 
 /* Título */
 
@@ -168,16 +188,23 @@ label {
     margin-bottom: 25px;
 }
 
+
 .input-group input,
 .input-group select {
     width: 100%;
     height: 58px;
+
     border-radius: 14px;
+
     border: 1px solid #ddd;
+
     padding-left: 55px;
     padding-right: 20px;
+
     font-size: 1rem;
-    background: white;
+    color: #333;
+    background: #d9d9d9;
+
     transition: 0.3s;
 }
 
@@ -194,12 +221,17 @@ label {
 
 .input-group::before {
     content: "";
+
     position: absolute;
+
     width: 22px;
     height: 22px;
+
     left: 18px;
     top: 50%;
+
     transform: translateY(-50%);
+
     background-size: contain;
     background-repeat: no-repeat;
 }
@@ -207,19 +239,19 @@ label {
 /* Usuario */
 
 .input-user::before {
-    background-image: url('/assets/icono usuario gris.svg');
+    background-image: url('../assets/icono usuario gris.svg');
 }
 
 /* Correo */
 
 .input-email::before {
-    background-image: url('/assets/icono correo.svg');
+    background-image: url('../assets/icono correo.svg');
 }
 
 /* Password */
 
 .input-password::before {
-    background-image: url('/assets/icono candado.svg');
+    background-image: url('../assets/icono candado.svg');
 }
 
 /* =========================
@@ -230,8 +262,10 @@ label {
     display: flex;
     align-items: center;
     gap: 10px;
+
     margin-top: 10px;
     margin-bottom: 30px;
+
     font-size: 0.95rem;
     color: #555;
 }
@@ -249,18 +283,26 @@ label {
 button {
     width: 100%;
     height: 58px;
+
     border: none;
+
     border-radius: 14px;
+
     background: linear-gradient(90deg, #5B2384, #7E3BB5);
+
     color: white;
+
     font-size: 1rem;
     font-weight: 600;
+
     cursor: pointer;
+
     transition: 0.3s;
 }
 
 button:hover {
     transform: translateY(-2px);
+
     box-shadow: 0 8px 20px rgba(91,35,132,0.3);
 }
 

@@ -13,7 +13,7 @@
     <title>Registro - CREARTE</title>
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/registro.css">
+    <link rel="stylesheet" href="./css/registro.css">
 
 </head>
 
@@ -33,7 +33,7 @@
 <body>
 
     <!-- CONTENEDOR PRINCIPAL -->
-    <div class="container">
+    <!--div class="container">
 
         <!-- =========================
              PANEL IZQUIERDO
@@ -43,22 +43,14 @@
 
             <!-- Logo -->
             <img
-                src="/assets/logo-crearte-morado.svg"
+                src="./assets/logo-crearte-morado.svg"
                 alt="Logo CreArte"
                 class="logo"
             >
 
-            <!-- Texto -->
-            <h2 class="slogan">
-                Donde tu
-                <span>creatividad</span>
-                <br>
-                cobra forma.
-            </h2>
-
             <!-- Imagen artística -->
             <img
-                src="/assets/pinceles-lienzo-acuarelas.svg"
+                src="./assets/pinceles-lienzo-acuarelas.svg"
                 alt="Arte CreArte"
                 class="art-image"
             >
@@ -70,7 +62,7 @@
         ========================== -->
 
         <div class="right-panel">
-
+            
             <div class="form-container">
 
                 <!-- Título -->
@@ -104,7 +96,7 @@
                         <input
                             type="text"
                             id="nombre"
-                            placeholder="Ingresa tu nombre completo"
+                            placeholder="Ingresa tu(s) nombre(s)"
                             required
                         >
 
@@ -123,7 +115,7 @@
                         <input
                             type="text"
                             id="apellido"
-                            placeholder="Ingresa tu apellido completo"
+                            placeholder="Ingresa tu(s) apellido(s)"
                             required
                         >
 
@@ -191,15 +183,18 @@
                     ========================== -->
 
                     <label for="rol">
-                        Rol
+                        Usuario
                     </label>
 
                     <div class="input-group">
 
                         <select id="rol" required>
 
-                            <option value="">
-                                Selecciona un rol
+                            <option value="" disabled selected>
+                                Selecciona un tipo de usuario
+
+                            <option value="Admin">
+                                Admin
                             </option>
 
                             <option value="alumno">
@@ -275,7 +270,7 @@
 
         </div>
 
-    </div>
+    <!--/div>
 
     <!-- JS -->
     <script src="/js/registro.js"></script>
