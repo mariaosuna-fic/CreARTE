@@ -159,6 +159,21 @@ El siguiente diagrama representa la estructura lógica y las relaciones principa
 
 ![Diagrama de clases](./public/assets/diagrama-clases.png)
 
+### 5.4.1. Diagrama de clases - Ejemplo
+
+El sistema CreARTE funciona como una plataforma administrativa para una academia de arte.
+
+El administrador puede gestionar cursos, alumnos, profesores, horarios y salones desde un panel principal.
+
+- Cada alumno puede inscribirse a clases y consultar sus pagos y asistencias.
+- Los profesores tienen asignadas clases y horarios específicos.
+- Las clases contienen información como nombre, tipo, nivel y cupo máximo.
+- Además, el sistema permite organizar horarios, registrar asistencias y controlar mensualidades y pagos.
+
+El diagrama de clases representa cómo se relacionan todos estos elementos dentro del sistema.
+
+![Diagrama de clases](./public/assets/panel-administracion.png)
+
 ---
 
 # 6. Instalación y Ejecución
