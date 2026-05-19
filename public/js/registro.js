@@ -8,6 +8,24 @@ formRegistro.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
+    // Obtener rol
+    let rol = document.getElementById('rol').value;
+
+    // Limpiar texto
+    rol = rol.toLowerCase().trim();
+
+    // Bloquear admin desde frontend
+    if (rol === 'admin') {
+
+        mensaje.textContent =
+            'No puedes registrarte como administrador';
+
+        mensaje.style.color = 'red';
+
+        return;
+
+    }
+
     const datos = {
 
         nombre: document.getElementById('nombre').value,
@@ -16,7 +34,7 @@ formRegistro.addEventListener('submit', async (e) => {
 
         contraseña: document.getElementById('contraseña').value,
 
-        rol: document.getElementById('rol').value
+        rol: rol
 
     };
 
@@ -40,7 +58,13 @@ formRegistro.addEventListener('submit', async (e) => {
 
         if (respuesta.ok) {
 
+            mensaje.style.color = 'green';
+
             formRegistro.reset();
+
+        } else {
+
+            mensaje.style.color = 'red';
 
         }
 
@@ -49,6 +73,8 @@ formRegistro.addEventListener('submit', async (e) => {
         console.error(error);
 
         mensaje.textContent = 'Error al registrar usuario';
+
+        mensaje.style.color = 'red';
 
     }
 

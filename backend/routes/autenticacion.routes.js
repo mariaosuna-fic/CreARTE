@@ -11,65 +11,118 @@ const jwt = require('jsonwebtoken');
 
 router.post('/registro', async (req, res) => {
 
-    const { nombre, correo, contraseña, rol } = req.body;
+    try {
 
-    if (!nombre || !correo || !contraseña || !rol) {
-        return res.status(400).json({
-            mensaje: 'Todos los campos son obligatorios'
-        });
-    }
+        let { nombre, correo, contraseña, rol } = req.body;
 
-    const rolesPermitidos = ['alumno', 'profesor'];
+        // ======================
+        // VALIDACIONES
+        // ======================
 
-    if (!rolesPermitidos.includes(rol)) {
-        return res.status(400).json({
-            mensaje: 'Rol no permitido'
-        });
-    }
+        if (!nombre || !correo || !contraseña || !rol) {
 
-    if (contraseña.length < 6) {
-        return res.status(400).json({
-            mensaje: 'La contraseña debe tener al menos 6 caracteres'
-        });
-    }
-
-    const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
-    if (!correoRegex.test(correo)) {
-        return res.status(400).json({
-            mensaje: 'Correo electrónico inválido'
-        });
-    }
-
-    const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
-
-    const sql = `
-        INSERT INTO usuario(nombre, correo, contraseña, rol, estado)
-        VALUES (?, ?, ?, ?, true)
-    `;
-
-    conexion.query(
-        sql,
-        [nombre, correo, contraseñaEncriptada, rol],
-        (error, resultado) => {
-
-            if (error) {
-
-                console.error(error);
-
-                return res.status(500).json({
-                    mensaje: 'Error al registrar usuario'
-                });
-
-            }
-
-            res.json({
-                mensaje: 'Usuario registrado correctamente',
-                id_usuario: resultado.insertId
+            return res.status(400).json({
+                mensaje: 'Todos los campos son obligatorios'
             });
 
         }
-    );
+
+        // Limpiar rol
+        rol = rol.toLowerCase().trim();
+
+        // Roles permitidos
+        const rolesPermitidos = ['alumno', 'profesor'];
+
+        if (!rolesPermitidos.includes(rol)) {
+
+            return res.status(400).json({
+                mensaje: 'Rol no permitido'
+            });
+
+        }
+
+        // Validar contraseña
+        if (contraseña.length < 6) {
+
+            return res.status(400).json({
+                mensaje: 'La contraseña debe tener al menos 6 caracteres'
+            });
+
+        }
+
+        // Validar correo
+        const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        if (!correoRegex.test(correo)) {
+
+            return res.status(400).json({
+                mensaje: 'Correo electrónico inválido'
+            });
+
+        }
+
+        // ======================
+        // ENCRIPTAR CONTRASEÑA
+        // ======================
+
+        const contraseñaEncriptada = await bcrypt.hash(
+            contraseña,
+            10
+        );
+
+        // ======================
+        // INSERTAR USUARIO
+        // ======================
+
+        const sql = `
+            INSERT INTO usuario
+            (
+                nombre,
+                correo,
+                contraseña,
+                rol,
+                estado
+            )
+            VALUES (?, ?, ?, ?, true)
+        `;
+
+        conexion.query(
+            sql,
+            [
+                nombre,
+                correo,
+                contraseñaEncriptada,
+                rol
+            ],
+            (error, resultado) => {
+
+                if (error) {
+
+                    console.error(error);
+
+                    return res.status(500).json({
+                        mensaje: 'Error al registrar usuario'
+                    });
+
+                }
+
+                res.json({
+                    mensaje: 'Usuario registrado correctamente',
+                    id_usuario: resultado.insertId
+                });
+
+            }
+        );
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.status(500).json({
+            mensaje: 'Error del servidor'
+        });
+
+    }
 
 });
 
@@ -82,9 +135,11 @@ router.post('/login', async (req, res) => {
     const { correo, contraseña } = req.body;
 
     if (!correo || !contraseña) {
+
         return res.status(400).json({
             mensaje: 'Correo y contraseña son obligatorios'
         });
+
     }
 
     const sql = `

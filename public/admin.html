@@ -2,53 +2,97 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Panel Administrador - CREARTE</title>
-    <link rel="stylesheet" href="/css/admin.css">
+
+    <link
+        rel="stylesheet"
+        href="/css/admin.css"
+    >
+
 </head>
 
 <body>
 
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
     <header class="navbar-admin">
 
         <div class="logo-container-admin">
+
             <img 
                 src="/assets/logo crearte azul.svg" 
                 alt="Logo CREARTE"
                 class="logo-admin"
             >
+
         </div>
 
-        <a href="#" class="btn-logout" id="cerrarSesion">
+        <a
+            href="#"
+            class="btn-logout"
+            id="cerrarSesion"
+        >
             Cerrar sesión
         </a>
 
     </header>
 
+    <!-- =========================
+         LAYOUT PRINCIPAL
+    ========================== -->
+
     <div class="layout-container">
+
+        <!-- =========================
+             SIDEBAR
+        ========================== -->
 
         <aside class="sidebar-admin">
 
             <nav class="sidebar-nav">
 
-                <a href="/clases.html" class="sidebar-link">
+                <a
+                    href="/clases.html"
+                    class="sidebar-link"
+                >
                     Cursos
                 </a>
 
-                <a href="/alumnos.html" class="sidebar-link">
+                <a
+                    href="/alumnos.html"
+                    class="sidebar-link"
+                >
                     Alumnos
                 </a>
 
-                <a href="/profesores.html" class="sidebar-link">
+                <a
+                    href="/profesores.html"
+                    class="sidebar-link"
+                >
                     Profesores
                 </a>
 
-                <a href="/horarios.html" class="sidebar-link">
+                <a
+                    href="/horarios.html"
+                    class="sidebar-link"
+                >
                     Horarios
                 </a>
 
-                <a href="/salones.html" class="sidebar-link">
+                <a
+                    href="/salones.html"
+                    class="sidebar-link"
+                >
                     Salones
                 </a>
 
@@ -56,50 +100,137 @@
 
         </aside>
 
+        <!-- =========================
+             CONTENIDO PRINCIPAL
+        ========================== -->
+
         <main class="main-content">
 
+            <!-- HEADER -->
+
             <div class="content-header">
-                <h1>Panel de Administración</h1>
-                <p>Bienvenido al gestor administrativo de CREARTE.</p>
+
+                <h1>
+                    Panel de Administración
+                </h1>
+
+                <p>
+                    Bienvenido al gestor administrativo de CREARTE.
+                </p>
+
             </div>
+
+            <!-- TARJETAS -->
 
             <div class="dashboard-grid">
 
-                <a href="/clases.html" class="dashboard-card">
-                    <h3>Cursos</h3>
-                    <p>Gestionar</p>
+                <!-- CURSOS -->
+
+                <a
+                    href="/clases.html"
+                    class="dashboard-card"
+                >
+
+                    <h3>
+                        Cursos
+                    </h3>
+
+                    <p>
+                        Gestionar
+                    </p>
+
                 </a>
 
-                <a href="/alumnos.html" class="dashboard-card">
-                    <h3>Alumnos</h3>
-                    <p>Gestionar</p>
+                <!-- ALUMNOS -->
+
+                <a
+                    href="/alumnos.html"
+                    class="dashboard-card"
+                >
+
+                    <h3>
+                        Alumnos
+                    </h3>
+
+                    <p>
+                        Gestionar
+                    </p>
+
                 </a>
 
-                <a href="/profesores.html" class="dashboard-card">
-                    <h3>Profesores</h3>
-                    <p>Gestionar</p>
+                <!-- PROFESORES -->
+
+                <a
+                    href="/profesores.html"
+                    class="dashboard-card"
+                >
+
+                    <h3>
+                        Profesores
+                    </h3>
+
+                    <p>
+                        Gestionar
+                    </p>
+
                 </a>
 
-                <a href="/horarios.html" class="dashboard-card">
-                    <h3>Horarios</h3>
-                    <p>Gestionar</p>
+                <!-- HORARIOS -->
+
+                <a
+                    href="/horarios.html"
+                    class="dashboard-card"
+                >
+
+                    <h3>
+                        Horarios
+                    </h3>
+
+                    <p>
+                        Gestionar
+                    </p>
+
                 </a>
 
-                <a href="/salones.html" class="dashboard-card">
-                    <h3>Salones</h3>
-                    <p>Gestionar</p>
+                <!-- SALONES -->
+
+                <a
+                    href="/salones.html"
+                    class="dashboard-card"
+                >
+
+                    <h3>
+                        Salones
+                    </h3>
+
+                    <p>
+                        Gestionar
+                    </p>
+
                 </a>
 
             </div>
 
+            <!-- DESCRIPCIÓN -->
+
             <section class="form-card">
 
-                <h2>Gestor administrativo</h2>
+                <h2>
+                    Gestor administrativo
+                </h2>
 
                 <p class="admin-description">
-                    Desde este panel puedes administrar la información principal de CREARTE,
-                    como cursos, alumnos, profesores, horarios y salones.
-                    Usa el menú lateral o las tarjetas para entrar al módulo que quieras gestionar.
+
+                    Desde este panel puedes administrar la
+                    información principal de CREARTE,
+                    como cursos, alumnos, profesores,
+                    horarios y salones.
+
+                    <br><br>
+
+                    Usa el menú lateral o las tarjetas
+                    para entrar al módulo que quieras gestionar.
+
                 </p>
 
             </section>
@@ -107,6 +238,8 @@
         </main>
 
     </div>
+
+    <!-- JS -->
 
     <script src="/js/admin.js"></script>
 
