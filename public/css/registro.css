@@ -526,3 +526,157 @@ button:hover {
         font-size: 1.1rem;
     }
 }
+
+/* RESPONSIVE REGISTRO / LOGIN */
+@media (max-width: 1024px) {
+    body {
+        overflow: auto;
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        height: auto;
+        min-height: 90vh;
+    }
+
+    .left-panel {
+        width: 50%;
+        padding: 30px;
+    }
+
+    .right-panel {
+        width: 50%;
+    }
+
+    .logo {
+        width: 260px;
+    }
+
+    .slogan {
+        font-size: 2.2rem;
+    }
+
+    .art-image {
+        width: 360px;
+    }
+
+    .form-container {
+        width: 88%;
+        padding: 35px;
+    }
+
+    .form-container h1 {
+        font-size: 2.3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow: auto;
+        padding: 15px;
+        align-items: flex-start;
+    }
+
+    .container {
+        flex-direction: column;
+        height: auto;
+        border-radius: 22px;
+    }
+
+    .left-panel,
+    .right-panel {
+        width: 100%;
+    }
+
+    .left-panel {
+        padding: 35px 20px;
+    }
+
+    .right-panel {
+        padding: 35px 0;
+        min-height: auto;
+    }
+
+    .right-panel::before {
+        background-size: cover;
+    }
+
+    .logo {
+        width: 220px;
+        margin-bottom: 20px;
+    }
+
+    .slogan {
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    .art-image {
+        width: 260px;
+        align-self: center;
+    }
+
+    .form-container {
+        width: 90%;
+        padding: 28px 22px;
+    }
+
+    .form-container h1 {
+        font-size: 2rem;
+    }
+
+    .subtitle {
+        font-size: 0.95rem;
+    }
+
+    .input-group input,
+    .input-group select,
+    button {
+        height: 52px;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        border-radius: 18px;
+    }
+
+    .left-panel {
+        padding: 25px 15px;
+    }
+
+    .logo {
+        width: 180px;
+    }
+
+    .slogan {
+        font-size: 1.45rem;
+    }
+
+    .art-image {
+        width: 210px;
+    }
+
+    .form-container {
+        width: 94%;
+        padding: 24px 18px;
+    }
+
+    .form-container h1 {
+        font-size: 1.7rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    .terms {
+        font-size: 0.85rem;
+        align-items: flex-start;
+    }
+}
