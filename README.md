@@ -268,6 +268,7 @@ https://cre-arte.vercel.app/
 ```
 
 La página principal funciona como la primera vista del sistema CREARTE. Desde esta sección, los usuarios pueden conocer información general sobre la academia, sus cursos y las opciones principales de navegación.
+ 
 
 ## 7.2. Registro de usuario
 
@@ -293,7 +294,16 @@ Para ingresar al sistema, el usuario debe:
 
 Si los datos son correctos, el sistema permite el acceso de acuerdo con el rol del usuario.
 
+## Credenciales de administrador (prueba)
+
+Para acceder al panel administrativo del sistema, se puede utilizar el siguiente usuario de prueba:
+
+```text
+Correo: carlos1@gmail.com
+Contraseña: carlos1
+
 ## 7.4. Módulo CRUD seleccionado: Clases
+``` 
 
 Para cumplir con el requerimiento de creación, lectura, actualización y eliminación de registros, se seleccionó la entidad **Clase**.
 
