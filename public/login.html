@@ -4,31 +4,41 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - CREARTE</title>
 
-    <link rel="stylesheet" href="/css/login.css">
+    <meta 
+        name="viewport" 
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    
+    <title>
+        Login - CREARTE
+    </title>
+
+    <link 
+        rel="stylesheet" 
+        href="/css/login.css"
+    >
+
 </head>
- 
-<script>
-
-    const token = localStorage.getItem('token');
-    const rol = localStorage.getItem('rol');
-
-    if (token && rol === 'admin') {
-
-        window.location.href = '/admin.html';
-
-    }
-
-</script>
 
 <body>
 
+    <script>
+
+        const token = localStorage.getItem('token');
+        const rol = localStorage.getItem('rol');
+
+        if (token && rol === 'admin') {
+
+            window.location.href = '/admin.html';
+
+        }
+
+    </script>
+
     <div class="container">
 
+        <!-- IZQUIERDA -->
         <div class="left-section">
 
             <img 
@@ -39,6 +49,7 @@
 
         </div>
 
+        <!-- DERECHA -->
         <div class="right-section">
 
             <div class="login-card">
@@ -49,12 +60,15 @@
                     class="logo"
                 >
 
-                <h1>Bienvenido de nuevo</h1>
+                <h1>
+                    Bienvenido de nuevo
+                </h1>
 
                 <p class="subtitle">
                     Inicia sesión para continuar tu camino creativo.
                 </p>
 
+                <!-- FORMULARIO -->
                 <form id="formLogin">
 
                     <input 
@@ -71,15 +85,22 @@
                         required
                     >
 
+                    <!-- MENSAJE ERROR / LOGIN -->
+                    <p id="mensaje"></p>
+
                     <button type="submit">
                         Iniciar sesión
                     </button>
 
+                    <!-- OPCIONES -->
                     <div class="options">
 
                         <label class="remember">
+
                             <input type="checkbox">
+
                             Recuérdame
+
                         </label>
 
                         <a href="#">
@@ -88,11 +109,15 @@
 
                     </div>
 
+                    <!-- REGISTRO -->
                     <p class="register">
+
                         ¿Todavía no tienes una cuenta?
+
                         <a href="/registro.html">
                             Regístrate
                         </a>
+
                     </p>
 
                 </form>

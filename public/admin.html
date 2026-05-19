@@ -1,29 +1,23 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
 
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Panel Administrador - CREARTE</title>
-
     <link rel="stylesheet" href="/css/admin.css">
-
 </head>
 
 <body>
 
-    <!-- NAVBAR -->
     <header class="navbar-admin">
 
         <div class="logo-container-admin">
-
             <img 
                 src="/assets/logo crearte azul.svg" 
                 alt="Logo CREARTE"
                 class="logo-admin"
             >
-
         </div>
 
         <a href="#" class="btn-logout" id="cerrarSesion">
@@ -32,31 +26,29 @@
 
     </header>
 
-    <!-- LAYOUT -->
     <div class="layout-container">
 
-        <!-- SIDEBAR -->
         <aside class="sidebar-admin">
 
             <nav class="sidebar-nav">
 
-                <a href="#" class="sidebar-link active">
+                <a href="/clases.html" class="sidebar-link">
                     Cursos
                 </a>
 
-                <a href="#" class="sidebar-link">
+                <a href="/alumnos.html" class="sidebar-link">
                     Alumnos
                 </a>
 
-                <a href="#" class="sidebar-link">
+                <a href="/profesores.html" class="sidebar-link">
                     Profesores
                 </a>
 
-                <a href="#" class="sidebar-link">
+                <a href="/horarios.html" class="sidebar-link">
                     Horarios
                 </a>
 
-                <a href="#" class="sidebar-link">
+                <a href="/salones.html" class="sidebar-link">
                     Salones
                 </a>
 
@@ -64,149 +56,51 @@
 
         </aside>
 
-        <!-- CONTENIDO -->
         <main class="main-content">
 
             <div class="content-header">
+                <h1>Panel de Administración</h1>
+                <p>Bienvenido al gestor administrativo de CREARTE.</p>
+            </div>
 
-                <h1>
-                    Panel de Administración
-                </h1>
+            <div class="dashboard-grid">
 
-                <p>
-                    Gestiona la información académica de CREARTE.
-                </p>
+                <a href="/clases.html" class="dashboard-card">
+                    <h3>Cursos</h3>
+                    <p>Gestionar</p>
+                </a>
+
+                <a href="/alumnos.html" class="dashboard-card">
+                    <h3>Alumnos</h3>
+                    <p>Gestionar</p>
+                </a>
+
+                <a href="/profesores.html" class="dashboard-card">
+                    <h3>Profesores</h3>
+                    <p>Gestionar</p>
+                </a>
+
+                <a href="/horarios.html" class="dashboard-card">
+                    <h3>Horarios</h3>
+                    <p>Gestionar</p>
+                </a>
+
+                <a href="/salones.html" class="dashboard-card">
+                    <h3>Salones</h3>
+                    <p>Gestionar</p>
+                </a>
 
             </div>
 
-            <!-- FORMULARIO -->
             <section class="form-card">
 
-                <form>
+                <h2>Gestor administrativo</h2>
 
-                    <div class="form-grid">
-
-                        <div class="form-group">
-
-                            <label>Nombre del curso</label>
-
-                            <input 
-                                type="text"
-                                placeholder="Ejemplo: Pintura artística"
-                            >
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>Nivel</label>
-
-                            <select>
-
-                                <option>Principiante</option>
-                                <option>Intermedio</option>
-                                <option>Avanzado</option>
-
-                            </select>
-
-                        </div>
-
-                        <div class="form-group">
-
-                            <label>Cupo máximo</label>
-
-                            <input 
-                                type="number"
-                                placeholder="20"
-                            >
-
-                        </div>
-
-                        <div class="form-group full-width">
-
-                            <label>Descripción</label>
-
-                            <textarea 
-                                rows="4"
-                                placeholder="Descripción del curso"
-                            ></textarea>
-
-                        </div>
-
-                    </div>
-
-                    <div class="form-buttons">
-
-                        <button type="submit" class="btn-primary">
-                            Guardar
-                        </button>
-
-                        <button type="reset" class="btn-cancel">
-                            Cancelar
-                        </button>
-
-                    </div>
-
-                </form>
-
-            </section>
-
-            <!-- TABLA -->
-            <h2 class="table-title">
-                Cursos registrados
-            </h2>
-
-            <section class="table-card">
-
-                <table class="custom-table">
-
-                    <thead>
-
-                        <tr>
-
-                            <th>ID</th>
-                            <th>Curso</th>
-                            <th>Nivel</th>
-                            <th>Cupo</th>
-                            <th>Acciones</th>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-
-                            <td>1</td>
-
-                            <td>Pintura artística</td>
-
-                            <td>
-                                <span class="badge-nivel principiante">
-                                    Principiante
-                                </span>
-                            </td>
-
-                            <td>20</td>
-
-                            <td>
-
-                                <button class="btn-table-edit">
-                                    Editar
-                                </button>
-
-                                <button class="btn-table-delete">
-                                    Eliminar
-                                </button>
-
-                            </td>
-
-                        </tr>
-
-                    </tbody>
-
-                </table>
+                <p class="admin-description">
+                    Desde este panel puedes administrar la información principal de CREARTE,
+                    como cursos, alumnos, profesores, horarios y salones.
+                    Usa el menú lateral o las tarjetas para entrar al módulo que quieras gestionar.
+                </p>
 
             </section>
 
@@ -214,23 +108,8 @@
 
     </div>
 
-    <script>
-
-        const cerrarSesion = document.getElementById('cerrarSesion');
-
-        cerrarSesion.addEventListener('click', () => {
-
-            localStorage.removeItem('token');
-            localStorage.removeItem('rol');
-            localStorage.removeItem('nombre');
-
-            window.location.href = '/login.html';
-
-        });
-
-    </script>
+    <script src="/js/admin.js"></script>
 
 </body>
 
 </html>
-
