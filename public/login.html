@@ -9,8 +9,9 @@
 
     <link rel="stylesheet" href="/css/login.css">
 
+    
 </head>
-
+ 
 <script>
 
     const token = localStorage.getItem('token');
@@ -18,7 +19,7 @@
 
     if (token && rol === 'admin') {
 
-        window.location.href = '/clases.html';
+        window.location.href = '/admin.html';
 
     }
 
@@ -69,9 +70,6 @@
                         placeholder="Contraseña"
                         required
                     >
-
-                    <!-- MENSAJE DEL LOGIN -->
-                    <p id="mensaje"></p>
 
                     <button type="submit">
                         Iniciar sesión
