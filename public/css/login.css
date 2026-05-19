@@ -12,10 +12,6 @@ body {
   background: #f5f5f5;
 
   /* Fondo principal */
-    background: url('../assets/fondo azul registro.svg')
-                no-repeat center center;
-    background-size: cover;
-
     overflow: hidden;
     position: relative;
 }
