@@ -253,7 +253,7 @@ async function eliminarClaseProgramada(id) {
     if (!confirm('¿Seguro que deseas eliminar esta clase programada?')) return;
 
     try {
-        const respuesta = await fetch(`${API_URL}/clases-programadas/${id}`, {
+        const respuesta = await fetch(`${API_URL}/clases_programadas/${id}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${token}`
