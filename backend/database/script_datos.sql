@@ -1,35 +1,6 @@
 CREATE DATABASE CREARTE;
 USE CREARTE;
 
--- USUARIO
-CREATE TABLE Usuario (
-    id_usuario INT AUTO_INCREMENT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL,
-    correo VARCHAR(100) NOT NULL UNIQUE,
-    contraseña VARCHAR(100) NOT NULL,
-    rol ENUM('admin','alumno','profesor') NOT NULL,
-    estado BOOLEAN NOT NULL
-);
-
--- ALUMNO
-CREATE TABLE Alumno (
-    id_alumno INT AUTO_INCREMENT PRIMARY KEY,
-    matricula VARCHAR(50) NOT NULL,
-    telefono VARCHAR(20),
-    fecha_registro DATE,
-    id_usuario INT UNIQUE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
-
--- PROFESOR
-CREATE TABLE Profesor (
-    id_profesor INT AUTO_INCREMENT PRIMARY KEY,
-    especialidad VARCHAR(100),
-    disponibilidad VARCHAR(100),
-    id_usuario INT UNIQUE,
-    FOREIGN KEY (id_usuario) REFERENCES Usuario(id_usuario)
-);
-
 -- CLASE
 CREATE TABLE Clase (
     id_clase INT AUTO_INCREMENT PRIMARY KEY,
