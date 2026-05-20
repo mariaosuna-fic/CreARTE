@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscripciones - CREARTE</title>
+    <link rel="stylesheet" href="/css/clases.css">
+</head>
+
+<body class="admin-body">
+
+<header class="navbar-admin">
+    <div class="logo-container-admin">
+        <img src="/assets/logo crearte azul.svg" alt="CREARTE" class="logo-admin">
+    </div>
+
+    <a href="#" class="btn-logout" onclick="cerrarSesion()">
+        Cerrar sesión ➔
+    </a>
+</header>
+
+<div class="layout-container">
+
+    <aside class="sidebar-admin">
+        <nav class="sidebar-nav">
+            <a href="/admin.html" class="sidebar-link">Panel</a>
+            <a href="/clases.html" class="sidebar-link">Cursos</a>
+            <a href="/alumnos.html" class="sidebar-link">Alumnos</a>
+            <a href="/profesores.html" class="sidebar-link">Profesores</a>
+            <a href="/horarios.html" class="sidebar-link">Horarios</a>
+            <a href="/salones.html" class="sidebar-link">Salones</a>
+            <a href="/mensualidades.html" class="sidebar-link">Mensualidades</a>
+            <a href="/pagos.html" class="sidebar-link">Pagos</a>
+            <a href="/inscripciones.html" class="sidebar-link active">Inscripciones</a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+
+        <header class="content-header">
+            <h1>Gestión de Inscripciones</h1>
+            <p>Administra la inscripción de alumnos a clases.</p>
+        </header>
+
+        <section class="form-section">
+            <div class="form-card">
+
+                <form id="formInscripcion" class="clase-form">
+
+                    <input type="hidden" id="id_inscripcion_edicion">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+                            <label>Fecha de inscripción</label>
+                            <input type="date" id="fecha_inscripcion" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ID Alumno</label>
+                            <input type="number" id="id_alumno" placeholder="1" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label>ID Clase</label>
+                            <input type="number" id="id_clase" placeholder="1" required>
+                        </div>
+
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" id="btnGuardar" class="btn-primary">
+                            Guardar Inscripción
+                        </button>
+
+                        <button type="button" id="btnCancelar" class="btn-cancel" style="display: none;">
+                            Cancelar
+                        </button>
+                    </div>
+
+                </form>
+
+            </div>
+        </section>
+
+        <section class="table-section">
+
+            <h3 class="table-title">Inscripciones registradas</h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>ID Inscripción</th>
+                            <th>Fecha</th>
+                            <th>ID Alumno</th>
+                            <th>ID Clase</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaInscripciones"></tbody>
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/js/inscripciones.js"></script>
+
+</body>
+</html>

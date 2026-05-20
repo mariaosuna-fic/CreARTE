@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Panel Alumno - CREARTE
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
+
+</head>
+
+<body class="admin-body">
+
+<header class="navbar-admin">
+
+    <div class="logo-container-admin">
+
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
+        >
+
+    </div>
+
+    <a
+        href="#"
+        class="btn-logout"
+        onclick="cerrarSesion()"
+    >
+        Cerrar sesión ➔
+    </a>
+
+</header>
+
+<div class="layout-container">
+
+    <aside class="sidebar-admin">
+
+        <nav class="sidebar-nav">
+
+            <a
+                href="/alumno-panel.html"
+                class="sidebar-link active"
+            >
+                Mis clases
+            </a>
+
+            <a
+                href="#seccionHorarios"
+                class="sidebar-link"
+            >
+                Horarios
+            </a>
+
+            <a
+                href="#seccionSalones"
+                class="sidebar-link"
+            >
+                Salones
+            </a>
+
+            <a
+                href="#seccionMensualidades"
+                class="sidebar-link"
+            >
+                Mensualidades
+            </a>
+
+            <a
+                href="#seccionPagos"
+                class="sidebar-link"
+            >
+                Pagos
+            </a>
+
+        </nav>
+
+    </aside>
+
+    <main class="main-content">
+
+        <header class="content-header">
+
+            <h1>
+                Panel del Alumno
+            </h1>
+
+            <p>
+                Consulta tus clases, horarios, salones y pagos.
+            </p>
+
+        </header>
+
+        <!-- RESUMEN -->
+
+        <section class="dashboard-grid">
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Clases inscritas
+                </h3>
+
+                <p id="totalClases">
+                    0
+                </p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Mensualidades pendientes
+                </h3>
+
+                <p id="totalPendientes">
+                    0
+                </p>
+
+            </div>
+
+            <div class="dashboard-card">
+
+                <h3>
+                    Pagos realizados
+                </h3>
+
+                <p id="totalPagos">
+                    0
+                </p>
+
+            </div>
+
+        </section>
+
+        <!-- CLASES -->
+
+        <section class="table-section">
+
+            <h3 class="table-title">
+                Mis clases inscritas
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Clase</th>
+
+                            <th>Tipo</th>
+
+                            <th>Nivel</th>
+
+                            <th>Profesor</th>
+
+                            <th>Estado</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaMisClases"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- HORARIOS -->
+
+        <section
+            class="table-section"
+            id="seccionHorarios"
+        >
+
+            <h3 class="table-title">
+                Horarios
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Clase</th>
+
+                            <th>Día</th>
+
+                            <th>Hora inicio</th>
+
+                            <th>Hora fin</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaHorarios"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- SALONES -->
+
+        <section
+            class="table-section"
+            id="seccionSalones"
+        >
+
+            <h3 class="table-title">
+                Salones asignados
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Clase</th>
+
+                            <th>Salón</th>
+
+                            <th>Capacidad</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaSalones"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- MENSUALIDADES -->
+
+        <section
+            class="table-section"
+            id="seccionMensualidades"
+        >
+
+            <h3 class="table-title">
+                Mis mensualidades
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Folio</th>
+
+                            <th>Concepto</th>
+
+                            <th>Monto</th>
+
+                            <th>Fecha límite</th>
+
+                            <th>Estado</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaMensualidades"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <!-- PAGOS -->
+
+        <section
+            class="table-section"
+            id="seccionPagos"
+        >
+
+            <h3 class="table-title">
+                Recibos de pago
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Fecha</th>
+
+                            <th>Monto</th>
+
+                            <th>Método</th>
+
+                            <th>Folio</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaPagos"></tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/js/alumno-panel.js"></script>
+
+</body>
+
+</html>

@@ -1,192 +1,269 @@
-const token = localStorage.getItem('token');
-const rol = localStorage.getItem('rol');
+<!DOCTYPE html>
+<html lang="es">
 
-if (!token || rol !== 'profesor') {
-    alert('Debes iniciar sesión como profesor');
-    window.location.href = '/login.html';
-}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Profesor - CREARTE</title>
 
-const clasesProfesor = [
-    {
-        id: 1,
-        clase: 'Pintura al óleo',
-        tipo: 'Arte visual',
-        nivel: 'Intermedio',
-        dia: 'Lunes',
-        horario: '4:00 PM - 6:00 PM',
-        salon: 'Salón A',
-        alumnos: [
-            {
-                id: 1,
-                nombre: 'María López',
-                correo: 'maria@gmail.com',
-                matricula: 'A001',
-                telefono: '6671234567'
-            },
-            {
-                id: 2,
-                nombre: 'Carlos Ruiz',
-                correo: 'carlos@gmail.com',
-                matricula: 'A002',
-                telefono: '6679998888'
-            }
-        ]
-    },
-    {
-        id: 2,
-        clase: 'Danza contemporánea',
-        tipo: 'Danza',
-        nivel: 'Principiante',
-        dia: 'Miércoles',
-        horario: '5:00 PM - 7:00 PM',
-        salon: 'Salón B',
-        alumnos: [
-            {
-                id: 3,
-                nombre: 'Ana Torres',
-                correo: 'ana@gmail.com',
-                matricula: 'A003',
-                telefono: '6675551111'
-            }
-        ]
-    }
-];
+    <link rel="stylesheet" href="/css/clases.css">
+</head>
 
-document.addEventListener('DOMContentLoaded', () => {
-    cargarResumen();
-    cargarClases();
-    cargarFechaActual();
-});
+<body class="admin-body">
 
-function cargarFechaActual() {
-    const fecha = document.getElementById('fechaAsistencia');
+<header class="navbar-admin">
 
-    if (fecha) {
-        fecha.value = new Date().toISOString().split('T')[0];
-    }
-}
+    <div class="logo-container-admin">
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
+        >
+    </div>
 
-function cargarResumen() {
-    document.getElementById('totalClases').textContent =
-        clasesProfesor.length;
+    <a href="#" class="btn-logout" onclick="cerrarSesion()">
+        Cerrar sesión ➔
+    </a>
 
-    let totalAlumnos = 0;
+</header>
 
-    clasesProfesor.forEach(clase => {
-        totalAlumnos += clase.alumnos.length;
-    });
+<div class="layout-container">
 
-    document.getElementById('totalAlumnos').textContent =
-        totalAlumnos;
+    <aside class="sidebar-admin">
 
-    document.getElementById('totalHoy').textContent =
-        clasesProfesor.length;
-}
+        <nav class="sidebar-nav">
 
-function cargarClases() {
-    const tabla = document.getElementById('tablaMisClases');
+            <a href="/profesor-panel.html" class="sidebar-link active">
+                Mis clases
+            </a>
 
-    tabla.innerHTML = '';
+            <a href="#seccionAlumnos" class="sidebar-link">
+                Alumnos
+            </a>
 
-    clasesProfesor.forEach(clase => {
-        tabla.innerHTML += `
-            <tr>
-                <td>${clase.clase}</td>
-                <td>${clase.tipo}</td>
-                <td>${clase.nivel}</td>
-                <td>${clase.dia}</td>
-                <td>${clase.horario}</td>
-                <td>${clase.salon}</td>
-                <td>
-                    <button
-                        class="btn-table-edit"
-                        onclick="verAlumnos(${clase.id})"
-                    >
-                        Ver alumnos
-                    </button>
-                </td>
-            </tr>
-        `;
-    });
-}
+            <a href="#seccionAsistencia" class="sidebar-link">
+                Asistencia
+            </a>
 
-function verAlumnos(idClase) {
-    const clase = clasesProfesor.find(c => c.id === idClase);
+        </nav>
 
-    if (!clase) return;
+    </aside>
 
-    document.getElementById('claseSeleccionada').value =
-        clase.clase;
+    <main class="main-content">
 
-    const tablaAlumnos =
-        document.getElementById('tablaAlumnosClase');
+        <header class="content-header">
 
-    tablaAlumnos.innerHTML = '';
+            <h1>
+                Panel del Profesor
+            </h1>
 
-    clase.alumnos.forEach(alumno => {
-        tablaAlumnos.innerHTML += `
-            <tr>
-                <td>${alumno.id}</td>
-                <td>${alumno.nombre}</td>
-                <td>${alumno.correo}</td>
-                <td>${alumno.matricula}</td>
-                <td>${alumno.telefono}</td>
-            </tr>
-        `;
-    });
+            <p>
+                Consulta tus clases asignadas, horarios, salones y alumnos inscritos.
+            </p>
 
-    cargarAsistencia(clase);
+        </header>
 
-    document.getElementById('seccionAlumnos').scrollIntoView({
-        behavior: 'smooth'
-    });
-}
+        <section class="dashboard-grid">
 
-function cargarAsistencia(clase) {
-    const tabla = document.getElementById('tablaAsistencia');
+            <div class="dashboard-card">
+                <h3>Clases asignadas</h3>
+                <p id="totalClases">0</p>
+            </div>
 
-    tabla.innerHTML = '';
+            <div class="dashboard-card">
+                <h3>Alumnos inscritos</h3>
+                <p id="totalAlumnos">0</p>
+            </div>
 
-    clase.alumnos.forEach(alumno => {
-        tabla.innerHTML += `
-            <tr>
-                <td>${alumno.nombre}</td>
-                <td>
-                    <input
-                        type="radio"
-                        name="asistencia_${alumno.id}"
-                        value="presente"
-                        checked
-                    >
-                </td>
-                <td>
-                    <input
-                        type="radio"
-                        name="asistencia_${alumno.id}"
-                        value="ausente"
-                    >
-                </td>
-            </tr>
-        `;
-    });
-}
+            <div class="dashboard-card">
+                <h3>Clases de hoy</h3>
+                <p id="totalHoy">0</p>
+            </div>
 
-document.getElementById('formAsistencia').addEventListener('submit', (e) => {
-    e.preventDefault();
+        </section>
 
-    const claseSeleccionada =
-        document.getElementById('claseSeleccionada').value;
+        <section class="form-card">
 
-    if (!claseSeleccionada) {
-        alert('Primero selecciona una clase');
-        return;
-    }
+            <h2>
+                Seleccionar clase
+            </h2>
 
-    alert('Asistencia guardada correctamente');
-});
+            <div class="form-grid">
 
-function cerrarSesion() {
-    localStorage.clear();
-    alert('Sesión cerrada correctamente');
-    window.location.href = '/login.html';
-}
+                <div class="form-group full-width">
+
+                    <label for="claseSeleccionada">
+                        Clase asignada
+                    </label>
+
+                    <select id="claseSeleccionada" required>
+
+                        <option value="">
+                            Selecciona una clase
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <section class="table-section">
+
+            <h3 class="table-title">
+                Mis clases asignadas
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+                        <tr>
+                            <th>Clase</th>
+                            <th>Tipo</th>
+                            <th>Nivel</th>
+                            <th>Día</th>
+                            <th>Horario</th>
+                            <th>Salón</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaMisClases">
+
+                        <tr>
+                            <td colspan="7">
+                                Cargando clases asignadas...
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <section class="table-section" id="seccionAlumnos">
+
+            <h3 class="table-title">
+                Alumnos de la clase seleccionada
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+                        <tr>
+                            <th>ID Alumno</th>
+                            <th>Nombre</th>
+                            <th>Correo</th>
+                            <th>Matrícula</th>
+                            <th>Teléfono</th>
+                        </tr>
+                    </thead>
+
+                    <tbody id="tablaAlumnosClase">
+
+                        <tr>
+                            <td colspan="5">
+                                Selecciona una clase para ver sus alumnos.
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+        <section class="form-section" id="seccionAsistencia">
+
+            <div class="form-card">
+
+                <h2>
+                    Tomar asistencia
+                </h2>
+
+                <p class="admin-description">
+                    Selecciona una clase y marca la asistencia de los alumnos inscritos.
+                </p>
+
+                <form id="formAsistencia" class="clase-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label for="fechaAsistencia">
+                                Fecha
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fechaAsistencia"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="table-card">
+
+                        <table class="custom-table">
+
+                            <thead>
+                                <tr>
+                                    <th>Alumno</th>
+                                    <th>Presente</th>
+                                    <th>Ausente</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="tablaAsistencia">
+
+                                <tr>
+                                    <td colspan="3">
+                                        Selecciona una clase para tomar asistencia.
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                    <br>
+
+                    <div class="form-buttons">
+
+                        <button type="submit" class="btn-primary">
+                            Guardar asistencia
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script src="/js/profesor-panel.js"></script>
+
+</body>
+
+</html> 

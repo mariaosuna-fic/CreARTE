@@ -72,17 +72,13 @@ formLogin.addEventListener('submit', async (e) => {
         );
 
         if (resultado.usuario.rol === 'admin') {
-
             window.location.href = '/admin.html';
-
         } else if (resultado.usuario.rol === 'profesor') {
-
             window.location.href = '/profesor-panel.html';
-
+        } else if (resultado.usuario.rol === 'alumno') {
+            window.location.href = '/alumno-panel.html';
         } else {
-
             window.location.href = '/index.html';
-
         }
 
     } catch (error) {
