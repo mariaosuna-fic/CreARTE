@@ -15,7 +15,41 @@ const btnCancelar = document.getElementById('btnCancelar');
 
 let idPagoEditando = null;
 
-document.addEventListener('DOMContentLoaded', cargarPagos);
+document.addEventListener('DOMContentLoaded', () => {
+    cargarMensualidadesSelect();
+    cargarPagos();
+});
+
+async function cargarMensualidadesSelect() {
+    try {
+        const respuesta = await fetch(`${API_URL}/mensualidades`, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        const mensualidades = await respuesta.json();
+
+        const select = document.getElementById('id_mensualidad');
+
+        select.innerHTML = `
+            <option value="">
+                Selecciona una mensualidad
+            </option>
+        `;
+
+        mensualidades.forEach(m => {
+            select.innerHTML += `
+                <option value="${m.id_mensualidad}">
+                    ${m.folio_recibo} - ${m.concepto} - $${m.monto}
+                </option>
+            `;
+        });
+
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 formPago.addEventListener('submit', async (e) => {
 
@@ -85,19 +119,12 @@ async function cargarPagos() {
 
             tablaPagos.innerHTML += `
                 <tr>
-
                     <td>${pago.id_pago}</td>
-
                     <td>${pago.fecha_pago}</td>
-
                     <td>${pago.monto_pagado}</td>
-
                     <td>${pago.metodo_pago}</td>
-
                     <td>${pago.id_mensualidad}</td>
-
                     <td>
-
                         <button
                             class="btn-table-edit"
                             onclick="editarPago(
@@ -117,9 +144,7 @@ async function cargarPagos() {
                         >
                             Eliminar
                         </button>
-
                     </td>
-
                 </tr>
             `;
 
@@ -157,8 +182,7 @@ function editarPago(id, fecha, monto, metodo, idMensualidad) {
 
 async function eliminarPago(id) {
 
-    const confirmar =
-        confirm('¿Seguro que deseas eliminar este pago?');
+    const confirmar = confirm('¿Seguro que deseas eliminar este pago?');
 
     if (!confirmar) return;
 

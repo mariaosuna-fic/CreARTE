@@ -2,22 +2,41 @@
 <html lang="es">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pagos - CREARTE</title>
-    <link rel="stylesheet" href="/css/clases.css">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Clases Programadas - CREARTE
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
+
 </head>
 
 <body class="admin-body">
 
+<!-- =========================
+     NAVBAR
+========================= -->
+
 <header class="navbar-admin">
 
     <div class="logo-container-admin">
+
         <img
             src="/assets/logo crearte azul.svg"
             alt="CREARTE"
             class="logo-admin"
         >
+
     </div>
 
     <a
@@ -32,43 +51,81 @@
 
 <div class="layout-container">
 
+    <!-- =========================
+         SIDEBAR
+    ========================== -->
+
     <aside class="sidebar-admin">
 
         <nav class="sidebar-nav">
 
-            <a href="/admin.html" class="sidebar-link">
+            <a
+                href="/admin.html"
+                class="sidebar-link"
+            >
                 Panel
             </a>
 
-            <a href="/clases.html" class="sidebar-link">
+            <a
+                href="/clases.html"
+                class="sidebar-link"
+            >
                 Cursos
             </a>
 
-            <a href="/alumnos.html" class="sidebar-link">
+            <a
+                href="/clases-programadas.html"
+                class="sidebar-link active"
+            >
+                Clases Programadas
+            </a>
+
+            <a
+                href="/alumnos.html"
+                class="sidebar-link"
+            >
                 Alumnos
             </a>
 
-            <a href="/profesores.html" class="sidebar-link">
+            <a
+                href="/profesores.html"
+                class="sidebar-link"
+            >
                 Profesores
             </a>
 
-            <a href="/horarios.html" class="sidebar-link">
+            <a
+                href="/horarios.html"
+                class="sidebar-link"
+            >
                 Horarios
             </a>
 
-            <a href="/salones.html" class="sidebar-link">
+            <a
+                href="/salones.html"
+                class="sidebar-link"
+            >
                 Salones
             </a>
 
-            <a href="/mensualidades.html" class="sidebar-link">
+            <a
+                href="/mensualidades.html"
+                class="sidebar-link"
+            >
                 Mensualidades
             </a>
 
-            <a href="/pagos.html" class="sidebar-link active">
+            <a
+                href="/pagos.html"
+                class="sidebar-link"
+            >
                 Pagos
             </a>
 
-            <a href="/inscripciones.html" class="sidebar-link">
+            <a
+                href="/inscripciones.html"
+                class="sidebar-link"
+            >
                 Inscripciones
             </a>
 
@@ -76,119 +133,122 @@
 
     </aside>
 
+    <!-- =========================
+         CONTENIDO PRINCIPAL
+    ========================== -->
+
     <main class="main-content">
 
         <header class="content-header">
 
             <h1>
-                Gestión de Pagos
+                Gestión de Clases Programadas
             </h1>
 
             <p>
-                Administra los pagos realizados por los alumnos.
+                Asigna cursos, profesores, horarios y salones.
             </p>
 
         </header>
 
-        <!-- FORMULARIO -->
+        <!-- =========================
+             FORMULARIO
+        ========================== -->
 
         <section class="form-section">
 
             <div class="form-card">
 
                 <form
-                    id="formPago"
+                    id="formClaseProgramada"
                     class="clase-form"
                 >
 
                     <input
                         type="hidden"
-                        id="id_pago_edicion"
+                        id="id_clase_programada_edicion"
                     >
 
                     <div class="form-grid">
 
-                        <!-- FECHA -->
+                        <!-- CLASE -->
 
                         <div class="form-group">
 
                             <label>
-                                Fecha de pago
-                            </label>
-
-                            <input
-                                type="date"
-                                id="fecha_pago"
-                                required
-                            >
-
-                        </div>
-
-                        <!-- MONTO -->
-
-                        <div class="form-group">
-
-                            <label>
-                                Monto pagado
-                            </label>
-
-                            <input
-                                type="number"
-                                id="monto_pagado"
-                                placeholder="1200"
-                                required
-                            >
-
-                        </div>
-
-                        <!-- MÉTODO -->
-
-                        <div class="form-group">
-
-                            <label>
-                                Método de pago
+                                Curso
                             </label>
 
                             <select
-                                id="metodo_pago"
+                                id="id_clase"
                                 required
                             >
 
                                 <option value="">
-                                    Selecciona método
-                                </option>
-
-                                <option value="Efectivo">
-                                    Efectivo
-                                </option>
-
-                                <option value="Transferencia">
-                                    Transferencia
-                                </option>
-
-                                <option value="Tarjeta">
-                                    Tarjeta
+                                    Selecciona un curso
                                 </option>
 
                             </select>
 
                         </div>
 
-                        <!-- MENSUALIDAD -->
+                        <!-- PROFESOR -->
 
                         <div class="form-group">
 
                             <label>
-                                Mensualidad
+                                Profesor
                             </label>
 
                             <select
-                                id="id_mensualidad"
+                                id="id_profesor"
                                 required
                             >
 
                                 <option value="">
-                                    Selecciona una mensualidad
+                                    Selecciona un profesor
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- HORARIO -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Horario
+                            </label>
+
+                            <select
+                                id="id_horario"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona un horario
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <!-- SALÓN -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Salón
+                            </label>
+
+                            <select
+                                id="id_salon"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona un salón
                                 </option>
 
                             </select>
@@ -206,7 +266,7 @@
                             id="btnGuardar"
                             class="btn-primary"
                         >
-                            Guardar Pago
+                            Guardar Clase Programada
                         </button>
 
                         <button
@@ -226,12 +286,14 @@
 
         </section>
 
-        <!-- TABLA -->
+        <!-- =========================
+             TABLA
+        ========================== -->
 
         <section class="table-section">
 
             <h3 class="table-title">
-                Pagos registrados
+                Clases programadas registradas
             </h3>
 
             <div class="table-card">
@@ -242,15 +304,15 @@
 
                         <tr>
 
-                            <th>ID Pago</th>
+                            <th>ID</th>
 
-                            <th>Fecha</th>
+                            <th>Curso</th>
 
-                            <th>Monto</th>
+                            <th>Profesor</th>
 
-                            <th>Método</th>
+                            <th>Horario</th>
 
-                            <th>Mensualidad</th>
+                            <th>Salón</th>
 
                             <th>Acciones</th>
 
@@ -258,7 +320,7 @@
 
                     </thead>
 
-                    <tbody id="tablaPagos"></tbody>
+                    <tbody id="tablaClasesProgramadas"></tbody>
 
                 </table>
 
@@ -270,7 +332,7 @@
 
 </div>
 
-<script src="/js/pagos.js"></script>
+<script src="/js/clases-programadas.js"></script>
 
 </body>
 
