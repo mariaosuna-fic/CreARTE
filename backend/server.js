@@ -21,59 +21,38 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-// Permite JSON
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+// ======================
+// MIDDLEWARES
+// ======================
 
-// Carpeta frontend
+app.use(express.json());
+
+app.use(express.urlencoded({
+    extended: true
+}));
+
+// ======================
+// ARCHIVOS ESTÁTICOS
+// ======================
+
 app.use(express.static(
     path.join(__dirname, '..', 'public')
 ));
 
-// Ruta principal
+// ======================
+// VISTAS
+// ======================
+
+// Inicio
 app.get('/', (req, res) => {
+
     res.sendFile(
         path.join(__dirname, '..', 'views', 'index.html')
     );
-});
-
-// Ruta CRUD Clases
-app.get('/clases-admin', (req, res) => {
-
-    res.sendFile(
-        path.join(__dirname, '..', 'views', 'clases.html')
-    );
 
 });
 
-// Ruta CRUD Alumnos
-app.get('/alumnos-admin', (req, res) => {
-
-    res.sendFile(
-        path.join(__dirname, '..', 'views', 'alumnos.html')
-    );
-
-});
-
-// Ruta CRUD Profesores
-app.get('/profesores-admin', (req, res) => {
-
-    res.sendFile(
-        path.join(__dirname, '..', 'views', 'profesores.html')
-    );
-
-});
-
-// Ruta CRUD Salones
-app.get('/salones-admin', (req, res) => {
-
-    res.sendFile(
-        path.join(__dirname, '..', 'views', 'salones.html')
-    );
-
-});
-
-// Rutas de autenticación
+// Login
 app.get('/login', (req, res) => {
 
     res.sendFile(
@@ -82,6 +61,7 @@ app.get('/login', (req, res) => {
 
 });
 
+// Registro
 app.get('/registro', (req, res) => {
 
     res.sendFile(
@@ -90,23 +70,88 @@ app.get('/registro', (req, res) => {
 
 });
 
-// Rutas API
+// CRUD Clases
+app.get('/clases-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'clases.html')
+    );
+
+});
+
+// CRUD Alumnos
+app.get('/alumnos-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'alumnos.html')
+    );
+
+});
+
+// CRUD Profesores
+app.get('/profesores-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'profesores.html')
+    );
+
+});
+
+// CRUD Horarios
+app.get('/horarios-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'horarios.html')
+    );
+
+});
+
+// CRUD Salones
+app.get('/salones-admin', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'salones.html')
+    );
+
+});
+
+// ======================
+// RUTAS API
+// ======================
+
 app.use('/usuarios', usuariosRoutes);
+
 app.use('/alumnos', alumnosRoutes);
+
 app.use('/profesores', profesoresRoutes);
+
 app.use('/clases', clasesRoutes);
+
 app.use('/horarios', horariosRoutes);
+
 app.use('/salones', salonesRoutes);
+
 app.use('/clases-programadas', clasesProgramadasRoutes);
+
 app.use('/inscripciones', inscripcionesRoutes);
+
 app.use('/asistencias', asistenciasRoutes);
+
 app.use('/mensualidades', mensualidadesRoutes);
+
 app.use('/pagos', pagosRoutes);
+
+// Auth
 app.use('/', autenticacionRoutes);
 
-// Inicializa servidor
+// ======================
+// SERVIDOR
+// ======================
+
 app.listen(PORT, () => {
 
-    console.log(`Servidor corriendo en puerto ${PORT}`);
+    console.log(
+        `Servidor corriendo en puerto ${PORT}`
+    );
 
 });

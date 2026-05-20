@@ -8,6 +8,8 @@ formLogin.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
+    mensaje.textContent = '';
+
     const datos = {
 
         correo: document.getElementById('correo').value,
@@ -34,25 +36,60 @@ formLogin.addEventListener('submit', async (e) => {
 
         mensaje.textContent = resultado.mensaje;
 
-        if (respuesta.ok) {
+        // ======================
+        // SI HAY ERROR
+        // ======================
 
-            localStorage.setItem('token', resultado.token);
+        if (!respuesta.ok) {
 
-            localStorage.setItem('rol', resultado.usuario.rol);
+            mensaje.style.color = 'red';
 
-            localStorage.setItem('nombre', resultado.usuario.nombre);
+            return;
 
-            alert('Bienvenido/a ' + resultado.usuario.nombre);
+        }
 
-            if (resultado.usuario.rol === 'admin') {
+        // ======================
+        // GUARDAR SESIÓN
+        // ======================
 
-                window.location.href = '/admin.html';
+        localStorage.setItem(
+            'token',
+            resultado.token
+        );
 
-            } else {
+        localStorage.setItem(
+            'rol',
+            resultado.usuario.rol
+        );
 
-                window.location.href = '/index.html';
+        localStorage.setItem(
+            'nombre',
+            resultado.usuario.nombre
+        );
 
-            }
+        localStorage.setItem(
+            'id_usuario',
+            resultado.usuario.id_usuario
+        );
+
+        mensaje.style.color = 'green';
+
+        alert(
+            'Bienvenido/a ' +
+            resultado.usuario.nombre
+        );
+
+        // ======================
+        // REDIRECCIÓN POR ROL
+        // ======================
+
+        if (resultado.usuario.rol === 'admin') {
+
+            window.location.href = '/admin.html';
+
+        } else {
+
+            window.location.href = '/index.html';
 
         }
 
@@ -60,7 +97,10 @@ formLogin.addEventListener('submit', async (e) => {
 
         console.error('Error:', error);
 
-        mensaje.textContent = 'Error al iniciar sesión';
+        mensaje.style.color = 'red';
+
+        mensaje.textContent =
+            'Error al conectar con el servidor';
 
     }
 

@@ -2,130 +2,55 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
-
-    <title>
-        Profesores - CREARTE
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="/css/clases.css"
-    >
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profesores - CREARTE</title>
+    <link rel="stylesheet" href="/css/clases.css">
 </head>
 
 <body class="admin-body">
 
 <script>
-
     const token = localStorage.getItem('token');
     const rol = localStorage.getItem('rol');
 
     if (!token || rol !== 'admin') {
-
         alert('Debes iniciar sesión como administrador');
-
         window.location.href = '/login.html';
-
     }
-
 </script>
 
-<!-- NAVBAR -->
-
 <header class="navbar-admin">
-
     <div class="logo-container-admin">
-
-        <img
-            src="/assets/logo crearte azul.svg"
-            alt="CREARTE"
-            class="logo-admin"
-        >
-
+        <img src="/assets/logo crearte azul.svg" alt="CREARTE" class="logo-admin">
     </div>
 
-    <a
-        href="#"
-        class="btn-logout"
-        onclick="cerrarSesion()"
-    >
+    <a href="#" class="btn-logout" onclick="cerrarSesion()">
         Cerrar sesión ➔
     </a>
-
 </header>
-
-<!-- LAYOUT -->
 
 <div class="layout-container">
 
-    <!-- SIDEBAR -->
-
     <aside class="sidebar-admin">
-
         <nav class="sidebar-nav">
-
-            <a href="/admin.html" class="sidebar-link">
-                Panel
-            </a>
-
-            <a href="/clases.html" class="sidebar-link">
-                Cursos
-            </a>
-
-            <a href="/alumnos.html" class="sidebar-link">
-                Alumnos
-            </a>
-
-            <a
-                href="/profesores.html"
-                class="sidebar-link active"
-            >
-                Profesores
-            </a>
-
-            <a href="/horarios.html" class="sidebar-link">
-                Horarios
-            </a>
-
-            <a href="/salones.html" class="sidebar-link">
-                Salones
-            </a>
-
+            <a href="/admin.html" class="sidebar-link">Panel</a>
+            <a href="/clases.html" class="sidebar-link">Cursos</a>
+            <a href="/alumnos.html" class="sidebar-link">Alumnos</a>
+            <a href="/profesores.html" class="sidebar-link active">Profesores</a>
+            <a href="/horarios.html" class="sidebar-link">Horarios</a>
+            <a href="/salones.html" class="sidebar-link">Salones</a>
         </nav>
-
     </aside>
-
-    <!-- MAIN -->
 
     <main class="main-content">
 
-        <!-- HEADER -->
-
         <header class="content-header">
-
-            <h1>
-                Gestión de Profesores
-            </h1>
-
-            <p>
-                Administra los profesores registrados
-                en CREARTE.
-            </p>
-
+            <h1>Gestión de Profesores</h1>
+            <p>Administra los profesores registrados en CREARTE.</p>
         </header>
 
-        <!-- FORMULARIO -->
-
         <section class="form-section">
-
             <div class="form-card">
 
                 <form id="formProfesor" class="clase-form">
@@ -133,111 +58,64 @@
                     <div class="form-grid">
 
                         <div class="form-group">
-
-                            <label>
-                                Usuario profesor
-                            </label>
-
-                            <select
-                                id="id_usuario"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un profesor
-                                </option>
-
-                            </select>
-
+                            <label>Nombre completo</label>
+                            <input type="text" id="nombre" placeholder="Ej. Carlos López" required>
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Especialidad
-                            </label>
-
-                            <input
-                                type="text"
-                                id="especialidad"
-                                placeholder="Ej. Danza"
-                                required
-                            >
-
+                            <label>Correo electrónico</label>
+                            <input type="email" id="correo" placeholder="Ej. profesor@gmail.com" required>
                         </div>
 
                         <div class="form-group">
+                            <label>Contraseña temporal</label>
+                            <input type="password" id="contraseña" placeholder="Ej. profesor123" required>
+                        </div>
 
-                            <label>
-                                Disponibilidad
-                            </label>
+                        <div class="form-group">
+                            <label>Especialidad</label>
+                            <input type="text" id="especialidad" placeholder="Ej. Danza" required>
+                        </div>
 
-                            <input
-                                type="text"
-                                id="disponibilidad"
-                                placeholder="Ej. Lunes a viernes"
-                                required
-                            >
-
+                        <div class="form-group">
+                            <label>Disponibilidad</label>
+                            <input type="text" id="disponibilidad" placeholder="Ej. Lunes a viernes" required>
                         </div>
 
                     </div>
 
                     <div class="form-buttons">
-
-                        <button
-                            type="submit"
-                            id="btnGuardar"
-                            class="btn-primary"
-                        >
-
+                        <button type="submit" id="btnGuardar" class="btn-primary">
                             Guardar Profesor
-
                         </button>
-
                     </div>
 
                 </form>
 
             </div>
-
         </section>
-
-        <!-- TABLA -->
 
         <section class="table-section">
 
-            <h3 class="table-title">
-                Profesores registrados
-            </h3>
+            <h3 class="table-title">Profesores registrados</h3>
 
             <div class="table-card">
 
                 <table class="custom-table">
 
                     <thead>
-
                         <tr>
-
                             <th>ID Profesor</th>
-
+                            <th>Nombre</th>
+                            <th>Correo</th>
                             <th>Especialidad</th>
-
                             <th>Disponibilidad</th>
-
                             <th>ID Usuario</th>
-
                             <th>Acciones</th>
-
                         </tr>
-
                     </thead>
 
-                    <tbody id="tablaProfesores">
-
-                        <!-- JS -->
-
-                    </tbody>
+                    <tbody id="tablaProfesores"></tbody>
 
                 </table>
 
@@ -250,17 +128,11 @@
 </div>
 
 <script>
-
     function cerrarSesion() {
-
         localStorage.clear();
-
         alert('Sesión cerrada correctamente');
-
         window.location.href = '/login.html';
-
     }
-
 </script>
 
 <script src="/js/profesores.js"></script>

@@ -15,64 +15,37 @@ router.post('/registro', async (req, res) => {
 
         let { nombre, correo, contraseña, rol } = req.body;
 
-        // ======================
-        // VALIDACIONES
-        // ======================
-
         if (!nombre || !correo || !contraseña || !rol) {
-
             return res.status(400).json({
                 mensaje: 'Todos los campos son obligatorios'
             });
-
         }
 
-        // Limpiar rol
         rol = rol.toLowerCase().trim();
 
-        // Roles permitidos
         const rolesPermitidos = ['alumno', 'profesor'];
 
         if (!rolesPermitidos.includes(rol)) {
-
             return res.status(400).json({
                 mensaje: 'Rol no permitido'
             });
-
         }
 
-        // Validar contraseña
         if (contraseña.length < 6) {
-
             return res.status(400).json({
                 mensaje: 'La contraseña debe tener al menos 6 caracteres'
             });
-
         }
 
-        // Validar correo
         const correoRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
         if (!correoRegex.test(correo)) {
-
             return res.status(400).json({
                 mensaje: 'Correo electrónico inválido'
             });
-
         }
 
-        // ======================
-        // ENCRIPTAR CONTRASEÑA
-        // ======================
-
-        const contraseñaEncriptada = await bcrypt.hash(
-            contraseña,
-            10
-        );
-
-        // ======================
-        // INSERTAR USUARIO
-        // ======================
+        const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
 
         const sql = `
             INSERT INTO usuario
@@ -97,13 +70,11 @@ router.post('/registro', async (req, res) => {
             (error, resultado) => {
 
                 if (error) {
-
                     console.error(error);
 
                     return res.status(500).json({
                         mensaje: 'Error al registrar usuario'
                     });
-
                 }
 
                 res.json({
@@ -135,11 +106,9 @@ router.post('/login', async (req, res) => {
     const { correo, contraseña } = req.body;
 
     if (!correo || !contraseña) {
-
         return res.status(400).json({
             mensaje: 'Correo y contraseña son obligatorios'
         });
-
     }
 
     const sql = `
@@ -153,21 +122,17 @@ router.post('/login', async (req, res) => {
         async (error, resultados) => {
 
             if (error) {
-
                 console.error(error);
 
                 return res.status(500).json({
                     mensaje: 'Error al iniciar sesión'
                 });
-
             }
 
             if (resultados.length === 0) {
-
                 return res.status(401).json({
                     mensaje: 'Correo o contraseña incorrectos'
                 });
-
             }
 
             const usuario = resultados[0];
@@ -178,11 +143,15 @@ router.post('/login', async (req, res) => {
             );
 
             if (!contraseñaValida) {
-
                 return res.status(401).json({
                     mensaje: 'Correo o contraseña incorrectos'
                 });
+            }
 
+            if (!process.env.JWT_SECRET) {
+                return res.status(500).json({
+                    mensaje: 'JWT_SECRET no está configurado'
+                });
             }
 
             const token = jwt.sign(
