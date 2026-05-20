@@ -23,7 +23,7 @@ formInscripcion.addEventListener('submit', async (e) => {
     const datos = {
         fecha_inscripcion: document.getElementById('fecha_inscripcion').value,
         id_alumno: document.getElementById('id_alumno').value,
-        id_clase: document.getElementById('id_clase').value
+        id_clase_programada: document.getElementById('id_clase_programada').value
     };
 
     let url = `${API_URL}/inscripciones`;
@@ -77,7 +77,7 @@ async function cargarInscripciones() {
                     <td>${i.id_inscripcion}</td>
                     <td>${i.fecha_inscripcion}</td>
                     <td>${i.id_alumno}</td>
-                    <td>${i.id_clase}</td>
+                    <td>${i.id_clase_programada}</td>
                     <td>
                         <button
                             class="btn-table-edit"
@@ -85,7 +85,7 @@ async function cargarInscripciones() {
                                 ${i.id_inscripcion},
                                 '${i.fecha_inscripcion}',
                                 ${i.id_alumno},
-                                ${i.id_clase}
+                                ${i.id_clase_programada}
                             )"
                         >
                             Editar
@@ -113,7 +113,7 @@ function editarInscripcion(id, fecha, idAlumno, idClase) {
 
     document.getElementById('fecha_inscripcion').value = fecha;
     document.getElementById('id_alumno').value = idAlumno;
-    document.getElementById('id_clase').value = idClase;
+    document.getElementById('id_clase_programada').value = idClase;
 
     btnGuardar.textContent = 'Actualizar Inscripción';
     btnCancelar.style.display = 'inline-block';
