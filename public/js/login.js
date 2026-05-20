@@ -36,10 +36,6 @@ formLogin.addEventListener('submit', async (e) => {
 
         mensaje.textContent = resultado.mensaje;
 
-        // ======================
-        // SI HAY ERROR
-        // ======================
-
         if (!respuesta.ok) {
 
             mensaje.style.color = 'red';
@@ -47,10 +43,6 @@ formLogin.addEventListener('submit', async (e) => {
             return;
 
         }
-
-        // ======================
-        // GUARDAR SESIÓN
-        // ======================
 
         localStorage.setItem(
             'token',
@@ -79,13 +71,13 @@ formLogin.addEventListener('submit', async (e) => {
             resultado.usuario.nombre
         );
 
-        // ======================
-        // REDIRECCIÓN POR ROL
-        // ======================
-
         if (resultado.usuario.rol === 'admin') {
 
             window.location.href = '/admin.html';
+
+        } else if (resultado.usuario.rol === 'profesor') {
+
+            window.location.href = '/profesor-panel.html';
 
         } else {
 
