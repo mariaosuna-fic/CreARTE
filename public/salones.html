@@ -5,9 +5,23 @@
 
     <meta charset="UTF-8">
 
-    <title>Salones - CREARTE</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Salones - CREARTE
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
 
 </head>
+
+<body class="admin-body">
 
 <script>
 
@@ -24,69 +38,211 @@
 
 </script>
 
-<body>
+<!-- NAVBAR -->
 
-    <h1>Gestión de Salones</h1>
+<header class="navbar-admin">
 
-    <form id="formSalon">
+    <div class="logo-container-admin">
 
-        <label>Nombre del salón:</label>
-
-        <input
-            type="text"
-            id="nombre_salon"
-            placeholder="Ej. Salón de danza"
-            required
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
         >
 
-        <br><br>
+    </div>
 
-        <label>Capacidad:</label>
+    <a
+        href="#"
+        class="btn-logout"
+        onclick="cerrarSesion()"
+    >
+        Cerrar sesión ➔
+    </a>
 
-        <input
-            type="number"
-            id="capacidad"
-            placeholder="Ej. 20"
-            required
-        >
+</header>
 
-        <br><br>
+<!-- LAYOUT -->
 
-        <button type="submit" id="btnGuardar">
-            Guardar Salón
-        </button>
+<div class="layout-container">
 
-    </form>
+    <!-- SIDEBAR -->
 
-    <hr>
+    <aside class="sidebar-admin">
 
-    <h2>Salones registrados</h2>
+        <nav class="sidebar-nav">
 
-    <table border="1">
+            <a href="/admin.html" class="sidebar-link">
+                Panel
+            </a>
 
-        <thead>
+            <a href="/clases.html" class="sidebar-link">
+                Cursos
+            </a>
 
-            <tr>
+            <a href="/alumnos.html" class="sidebar-link">
+                Alumnos
+            </a>
 
-                <th>ID Salón</th>
+            <a href="/profesores.html" class="sidebar-link">
+                Profesores
+            </a>
 
-                <th>Nombre</th>
+            <a href="/horarios.html" class="sidebar-link">
+                Horarios
+            </a>
 
-                <th>Capacidad</th>
+            <a
+                href="/salones.html"
+                class="sidebar-link active"
+            >
+                Salones
+            </a>
 
-                <th>Acciones</th>
+        </nav>
 
-            </tr>
+    </aside>
 
-        </thead>
+    <!-- MAIN -->
 
-        <tbody id="tablaSalones">
-            <!-- Aquí se cargan los salones -->
-        </tbody>
+    <main class="main-content">
 
-    </table>
+        <!-- HEADER -->
 
-    <script src="/js/salones.js"></script>
+        <header class="content-header">
+
+            <h1>
+                Gestión de Salones
+            </h1>
+
+            <p>
+                Administra los salones registrados
+                en CREARTE.
+            </p>
+
+        </header>
+
+        <!-- FORMULARIO -->
+
+        <section class="form-section">
+
+            <div class="form-card">
+
+                <form id="formSalon" class="clase-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Nombre del salón
+                            </label>
+
+                            <input
+                                type="text"
+                                id="nombre_salon"
+                                placeholder="Ej. Salón de danza"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Capacidad
+                            </label>
+
+                            <input
+                                type="number"
+                                id="capacidad"
+                                placeholder="Ej. 20"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            id="btnGuardar"
+                            class="btn-primary"
+                        >
+
+                            Guardar Salón
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+
+        <section class="table-section">
+
+            <h3 class="table-title">
+                Salones registrados
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID Salón</th>
+
+                            <th>Nombre</th>
+
+                            <th>Capacidad</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaSalones">
+
+                        <!-- JS -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+    function cerrarSesion() {
+
+        localStorage.clear();
+
+        alert('Sesión cerrada correctamente');
+
+        window.location.href = '/login.html';
+
+    }
+
+</script>
+
+<script src="/js/salones.js"></script>
 
 </body>
 

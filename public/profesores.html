@@ -5,11 +5,23 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Profesores - CREARTE</title>
+    <title>
+        Profesores - CREARTE
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
 
 </head>
+
+<body class="admin-body">
 
 <script>
 
@@ -26,83 +38,232 @@
 
 </script>
 
-<body>
+<!-- NAVBAR -->
 
-    <h1>Gestión de Profesores</h1>
+<header class="navbar-admin">
 
-    <form id="formProfesor">
+    <div class="logo-container-admin">
 
-        <label>Usuario profesor:</label>
-
-        <select id="id_usuario" required>
-
-            <option value="">
-                Selecciona un usuario con rol profesor
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <label>Especialidad:</label>
-
-        <input 
-            type="text"
-            id="especialidad"
-            placeholder="Ej. Danza, pintura, música"
-            required
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
         >
 
-        <br><br>
+    </div>
 
-        <label>Disponibilidad:</label>
+    <a
+        href="#"
+        class="btn-logout"
+        onclick="cerrarSesion()"
+    >
+        Cerrar sesión ➔
+    </a>
 
-        <input 
-            type="text"
-            id="disponibilidad"
-            placeholder="Ej. Lunes a viernes por la tarde"
-            required
-        >
+</header>
 
-        <br><br>
+<!-- LAYOUT -->
 
-        <button type="submit" id="btnGuardar">
-            Guardar Profesor
-        </button>
+<div class="layout-container">
 
-    </form>
+    <!-- SIDEBAR -->
 
-    <hr>
+    <aside class="sidebar-admin">
 
-    <h2>Profesores registrados</h2>
+        <nav class="sidebar-nav">
 
-    <table border="1">
+            <a href="/admin.html" class="sidebar-link">
+                Panel
+            </a>
 
-        <thead>
+            <a href="/clases.html" class="sidebar-link">
+                Cursos
+            </a>
 
-            <tr>
+            <a href="/alumnos.html" class="sidebar-link">
+                Alumnos
+            </a>
 
-                <th>ID Profesor</th>
+            <a
+                href="/profesores.html"
+                class="sidebar-link active"
+            >
+                Profesores
+            </a>
 
-                <th>Especialidad</th>
+            <a href="/horarios.html" class="sidebar-link">
+                Horarios
+            </a>
 
-                <th>Disponibilidad</th>
+            <a href="/salones.html" class="sidebar-link">
+                Salones
+            </a>
 
-                <th>ID Usuario</th>
+        </nav>
 
-                <th>Acciones</th>
+    </aside>
 
-            </tr>
+    <!-- MAIN -->
 
-        </thead>
+    <main class="main-content">
 
-        <tbody id="tablaProfesores">
-            <!-- Aquí se cargan los profesores -->
-        </tbody>
+        <!-- HEADER -->
 
-    </table>
+        <header class="content-header">
 
-    <script src="/js/profesores.js"></script>
+            <h1>
+                Gestión de Profesores
+            </h1>
+
+            <p>
+                Administra los profesores registrados
+                en CREARTE.
+            </p>
+
+        </header>
+
+        <!-- FORMULARIO -->
+
+        <section class="form-section">
+
+            <div class="form-card">
+
+                <form id="formProfesor" class="clase-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Usuario profesor
+                            </label>
+
+                            <select
+                                id="id_usuario"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona un profesor
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Especialidad
+                            </label>
+
+                            <input
+                                type="text"
+                                id="especialidad"
+                                placeholder="Ej. Danza"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Disponibilidad
+                            </label>
+
+                            <input
+                                type="text"
+                                id="disponibilidad"
+                                placeholder="Ej. Lunes a viernes"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            id="btnGuardar"
+                            class="btn-primary"
+                        >
+
+                            Guardar Profesor
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+
+        <section class="table-section">
+
+            <h3 class="table-title">
+                Profesores registrados
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID Profesor</th>
+
+                            <th>Especialidad</th>
+
+                            <th>Disponibilidad</th>
+
+                            <th>ID Usuario</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaProfesores">
+
+                        <!-- JS -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+    function cerrarSesion() {
+
+        localStorage.clear();
+
+        alert('Sesión cerrada correctamente');
+
+        window.location.href = '/login.html';
+
+    }
+
+</script>
+
+<script src="/js/profesores.js"></script>
 
 </body>
 

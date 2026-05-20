@@ -5,114 +5,281 @@
 
     <meta charset="UTF-8">
 
-    <title>Alumnos - CREARTE</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Alumnos - CREARTE
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
 
 </head>
 
-<body>
+<body class="admin-body">
 
-    <script>
+<script>
 
-        const token = localStorage.getItem('token');
-        const rol = localStorage.getItem('rol');
+    const token = localStorage.getItem('token');
+    const rol = localStorage.getItem('rol');
 
-        if (!token || rol !== 'admin') {
+    if (!token || rol !== 'admin') {
 
-            alert('Debes iniciar sesión como administrador');
+        alert('Debes iniciar sesión como administrador');
 
-            window.location.href = '/login.html';
+        window.location.href = '/login.html';
 
-        }
+    }
 
-    </script>
+</script>
 
-    <h1>Gestión de Alumnos</h1>
+<!-- NAVBAR -->
 
-    <form id="formAlumno">
+<header class="navbar-admin">
 
-        <label>Usuario alumno:</label>
+    <div class="logo-container-admin">
 
-        <select id="id_usuario" required>
-
-            <option value="">
-                Selecciona un usuario con rol alumno
-            </option>
-
-        </select>
-
-        <br><br>
-
-        <label>Matrícula:</label>
-
-        <input
-            type="text"
-            id="matricula"
-            placeholder="Ej. A001"
-            required
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
         >
 
-        <br><br>
+    </div>
 
-        <label>Teléfono:</label>
+    <a
+        href="#"
+        class="btn-logout"
+        onclick="cerrarSesion()"
+    >
+        Cerrar sesión ➔
+    </a>
 
-        <input
-            type="text"
-            id="telefono"
-            placeholder="Ej. 6671234567"
-            required
-        >
+</header>
 
-        <br><br>
+<!-- LAYOUT -->
 
-        <label>Fecha de registro:</label>
+<div class="layout-container">
 
-        <input
-            type="date"
-            id="fecha_registro"
-            required
-        >
+    <!-- SIDEBAR -->
 
-        <br><br>
+    <aside class="sidebar-admin">
 
-        <button type="submit" id="btnGuardar">
-            Guardar Alumno
-        </button>
+        <nav class="sidebar-nav">
 
-    </form>
+            <a href="/admin.html" class="sidebar-link">
+                Panel
+            </a>
 
-    <hr>
+            <a href="/clases.html" class="sidebar-link">
+                Cursos
+            </a>
 
-    <h2>Alumnos registrados</h2>
+            <a
+                href="/alumnos.html"
+                class="sidebar-link active"
+            >
+                Alumnos
+            </a>
 
-    <table border="1">
+            <a href="/profesores.html" class="sidebar-link">
+                Profesores
+            </a>
 
-        <thead>
+            <a href="/horarios.html" class="sidebar-link">
+                Horarios
+            </a>
 
-            <tr>
+            <a href="/salones.html" class="sidebar-link">
+                Salones
+            </a>
 
-                <th>ID Alumno</th>
+        </nav>
 
-                <th>Matrícula</th>
+    </aside>
 
-                <th>Teléfono</th>
+    <!-- MAIN -->
 
-                <th>Fecha Registro</th>
+    <main class="main-content">
 
-                <th>ID Usuario</th>
+        <!-- HEADER -->
 
-                <th>Acciones</th>
+        <header class="content-header">
 
-            </tr>
+            <h1>
+                Gestión de Alumnos
+            </h1>
 
-        </thead>
+            <p>
+                Administra los alumnos registrados
+                en CREARTE.
+            </p>
 
-        <tbody id="tablaAlumnos">
-            <!-- Aquí se cargan los alumnos -->
-        </tbody>
+        </header>
 
-    </table>
+        <!-- FORMULARIO -->
 
-    <script src="/js/alumnos.js"></script>
+        <section class="form-section">
+
+            <div class="form-card">
+
+                <form id="formAlumno" class="clase-form">
+
+                    <div class="form-grid">
+
+                        <div class="form-group">
+
+                            <label>
+                                Usuario alumno
+                            </label>
+
+                            <select
+                                id="id_usuario"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona un alumno
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Matrícula
+                            </label>
+
+                            <input
+                                type="text"
+                                id="matricula"
+                                placeholder="Ej. A001"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Teléfono
+                            </label>
+
+                            <input
+                                type="text"
+                                id="telefono"
+                                placeholder="Ej. 6671234567"
+                                required
+                            >
+
+                        </div>
+
+                        <div class="form-group">
+
+                            <label>
+                                Fecha de registro
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fecha_registro"
+                                required
+                            >
+
+                        </div>
+
+                    </div>
+
+                    <div class="form-buttons">
+
+                        <button
+                            type="submit"
+                            id="btnGuardar"
+                            class="btn-primary"
+                        >
+
+                            Guardar Alumno
+
+                        </button>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </section>
+
+        <!-- TABLA -->
+
+        <section class="table-section">
+
+            <h3 class="table-title">
+                Alumnos registrados
+            </h3>
+
+            <div class="table-card">
+
+                <table class="custom-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>ID Alumno</th>
+
+                            <th>Matrícula</th>
+
+                            <th>Teléfono</th>
+
+                            <th>Fecha Registro</th>
+
+                            <th>ID Usuario</th>
+
+                            <th>Acciones</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tablaAlumnos">
+
+                        <!-- JS -->
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+    </main>
+
+</div>
+
+<script>
+
+    function cerrarSesion() {
+
+        localStorage.clear();
+
+        alert('Sesión cerrada correctamente');
+
+        window.location.href = '/login.html';
+
+    }
+
+</script>
+
+<script src="/js/alumnos.js"></script>
 
 </body>
 
