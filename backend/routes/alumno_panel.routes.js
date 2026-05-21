@@ -6,7 +6,7 @@ const { verificarToken, soloAlumno } = require('../middlewares/auth');
 
 router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
-    const idUsuario = req.usuario.id;
+    const idUsuario = req.usuario.id || req.usuario.id_usuario;
 
     const sqlClases = `
         SELECT
@@ -33,9 +33,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
         if (error) {
             console.log(error);
-            return res.status(500).json({
-                mensaje: 'Error al obtener clases'
-            });
+            return res.status(500).json({ mensaje: 'Error al obtener clases' });
         }
 
         const sqlHorarios = `
@@ -60,9 +58,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
             if (error) {
                 console.log(error);
-                return res.status(500).json({
-                    mensaje: 'Error al obtener horarios'
-                });
+                return res.status(500).json({ mensaje: 'Error al obtener horarios' });
             }
 
             const sqlSalones = `
@@ -86,19 +82,17 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
                 if (error) {
                     console.log(error);
-                    return res.status(500).json({
-                        mensaje: 'Error al obtener salones'
-                    });
+                    return res.status(500).json({ mensaje: 'Error al obtener salones' });
                 }
 
                 const sqlMensualidades = `
                     SELECT
-                        id_mensualidad,
-                        folio_recibo AS folio,
-                        concepto,
-                        monto,
-                        fecha_limite AS fecha,
-                        estado
+                        m.id_mensualidad,
+                        m.folio_recibo AS folio,
+                        m.concepto,
+                        m.monto,
+                        m.fecha_limite AS fecha,
+                        m.estado
                     FROM mensualidad m
                     INNER JOIN alumno a
                         ON m.id_alumno = a.id_alumno
@@ -109,15 +103,13 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
                     if (error) {
                         console.log(error);
-                        return res.status(500).json({
-                            mensaje: 'Error al obtener mensualidades'
-                        });
+                        return res.status(500).json({ mensaje: 'Error al obtener mensualidades' });
                     }
 
                     const sqlPagos = `
                         SELECT
                             p.fecha_pago AS fecha,
-                            p.monto,
+                            p.monto_pagado AS monto,
                             p.metodo_pago AS metodo,
                             m.folio_recibo AS folio
                         FROM pago p
@@ -132,9 +124,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
 
                         if (error) {
                             console.log(error);
-                            return res.status(500).json({
-                                mensaje: 'Error al obtener pagos'
-                            });
+                            return res.status(500).json({ mensaje: 'Error al obtener pagos' });
                         }
 
                         res.json({

@@ -19,7 +19,9 @@ router.get(
     soloProfesor,
     (req, res) => {
 
-        const idUsuario = req.usuario.id;
+        const idUsuario =
+            req.usuario.id
+            || req.usuario.id_usuario;
 
         const sqlClases = `
             SELECT
@@ -64,28 +66,63 @@ router.get(
 
                 }
 
-                const totalAlumnos =
-                    clases.length;
+                const sqlTotalAlumnos = `
+                    SELECT COUNT(*) AS total
+                    FROM inscripcion i
 
-                const hoy = new Date()
-                    .toLocaleDateString(
-                        'es-MX',
-                        {
-                            weekday: 'long'
+                    INNER JOIN clase_programada cp
+                        ON i.id_clase_programada =
+                           cp.id_clase_programada
+
+                    INNER JOIN profesor p
+                        ON cp.id_profesor =
+                           p.id_profesor
+
+                    WHERE p.id_usuario = ?
+                `;
+
+                conexion.query(
+                    sqlTotalAlumnos,
+                    [idUsuario],
+                    (error, resultadoTotal) => {
+
+                        if (error) {
+
+                            console.log(error);
+
+                            return res.status(500).json({
+                                mensaje:
+                                    'Error al obtener total de alumnos'
+                            });
+
                         }
-                    );
 
-                const clasesHoy =
-                    clases.filter(clase =>
-                        clase.dia.toLowerCase()
-                        === hoy.toLowerCase()
-                    ).length;
+                        const totalAlumnos =
+                            resultadoTotal[0].total;
 
-                res.json({
-                    clases,
-                    totalAlumnos,
-                    clasesHoy
-                });
+                        const hoy = new Date()
+                            .toLocaleDateString(
+                                'es-MX',
+                                {
+                                    weekday: 'long'
+                                }
+                            );
+
+                        const clasesHoy =
+                            clases.filter(clase =>
+                                clase.dia
+                                    .toLowerCase()
+                                === hoy.toLowerCase()
+                            ).length;
+
+                        res.json({
+                            clases,
+                            totalAlumnos,
+                            clasesHoy
+                        });
+
+                    }
+                );
 
             }
         );
@@ -180,19 +217,19 @@ router.post(
 
         const valores = asistencias.map(
             asistencia => [
-                asistencia.id_alumno,
-                id_clase_programada,
                 fecha,
-                asistencia.estado
+                asistencia.estado,
+                asistencia.id_alumno,
+                id_clase_programada
             ]
         );
 
         const sql = `
             INSERT INTO asistencia (
-                id_alumno,
-                id_clase_programada,
                 fecha,
-                estado
+                estado,
+                id_alumno,
+                id_clase_programada
             )
             VALUES ?
         `;

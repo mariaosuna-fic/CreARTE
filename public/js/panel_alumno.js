@@ -82,7 +82,8 @@ function cargarResumen() {
     const pendientes =
         alumnoData.mensualidades.filter(
             mensualidad =>
-                mensualidad.estado === 'Pendiente'
+                mensualidad.estado &&
+                mensualidad.estado.toLowerCase() === 'pendiente'
         ).length;
 
     document.getElementById(
@@ -103,6 +104,20 @@ function cargarClases() {
         );
 
     tabla.innerHTML = '';
+
+    if (alumnoData.clases.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No tienes clases inscritas.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
 
     alumnoData.clases.forEach(clase => {
 
@@ -135,6 +150,20 @@ function cargarHorarios() {
 
     tabla.innerHTML = '';
 
+    if (alumnoData.horarios.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    No hay horarios registrados.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
     alumnoData.horarios.forEach(horario => {
 
         tabla.innerHTML += `
@@ -164,6 +193,20 @@ function cargarSalones() {
 
     tabla.innerHTML = '';
 
+    if (alumnoData.salones.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="3">
+                    No hay salones asignados.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
+
     alumnoData.salones.forEach(salon => {
 
         tabla.innerHTML += `
@@ -190,6 +233,20 @@ function cargarMensualidades() {
         );
 
     tabla.innerHTML = '';
+
+    if (alumnoData.mensualidades.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="5">
+                    No hay mensualidades registradas.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
 
     alumnoData.mensualidades.forEach(
         mensualidad => {
@@ -223,6 +280,20 @@ function cargarPagos() {
         );
 
     tabla.innerHTML = '';
+
+    if (alumnoData.pagos.length === 0) {
+
+        tabla.innerHTML = `
+            <tr>
+                <td colspan="4">
+                    No hay pagos registrados.
+                </td>
+            </tr>
+        `;
+
+        return;
+
+    }
 
     alumnoData.pagos.forEach(pago => {
 
