@@ -74,7 +74,7 @@ formLogin.addEventListener('submit', async (e) => {
         if (resultado.usuario.rol === 'admin') {
             window.location.href = '/admin.html';
         } else if (resultado.usuario.rol === 'profesor') {
-            window.location.href = '/profesor-panel.html';
+            window.location.href = '/profesor_panel.html';
         } else if (resultado.usuario.rol === 'alumno') {
             window.location.href = '/alumno_panel.html';
         } else {
