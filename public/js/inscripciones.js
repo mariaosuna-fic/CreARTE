@@ -15,11 +15,9 @@ const btnCancelar = document.getElementById('btnCancelar');
 
 let idInscripcionEditando = null;
 
-// ======================
-// INICIO
-// ======================
-
 document.addEventListener('DOMContentLoaded', () => {
+
+    colocarFechaActual();
 
     cargarAlumnosSelect();
 
@@ -29,26 +27,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
 });
 
-// ======================
-// CARGAR ALUMNOS SELECT
-// ======================
+function colocarFechaActual() {
+    document.getElementById('fecha_inscripcion').value =
+        new Date().toISOString().split('T')[0];
+}
 
 async function cargarAlumnosSelect() {
-
     try {
-
         const respuesta = await fetch(`${API_URL}/alumnos`, {
-
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-
         });
 
         const alumnos = await respuesta.json();
 
-        const select =
-            document.getElementById('id_alumno');
+        const select = document.getElementById('id_alumno');
 
         select.innerHTML = `
             <option value="">
@@ -57,43 +51,29 @@ async function cargarAlumnosSelect() {
         `;
 
         alumnos.forEach(alumno => {
-
             select.innerHTML += `
                 <option value="${alumno.id_alumno}">
                     ${alumno.nombre || 'Alumno'} - ${alumno.id_alumno}
                 </option>
             `;
-
         });
 
     } catch (error) {
-
         console.error(error);
-
     }
-
 }
 
-// ======================
-// CARGAR CLASES PROGRAMADAS
-// ======================
-
 async function cargarClasesProgramadasSelect() {
-
     try {
-
         const respuesta = await fetch(`${API_URL}/clases-programadas`, {
-
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-
         });
 
         const clases = await respuesta.json();
 
-        const select =
-            document.getElementById('id_clase_programada');
+        const select = document.getElementById('id_clase_programada');
 
         select.innerHTML = `
             <option value="">
@@ -102,72 +82,44 @@ async function cargarClasesProgramadasSelect() {
         `;
 
         clases.forEach(clase => {
-
             select.innerHTML += `
                 <option value="${clase.id_clase_programada}">
-                    Clase Programada #${clase.id_clase_programada}
+                    ${clase.nombre_clase || 'Clase'} - Programada #${clase.id_clase_programada}
                 </option>
             `;
-
         });
 
     } catch (error) {
-
         console.error(error);
-
     }
-
 }
-
-// ======================
-// GUARDAR / ACTUALIZAR
-// ======================
 
 formInscripcion.addEventListener('submit', async (e) => {
 
     e.preventDefault();
 
     const datos = {
-
-        fecha_inscripcion:
-            document.getElementById('fecha_inscripcion').value,
-
-        id_alumno:
-            document.getElementById('id_alumno').value,
-
-        id_clase_programada:
-            document.getElementById('id_clase_programada').value
-
+        fecha_inscripcion: document.getElementById('fecha_inscripcion').value,
+        id_alumno: document.getElementById('id_alumno').value,
+        id_clase_programada: document.getElementById('id_clase_programada').value
     };
 
     let url = `${API_URL}/inscripciones`;
-
     let metodo = 'POST';
 
     if (idInscripcionEditando !== null) {
-
         url = `${API_URL}/inscripciones/${idInscripcionEditando}`;
-
         metodo = 'PUT';
-
     }
 
     try {
-
         const respuesta = await fetch(url, {
-
             method: metodo,
-
             headers: {
-
                 'Content-Type': 'application/json',
-
                 'Authorization': `Bearer ${token}`
-
             },
-
             body: JSON.stringify(datos)
-
         });
 
         const resultado = await respuesta.json();
@@ -181,29 +133,19 @@ formInscripcion.addEventListener('submit', async (e) => {
         cargarInscripciones();
 
     } catch (error) {
-
         console.error(error);
-
         alert('Error al guardar inscripción');
-
     }
 
 });
 
-// ======================
-// CARGAR INSCRIPCIONES
-// ======================
-
 async function cargarInscripciones() {
 
     try {
-
         const respuesta = await fetch(`${API_URL}/inscripciones`, {
-
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-
         });
 
         const inscripciones = await respuesta.json();
@@ -211,20 +153,17 @@ async function cargarInscripciones() {
         tablaInscripciones.innerHTML = '';
 
         inscripciones.forEach(i => {
-
             tablaInscripciones.innerHTML += `
                 <tr>
-
                     <td>${i.id_inscripcion}</td>
 
                     <td>${i.fecha_inscripcion}</td>
 
-                    <td>${i.id_alumno}</td>
+                    <td>${i.alumno}</td>
 
-                    <td>${i.id_clase_programada}</td>
+                    <td>${i.clase}</td>
 
                     <td>
-
                         <button
                             class="btn-table-edit"
                             onclick="editarInscripcion(
@@ -243,27 +182,17 @@ async function cargarInscripciones() {
                         >
                             Eliminar
                         </button>
-
                     </td>
-
                 </tr>
             `;
-
         });
 
     } catch (error) {
-
         console.error(error);
-
         alert('Error al cargar inscripciones');
-
     }
 
 }
-
-// ======================
-// EDITAR
-// ======================
 
 function editarInscripcion(id, fecha, idAlumno, idClase) {
 
@@ -284,10 +213,6 @@ function editarInscripcion(id, fecha, idAlumno, idClase) {
 
 }
 
-// ======================
-// ELIMINAR
-// ======================
-
 async function eliminarInscripcion(id) {
 
     if (!confirm('¿Seguro que deseas eliminar esta inscripción?')) {
@@ -295,15 +220,11 @@ async function eliminarInscripcion(id) {
     }
 
     try {
-
         const respuesta = await fetch(`${API_URL}/inscripciones/${id}`, {
-
             method: 'DELETE',
-
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-
         });
 
         const resultado = await respuesta.json();
@@ -313,22 +234,17 @@ async function eliminarInscripcion(id) {
         cargarInscripciones();
 
     } catch (error) {
-
         console.error(error);
-
         alert('Error al eliminar inscripción');
-
     }
 
 }
 
-// ======================
-// RESETEAR FORMULARIO
-// ======================
-
 function resetearFormulario() {
 
     formInscripcion.reset();
+
+    colocarFechaActual();
 
     idInscripcionEditando = null;
 
@@ -339,10 +255,6 @@ function resetearFormulario() {
 }
 
 btnCancelar.addEventListener('click', resetearFormulario);
-
-// ======================
-// CERRAR SESIÓN
-// ======================
 
 function cerrarSesion() {
 

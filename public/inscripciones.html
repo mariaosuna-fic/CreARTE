@@ -1,111 +1,295 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
     <title>Inscripciones - CREARTE</title>
-    <link rel="stylesheet" href="/css/clases.css">
+
+    <link
+        rel="stylesheet"
+        href="/css/clases.css"
+    >
+
 </head>
 
 <body class="admin-body">
 
 <header class="navbar-admin">
+
     <div class="logo-container-admin">
-        <img src="/assets/logo crearte azul.svg" alt="CREARTE" class="logo-admin">
+
+        <img
+            src="/assets/logo crearte azul.svg"
+            alt="CREARTE"
+            class="logo-admin"
+        >
+
     </div>
 
-    <a href="#" class="btn-logout" onclick="cerrarSesion()">
+    <a
+        href="#"
+        class="btn-logout"
+        onclick="cerrarSesion()"
+    >
         Cerrar sesión ➔
     </a>
+
 </header>
 
 <div class="layout-container">
 
     <aside class="sidebar-admin">
+
         <nav class="sidebar-nav">
-            <a href="/admin.html" class="sidebar-link">Panel</a>
-            <a href="/clases.html" class="sidebar-link">Cursos</a>
-            <a href="/clases_programadas.html"class="sidebar-link" >Clases Programadas</a>
-            <a href="/alumnos.html" class="sidebar-link">Alumnos</a>
-            <a href="/profesores.html" class="sidebar-link">Profesores</a>
-            <a href="/horarios.html" class="sidebar-link">Horarios</a>
-            <a href="/salones.html" class="sidebar-link">Salones</a>
-            <a href="/mensualidades.html" class="sidebar-link">Mensualidades</a>
-            <a href="/pagos.html" class="sidebar-link">Pagos</a>
-            <a href="/inscripciones.html" class="sidebar-link active">Inscripciones</a>
+
+            <a
+                href="/admin.html"
+                class="sidebar-link"
+            >
+                Panel
+            </a>
+
+            <a
+                href="/clases.html"
+                class="sidebar-link"
+            >
+                Cursos
+            </a>
+
+            <a
+                href="/clases_programadas.html"
+                class="sidebar-link"
+            >
+                Clases Programadas
+            </a>
+
+            <a
+                href="/alumnos.html"
+                class="sidebar-link"
+            >
+                Alumnos
+            </a>
+
+            <a
+                href="/profesores.html"
+                class="sidebar-link"
+            >
+                Profesores
+            </a>
+
+            <a
+                href="/horarios.html"
+                class="sidebar-link"
+            >
+                Horarios
+            </a>
+
+            <a
+                href="/salones.html"
+                class="sidebar-link"
+            >
+                Salones
+            </a>
+
+            <a
+                href="/mensualidades.html"
+                class="sidebar-link"
+            >
+                Mensualidades
+            </a>
+
+            <a
+                href="/pagos.html"
+                class="sidebar-link"
+            >
+                Pagos
+            </a>
+
+            <a
+                href="/inscripciones.html"
+                class="sidebar-link active"
+            >
+                Inscripciones
+            </a>
+
         </nav>
+
     </aside>
+
+
+    <!-- ========================= -->
+    <!-- CONTENIDO -->
+    <!-- ========================= -->
 
     <main class="main-content">
 
         <header class="content-header">
-            <h1>Gestión de Inscripciones</h1>
-            <p>Administra la inscripción de alumnos a clases.</p>
+
+            <h1>
+                Gestión de Inscripciones
+            </h1>
+
+            <p>
+                Administra la inscripción de alumnos a clases.
+            </p>
+
         </header>
 
+
+        <!-- ========================= -->
+        <!-- FORMULARIO -->
+        <!-- ========================= -->
+
         <section class="form-section">
+
             <div class="form-card">
 
-                <form id="formInscripcion" class="clase-form">
+                <form
+                    id="formInscripcion"
+                    class="clase-form"
+                >
 
-                    <input type="hidden" id="id_inscripcion_edicion">
+                    <input
+                        type="hidden"
+                        id="id_inscripcion_edicion"
+                    >
 
                     <div class="form-grid">
 
-                        <div class="form-group">
-                            <label>Fecha de inscripción</label>
-                            <input type="date" id="fecha_inscripcion" required>
-                        </div>
+                        <!-- FECHA -->
 
                         <div class="form-group">
-                            <label>Alumno</label>
-                            <select id="id_alumno" required>
-                                <option value="">Selecciona un alumno</option>
-                            </select>
+
+                            <label>
+                                Fecha de inscripción
+                            </label>
+
+                            <input
+                                type="date"
+                                id="fecha_inscripcion"
+                                required
+                            >
+
                         </div>
 
+
+                        <!-- ALUMNO -->
+
                         <div class="form-group">
-                            <label>Clase programada</label>
-                            <select id="id_clase_programada" required>
-                                <option value="">Selecciona una clase</option>
+
+                            <label>
+                                Alumno
+                            </label>
+
+                            <select
+                                id="id_alumno"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona un alumno
+                                </option>
+
                             </select>
+
+                        </div>
+
+
+                        <!-- CLASE PROGRAMADA -->
+
+                        <div class="form-group">
+
+                            <label>
+                                Clase programada
+                            </label>
+
+                            <select
+                                id="id_clase_programada"
+                                required
+                            >
+
+                                <option value="">
+                                    Selecciona una clase
+                                </option>
+
+                            </select>
+
                         </div>
 
                     </div>
 
+
+                    <!-- BOTONES -->
+
                     <div class="form-buttons">
-                        <button type="submit" id="btnGuardar" class="btn-primary">
+
+                        <button
+                            type="submit"
+                            id="btnGuardar"
+                            class="btn-primary"
+                        >
                             Guardar Inscripción
                         </button>
 
-                        <button type="button" id="btnCancelar" class="btn-cancel" style="display: none;">
+                        <button
+                            type="button"
+                            id="btnCancelar"
+                            class="btn-cancel"
+                            style="display: none;"
+                        >
                             Cancelar
                         </button>
+
                     </div>
 
                 </form>
 
             </div>
+
         </section>
+
+
+        <!-- ========================= -->
+        <!-- TABLA -->
+        <!-- ========================= -->
 
         <section class="table-section">
 
-            <h3 class="table-title">Inscripciones registradas</h3>
+            <h3 class="table-title">
+                Inscripciones registradas
+            </h3>
 
             <div class="table-card">
 
                 <table class="custom-table">
+
                     <thead>
+
                         <tr>
+
                             <th>ID Inscripción</th>
+
                             <th>Fecha</th>
+
                             <th>Alumno</th>
-                            <th>Clase Programada</th>
+
+                            <th>Clase</th>
+
                             <th>Acciones</th>
+
                         </tr>
+
                     </thead>
 
                     <tbody id="tablaInscripciones"></tbody>
+
                 </table>
 
             </div>
