@@ -10,9 +10,7 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Panel Alumno - CREARTE
-    </title>
+    <title>Panel Alumno - CREARTE</title>
 
     <link
         rel="stylesheet"
@@ -52,7 +50,7 @@
         <nav class="sidebar-nav">
 
             <a
-                href="/alumno-panel.html"
+                href="#seccionClases"
                 class="sidebar-link active"
             >
                 Mis clases
@@ -94,59 +92,65 @@
 
         <header class="content-header">
 
-            <h1>
-                Panel del Alumno
-            </h1>
+            <h1>Panel del Alumno</h1>
 
             <p>
-                Consulta tus clases, horarios, salones y pagos.
+                Consulta tus clases, horarios, salones, mensualidades y pagos.
             </p>
 
         </header>
 
-        <!-- RESUMEN -->
+        <section
+            class="form-card"
+            id="seccionClases"
+        >
 
-        <section class="dashboard-grid">
+            <h2>Resumen general</h2>
 
-            <div class="dashboard-card">
+            <div class="form-grid">
 
-                <h3>
-                    Clases inscritas
-                </h3>
+                <div class="form-group">
 
-                <p id="totalClases">
-                    0
-                </p>
+                    <label>Clases inscritas</label>
 
-            </div>
+                    <input
+                        type="text"
+                        id="totalClases"
+                        value="0"
+                        readonly
+                    >
 
-            <div class="dashboard-card">
+                </div>
 
-                <h3>
-                    Mensualidades pendientes
-                </h3>
+                <div class="form-group">
 
-                <p id="totalPendientes">
-                    0
-                </p>
+                    <label>Mensualidades pendientes</label>
 
-            </div>
+                    <input
+                        type="text"
+                        id="totalPendientes"
+                        value="0"
+                        readonly
+                    >
 
-            <div class="dashboard-card">
+                </div>
 
-                <h3>
-                    Pagos realizados
-                </h3>
+                <div class="form-group">
 
-                <p id="totalPagos">
-                    0
-                </p>
+                    <label>Pagos realizados</label>
+
+                    <input
+                        type="text"
+                        id="totalPagos"
+                        value="0"
+                        readonly
+                    >
+
+                </div>
 
             </div>
 
         </section>
-
-        <!-- CLASES -->
 
         <section class="table-section">
 
@@ -161,17 +165,11 @@
                     <thead>
 
                         <tr>
-
                             <th>Clase</th>
-
                             <th>Tipo</th>
-
                             <th>Nivel</th>
-
                             <th>Profesor</th>
-
                             <th>Estado</th>
-
                         </tr>
 
                     </thead>
@@ -183,8 +181,6 @@
             </div>
 
         </section>
-
-        <!-- HORARIOS -->
 
         <section
             class="table-section"
@@ -202,15 +198,10 @@
                     <thead>
 
                         <tr>
-
                             <th>Clase</th>
-
                             <th>Día</th>
-
                             <th>Hora inicio</th>
-
                             <th>Hora fin</th>
-
                         </tr>
 
                     </thead>
@@ -222,8 +213,6 @@
             </div>
 
         </section>
-
-        <!-- SALONES -->
 
         <section
             class="table-section"
@@ -241,13 +230,9 @@
                     <thead>
 
                         <tr>
-
                             <th>Clase</th>
-
                             <th>Salón</th>
-
                             <th>Capacidad</th>
-
                         </tr>
 
                     </thead>
@@ -259,8 +244,6 @@
             </div>
 
         </section>
-
-        <!-- MENSUALIDADES -->
 
         <section
             class="table-section"
@@ -278,17 +261,11 @@
                     <thead>
 
                         <tr>
-
                             <th>Folio</th>
-
                             <th>Concepto</th>
-
                             <th>Monto</th>
-
                             <th>Fecha límite</th>
-
                             <th>Estado</th>
-
                         </tr>
 
                     </thead>
@@ -300,8 +277,6 @@
             </div>
 
         </section>
-
-        <!-- PAGOS -->
 
         <section
             class="table-section"
@@ -319,15 +294,10 @@
                     <thead>
 
                         <tr>
-
                             <th>Fecha</th>
-
                             <th>Monto</th>
-
                             <th>Método</th>
-
                             <th>Folio</th>
-
                         </tr>
 
                     </thead>
@@ -344,7 +314,7 @@
 
 </div>
 
-<script src="/js/alumno-panel.js"></script>
+<script src="/js/alumno_panel.js"></script>
 
 </body>
 

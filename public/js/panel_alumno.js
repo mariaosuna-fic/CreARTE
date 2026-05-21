@@ -6,104 +6,72 @@ if (!token || rol !== 'alumno') {
     window.location.href = '/login.html';
 }
 
-const alumnoData = {
-    clases: [
-        {
-            clase: 'Pintura al óleo',
-            tipo: 'Arte visual',
-            nivel: 'Intermedio',
-            profesor: 'Ana Torres',
-            estado: 'Activa'
-        },
-        {
-            clase: 'Danza contemporánea',
-            tipo: 'Danza',
-            nivel: 'Principiante',
-            profesor: 'Carlos Ruiz',
-            estado: 'Activa'
-        }
-    ],
-
-    horarios: [
-        {
-            clase: 'Pintura al óleo',
-            dia: 'Lunes',
-            inicio: '4:00 PM',
-            fin: '6:00 PM'
-        },
-        {
-            clase: 'Danza contemporánea',
-            dia: 'Miércoles',
-            inicio: '5:00 PM',
-            fin: '7:00 PM'
-        }
-    ],
-
-    salones: [
-        {
-            clase: 'Pintura al óleo',
-            salon: 'Salón A',
-            capacidad: 20
-        },
-        {
-            clase: 'Danza contemporánea',
-            salon: 'Salón B',
-            capacidad: 15
-        }
-    ],
-
-    mensualidades: [
-        {
-            folio: 'MENS-001',
-            concepto: 'Mensualidad mayo',
-            monto: '$1,200',
-            fecha: '2026-05-30',
-            estado: 'Pendiente'
-        },
-        {
-            folio: 'MENS-002',
-            concepto: 'Mensualidad abril',
-            monto: '$1,200',
-            fecha: '2026-04-30',
-            estado: 'Pagada'
-        }
-    ],
-
-    pagos: [
-        {
-            fecha: '2026-04-15',
-            monto: '$1,200',
-            metodo: 'Transferencia',
-            folio: 'MENS-002'
-        }
-    ]
+let alumnoData = {
+    clases: [],
+    horarios: [],
+    salones: [],
+    mensualidades: [],
+    pagos: []
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    cargarResumen();
-    cargarClases();
-    cargarHorarios();
-    cargarSalones();
-    cargarMensualidades();
-    cargarPagos();
+    cargarDatosAlumno();
 });
 
+async function cargarDatosAlumno() {
+
+    try {
+
+        const respuesta = await fetch('/alumno_panel/panel', {
+            method: 'GET',
+            headers: {
+                Authorization: `Bearer ${token}`,
+                'Content-Type': 'application/json'
+            }
+        });
+
+        if (!respuesta.ok) {
+            throw new Error('Error al cargar datos del alumno');
+        }
+
+        alumnoData = await respuesta.json();
+
+        cargarResumen();
+        cargarClases();
+        cargarHorarios();
+        cargarSalones();
+        cargarMensualidades();
+        cargarPagos();
+
+    } catch (error) {
+
+        console.log(error);
+
+        alert('No se pudo cargar la información del alumno');
+
+    }
+
+}
+
 function cargarResumen() {
-    document.getElementById('totalClases').textContent =
+
+    document.getElementById('totalClases').value =
         alumnoData.clases.length;
 
     const pendientes = alumnoData.mensualidades.filter(
         mensualidad => mensualidad.estado === 'Pendiente'
     ).length;
 
-    document.getElementById('totalPendientes').textContent =
+    document.getElementById('totalPendientes').value =
         pendientes;
 
-    document.getElementById('totalPagos').textContent =
+    document.getElementById('totalPagos').value =
         alumnoData.pagos.length;
+
 }
 
 function cargarClases() {
+
     const tabla = document.getElementById('tablaMisClases');
 
     tabla.innerHTML = '';
@@ -119,9 +87,11 @@ function cargarClases() {
             </tr>
         `;
     });
+
 }
 
 function cargarHorarios() {
+
     const tabla = document.getElementById('tablaHorarios');
 
     tabla.innerHTML = '';
@@ -136,9 +106,11 @@ function cargarHorarios() {
             </tr>
         `;
     });
+
 }
 
 function cargarSalones() {
+
     const tabla = document.getElementById('tablaSalones');
 
     tabla.innerHTML = '';
@@ -152,9 +124,11 @@ function cargarSalones() {
             </tr>
         `;
     });
+
 }
 
 function cargarMensualidades() {
+
     const tabla = document.getElementById('tablaMensualidades');
 
     tabla.innerHTML = '';
@@ -164,15 +138,17 @@ function cargarMensualidades() {
             <tr>
                 <td>${mensualidad.folio}</td>
                 <td>${mensualidad.concepto}</td>
-                <td>${mensualidad.monto}</td>
+                <td>$${mensualidad.monto}</td>
                 <td>${mensualidad.fecha}</td>
                 <td>${mensualidad.estado}</td>
             </tr>
         `;
     });
+
 }
 
 function cargarPagos() {
+
     const tabla = document.getElementById('tablaPagos');
 
     tabla.innerHTML = '';
@@ -181,16 +157,21 @@ function cargarPagos() {
         tabla.innerHTML += `
             <tr>
                 <td>${pago.fecha}</td>
-                <td>${pago.monto}</td>
+                <td>$${pago.monto}</td>
                 <td>${pago.metodo}</td>
                 <td>${pago.folio}</td>
             </tr>
         `;
     });
+
 }
 
 function cerrarSesion() {
+
     localStorage.clear();
+
     alert('Sesión cerrada correctamente');
+
     window.location.href = '/login.html';
+
 }

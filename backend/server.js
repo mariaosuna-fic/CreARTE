@@ -14,6 +14,8 @@ const asistenciasRoutes = require('./routes/asistencias.routes');
 const mensualidadesRoutes = require('./routes/mensualidades.routes');
 const pagosRoutes = require('./routes/pagos.routes');
 const autenticacionRoutes = require('./routes/autenticacion.routes');
+const alumnoPanelRoutes = require('./routes/alumno_panel.routes');
+const profesorPanelRoutes = require('./routes/profesor_panel.routes');
 
 const app = express();
 
@@ -21,29 +23,16 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 
-// ======================
-// MIDDLEWARES
-// ======================
-
 app.use(express.json());
 
 app.use(express.urlencoded({
     extended: true
 }));
 
-// ======================
-// ARCHIVOS ESTÁTICOS
-// ======================
-
 app.use(express.static(
     path.join(__dirname, '..', 'public')
 ));
 
-// ======================
-// VISTAS
-// ======================
-
-// Inicio
 app.get('/', (req, res) => {
 
     res.sendFile(
@@ -52,7 +41,6 @@ app.get('/', (req, res) => {
 
 });
 
-// Login
 app.get('/login', (req, res) => {
 
     res.sendFile(
@@ -61,7 +49,6 @@ app.get('/login', (req, res) => {
 
 });
 
-// Registro
 app.get('/registro', (req, res) => {
 
     res.sendFile(
@@ -70,7 +57,22 @@ app.get('/registro', (req, res) => {
 
 });
 
-// CRUD Clases
+app.get('/alumno_panel', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'alumno_panel.html')
+    );
+
+});
+
+app.get('/profesor_panel', (req, res) => {
+
+    res.sendFile(
+        path.join(__dirname, '..', 'views', 'profesor_panel.html')
+    );
+
+});
+
 app.get('/clases-admin', (req, res) => {
 
     res.sendFile(
@@ -79,7 +81,6 @@ app.get('/clases-admin', (req, res) => {
 
 });
 
-// CRUD Alumnos
 app.get('/alumnos-admin', (req, res) => {
 
     res.sendFile(
@@ -88,7 +89,6 @@ app.get('/alumnos-admin', (req, res) => {
 
 });
 
-// CRUD Profesores
 app.get('/profesores-admin', (req, res) => {
 
     res.sendFile(
@@ -97,7 +97,6 @@ app.get('/profesores-admin', (req, res) => {
 
 });
 
-// CRUD Horarios
 app.get('/horarios-admin', (req, res) => {
 
     res.sendFile(
@@ -106,7 +105,6 @@ app.get('/horarios-admin', (req, res) => {
 
 });
 
-// CRUD Salones
 app.get('/salones-admin', (req, res) => {
 
     res.sendFile(
@@ -114,10 +112,6 @@ app.get('/salones-admin', (req, res) => {
     );
 
 });
-
-// ======================
-// RUTAS API
-// ======================
 
 app.use('/usuarios', usuariosRoutes);
 
@@ -141,12 +135,11 @@ app.use('/mensualidades', mensualidadesRoutes);
 
 app.use('/pagos', pagosRoutes);
 
-// Auth
-app.use('/', autenticacionRoutes);
+app.use('/alumno_panel', alumnoPanelRoutes);
 
-// ======================
-// SERVIDOR
-// ======================
+app.use('/profesor_panel', profesorPanelRoutes);
+
+app.use('/', autenticacionRoutes);
 
 app.listen(PORT, () => {
 
