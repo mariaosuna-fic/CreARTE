@@ -6,7 +6,7 @@ if (!token || rol !== 'alumno') {
 
     alert('Debes iniciar sesión como alumno');
 
-    window.location.href = '/login';
+    window.location.href = '/login.html';
 
 }
 
@@ -252,6 +252,6 @@ window.cerrarSesion = function () {
         'Sesión cerrada correctamente'
     );
 
-    window.location.href = '/login';
+    window.location.href = '/login.html';
 
 };
