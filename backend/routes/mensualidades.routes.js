@@ -1,19 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
+const conexion = require('../database/db');
 
-const db = require('../database/db');
-
-const verificarToken =
-    require('../middlewares/verificarToken');
-
-
-// ==========================
 // OBTENER MENSUALIDADES
-// ==========================
-
-router.get('/', verificarToken, (req, res) => {
-
+router.get('/', (req, res) => {
     const sql = `
         SELECT 
             m.id_mensualidad,
@@ -27,40 +17,26 @@ router.get('/', verificarToken, (req, res) => {
             m.id_alumno,
             u.nombre AS alumno
         FROM mensualidad m
-        INNER JOIN alumno a
-            ON m.id_alumno = a.id_alumno
-        INNER JOIN usuario u
-            ON a.id_usuario = u.id_usuario
+        INNER JOIN alumno a ON m.id_alumno = a.id_alumno
+        INNER JOIN usuario u ON a.id_usuario = u.id_usuario
         WHERE m.estado != 'pagado'
         ORDER BY m.id_mensualidad DESC
     `;
 
-    db.query(sql, (err, results) => {
-
+    conexion.query(sql, (err, results) => {
         if (err) {
-
             console.error(err);
-
             return res.status(500).json({
-                mensaje:
-                    'Error al obtener mensualidades'
+                mensaje: 'Error al obtener mensualidades'
             });
-
         }
 
         res.json(results);
-
     });
-
 });
 
-
-// ==========================
 // CREAR MENSUALIDAD
-// ==========================
-
-router.post('/', verificarToken, (req, res) => {
-
+router.post('/', (req, res) => {
     const {
         folio_recibo,
         concepto,
@@ -74,61 +50,30 @@ router.post('/', verificarToken, (req, res) => {
 
     const sql = `
         INSERT INTO mensualidad
-        (
-            folio_recibo,
-            concepto,
-            monto,
-            fecha_limite,
-            estado,
-            mes,
-            anio,
-            id_alumno
-        )
+        (folio_recibo, concepto, monto, fecha_limite, estado, mes, anio, id_alumno)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
-    db.query(
+    conexion.query(
         sql,
-        [
-            folio_recibo,
-            concepto,
-            monto,
-            fecha_limite,
-            estado,
-            mes,
-            anio,
-            id_alumno
-        ],
+        [folio_recibo, concepto, monto, fecha_limite, estado, mes, anio, id_alumno],
         (err) => {
-
             if (err) {
-
                 console.error(err);
-
                 return res.status(500).json({
-                    mensaje:
-                        'Error al crear mensualidad'
+                    mensaje: 'Error al crear mensualidad'
                 });
-
             }
 
             res.json({
-                mensaje:
-                    'Mensualidad creada correctamente'
+                mensaje: 'Mensualidad creada correctamente'
             });
-
         }
     );
-
 });
 
-
-// ==========================
 // ACTUALIZAR MENSUALIDAD
-// ==========================
-
-router.put('/:id', verificarToken, (req, res) => {
-
+router.put('/:id', (req, res) => {
     const { id } = req.params;
 
     const {
@@ -144,8 +89,7 @@ router.put('/:id', verificarToken, (req, res) => {
 
     const sql = `
         UPDATE mensualidad
-        SET
-            folio_recibo = ?,
+        SET folio_recibo = ?,
             concepto = ?,
             monto = ?,
             fecha_limite = ?,
@@ -156,49 +100,26 @@ router.put('/:id', verificarToken, (req, res) => {
         WHERE id_mensualidad = ?
     `;
 
-    db.query(
+    conexion.query(
         sql,
-        [
-            folio_recibo,
-            concepto,
-            monto,
-            fecha_limite,
-            estado,
-            mes,
-            anio,
-            id_alumno,
-            id
-        ],
+        [folio_recibo, concepto, monto, fecha_limite, estado, mes, anio, id_alumno, id],
         (err) => {
-
             if (err) {
-
                 console.error(err);
-
                 return res.status(500).json({
-                    mensaje:
-                        'Error al actualizar mensualidad'
+                    mensaje: 'Error al actualizar mensualidad'
                 });
-
             }
 
             res.json({
-                mensaje:
-                    'Mensualidad actualizada correctamente'
+                mensaje: 'Mensualidad actualizada correctamente'
             });
-
         }
     );
-
 });
 
-
-// ==========================
 // ELIMINAR MENSUALIDAD
-// ==========================
-
-router.delete('/:id', verificarToken, (req, res) => {
-
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
 
     const sql = `
@@ -206,27 +127,18 @@ router.delete('/:id', verificarToken, (req, res) => {
         WHERE id_mensualidad = ?
     `;
 
-    db.query(sql, [id], (err) => {
-
+    conexion.query(sql, [id], (err) => {
         if (err) {
-
             console.error(err);
-
             return res.status(500).json({
-                mensaje:
-                    'Error al eliminar mensualidad'
+                mensaje: 'Error al eliminar mensualidad'
             });
-
         }
 
         res.json({
-            mensaje:
-                'Mensualidad eliminada correctamente'
+            mensaje: 'Mensualidad eliminada correctamente'
         });
-
     });
-
 });
-
 
 module.exports = router;

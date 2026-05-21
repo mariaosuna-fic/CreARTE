@@ -1,19 +1,9 @@
 const express = require('express');
-
 const router = express.Router();
+const conexion = require('../database/db');
 
-const db = require('../database/db');
-
-const verificarToken =
-    require('../middlewares/verificarToken');
-
-
-// ==========================
 // OBTENER INSCRIPCIONES
-// ==========================
-
-router.get('/', verificarToken, (req, res) => {
-
+router.get('/', (req, res) => {
     const sql = `
         SELECT 
             i.id_inscripcion,
@@ -23,41 +13,27 @@ router.get('/', verificarToken, (req, res) => {
             u.nombre AS alumno,
             c.nombre_clase AS clase
         FROM inscripcion i
-        INNER JOIN alumno a 
-            ON i.id_alumno = a.id_alumno
-        INNER JOIN usuario u 
-            ON a.id_usuario = u.id_usuario
-        INNER JOIN clase_programada cp 
-            ON i.id_clase_programada = cp.id_clase_programada
-        INNER JOIN clase c 
-            ON cp.id_clase = c.id_clase
+        INNER JOIN alumno a ON i.id_alumno = a.id_alumno
+        INNER JOIN usuario u ON a.id_usuario = u.id_usuario
+        INNER JOIN clase_programada cp ON i.id_clase_programada = cp.id_clase_programada
+        INNER JOIN clase c ON cp.id_clase = c.id_clase
         ORDER BY i.id_inscripcion DESC
     `;
 
-    db.query(sql, (err, results) => {
-
+    conexion.query(sql, (err, results) => {
         if (err) {
             console.error(err);
-
             return res.status(500).json({
                 mensaje: 'Error al obtener inscripciones'
             });
         }
 
         res.json(results);
-
     });
-
 });
 
-
-// ==========================
-// CREAR INSCRIPCIÓN
-// Y CREAR MENSUALIDAD AUTOMÁTICA
-// ==========================
-
-router.post('/', verificarToken, (req, res) => {
-
+// CREAR INSCRIPCIÓN Y MENSUALIDAD AUTOMÁTICA
+router.post('/', (req, res) => {
     const {
         fecha_inscripcion,
         id_alumno,
@@ -66,52 +42,37 @@ router.post('/', verificarToken, (req, res) => {
 
     const sqlInscripcion = `
         INSERT INTO inscripcion
-        (
-            fecha_inscripcion,
-            id_alumno,
-            id_clase_programada
-        )
+        (fecha_inscripcion, id_alumno, id_clase_programada)
         VALUES (?, ?, ?)
     `;
 
-    db.query(
+    conexion.query(
         sqlInscripcion,
-        [
-            fecha_inscripcion,
-            id_alumno,
-            id_clase_programada
-        ],
+        [fecha_inscripcion, id_alumno, id_clase_programada],
         (err, result) => {
-
             if (err) {
                 console.error(err);
-
                 return res.status(500).json({
                     mensaje: 'Error al crear inscripción'
                 });
             }
 
             const sqlClase = `
-                SELECT 
-                    c.nombre_clase
+                SELECT c.nombre_clase
                 FROM clase_programada cp
-                INNER JOIN clase c
-                    ON cp.id_clase = c.id_clase
+                INNER JOIN clase c ON cp.id_clase = c.id_clase
                 WHERE cp.id_clase_programada = ?
             `;
 
-            db.query(sqlClase, [id_clase_programada], (err, claseResult) => {
-
+            conexion.query(sqlClase, [id_clase_programada], (err, claseResult) => {
                 if (err) {
                     console.error(err);
-
                     return res.status(500).json({
                         mensaje: 'Inscripción creada, pero error al obtener la clase'
                     });
                 }
 
                 const fecha = new Date(fecha_inscripcion);
-
                 const mes = fecha.getMonth() + 1;
                 const anio = fecha.getFullYear();
 
@@ -146,7 +107,7 @@ router.post('/', verificarToken, (req, res) => {
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)
                 `;
 
-                db.query(
+                conexion.query(
                     sqlMensualidad,
                     [
                         folio_recibo,
@@ -159,10 +120,8 @@ router.post('/', verificarToken, (req, res) => {
                         id_alumno
                     ],
                     (err) => {
-
                         if (err) {
                             console.error(err);
-
                             return res.status(500).json({
                                 mensaje: 'Inscripción creada, pero error al crear mensualidad'
                             });
@@ -171,24 +130,15 @@ router.post('/', verificarToken, (req, res) => {
                         res.json({
                             mensaje: 'Inscripción y mensualidad creadas correctamente'
                         });
-
                     }
                 );
-
             });
-
         }
     );
-
 });
 
-
-// ==========================
 // ACTUALIZAR INSCRIPCIÓN
-// ==========================
-
-router.put('/:id', verificarToken, (req, res) => {
-
+router.put('/:id', (req, res) => {
     const { id } = req.params;
 
     const {
@@ -199,26 +149,18 @@ router.put('/:id', verificarToken, (req, res) => {
 
     const sql = `
         UPDATE inscripcion
-        SET
-            fecha_inscripcion = ?,
+        SET fecha_inscripcion = ?,
             id_alumno = ?,
             id_clase_programada = ?
         WHERE id_inscripcion = ?
     `;
 
-    db.query(
+    conexion.query(
         sql,
-        [
-            fecha_inscripcion,
-            id_alumno,
-            id_clase_programada,
-            id
-        ],
+        [fecha_inscripcion, id_alumno, id_clase_programada, id],
         (err) => {
-
             if (err) {
                 console.error(err);
-
                 return res.status(500).json({
                     mensaje: 'Error al actualizar inscripción'
                 });
@@ -227,19 +169,12 @@ router.put('/:id', verificarToken, (req, res) => {
             res.json({
                 mensaje: 'Inscripción actualizada correctamente'
             });
-
         }
     );
-
 });
 
-
-// ==========================
 // ELIMINAR INSCRIPCIÓN
-// ==========================
-
-router.delete('/:id', verificarToken, (req, res) => {
-
+router.delete('/:id', (req, res) => {
     const { id } = req.params;
 
     const sql = `
@@ -247,11 +182,9 @@ router.delete('/:id', verificarToken, (req, res) => {
         WHERE id_inscripcion = ?
     `;
 
-    db.query(sql, [id], (err) => {
-
+    conexion.query(sql, [id], (err) => {
         if (err) {
             console.error(err);
-
             return res.status(500).json({
                 mensaje: 'Error al eliminar inscripción'
             });
@@ -260,10 +193,7 @@ router.delete('/:id', verificarToken, (req, res) => {
         res.json({
             mensaje: 'Inscripción eliminada correctamente'
         });
-
     });
-
 });
-
 
 module.exports = router;
