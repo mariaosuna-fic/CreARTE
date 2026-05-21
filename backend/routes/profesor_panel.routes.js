@@ -31,7 +31,7 @@ router.get(
                 h.hora_inicio AS inicio,
                 h.hora_fin AS fin,
                 s.nombre_salon AS salon
-            FROM clases_programadas cp
+            FROM clase_programada cp
 
             INNER JOIN clase c
                 ON cp.id_clase = c.id_clase

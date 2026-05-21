@@ -18,7 +18,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
         FROM inscripcion i
         INNER JOIN alumno a
             ON i.id_alumno = a.id_alumno
-        INNER JOIN clases_programadas cp
+        INNER JOIN clase_programada cp
             ON i.id_clase_programada = cp.id_clase_programada
         INNER JOIN clase c
             ON cp.id_clase = c.id_clase
@@ -47,7 +47,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
             FROM inscripcion i
             INNER JOIN alumno a
                 ON i.id_alumno = a.id_alumno
-            INNER JOIN clases_programadas cp
+            INNER JOIN clase_programada cp
                 ON i.id_clase_programada = cp.id_clase_programada
             INNER JOIN clase c
                 ON cp.id_clase = c.id_clase
@@ -73,7 +73,7 @@ router.get('/panel', verificarToken, soloAlumno, (req, res) => {
                 FROM inscripcion i
                 INNER JOIN alumno a
                     ON i.id_alumno = a.id_alumno
-                INNER JOIN clases_programadas cp
+                INNER JOIN clase_programada cp
                     ON i.id_clase_programada = cp.id_clase_programada
                 INNER JOIN clase c
                     ON cp.id_clase = c.id_clase
