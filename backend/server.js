@@ -131,7 +131,7 @@ app.use('/horarios', horariosRoutes);
 
 app.use('/salones', salonesRoutes);
 
-app.use('/clases-programadas', clasesProgramadasRoutes);
+app.use('/clases_programadas', clasesProgramadasRoutes);
 
 app.use('/inscripciones', inscripcionesRoutes);
 

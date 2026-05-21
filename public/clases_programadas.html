@@ -2,270 +2,91 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+    <title>Clases Programadas - CREARTE</title>
 
-    <title>
-        Clases Programadas - CREARTE
-    </title>
-
-    <link
-        rel="stylesheet"
-        href="/css/clases.css"
-    >
-
+    <link rel="stylesheet" href="/css/clases.css">
 </head>
 
 <body class="admin-body">
 
-<!-- =========================
-     NAVBAR
-========================= -->
-
 <header class="navbar-admin">
-
     <div class="logo-container-admin">
-
-        <img
-            src="/assets/logo crearte azul.svg"
-            alt="CREARTE"
-            class="logo-admin"
-        >
-
+        <img src="/assets/logo crearte azul.svg" alt="CREARTE" class="logo-admin">
     </div>
 
-    <a
-        href="#"
-        class="btn-logout"
-        onclick="cerrarSesion()"
-    >
+    <a href="#" class="btn-logout" onclick="cerrarSesion()">
         Cerrar sesión ➔
     </a>
-
 </header>
 
 <div class="layout-container">
 
-    <!-- =========================
-         SIDEBAR
-    ========================== -->
-
     <aside class="sidebar-admin">
-
         <nav class="sidebar-nav">
-
-            <a
-                href="/admin.html"
-                class="sidebar-link"
-            >
-                Panel
-            </a>
-
-            <a
-                href="/clases.html"
-                class="sidebar-link"
-            >
-                Cursos
-            </a>
-
-            <a
-                href="/clases_programadas.html"
-                class="sidebar-link active"
-            >
-                Clases Programadas
-            </a>
-
-            <a
-                href="/alumnos.html"
-                class="sidebar-link"
-            >
-                Alumnos
-            </a>
-
-            <a
-                href="/profesores.html"
-                class="sidebar-link"
-            >
-                Profesores
-            </a>
-
-            <a
-                href="/horarios.html"
-                class="sidebar-link"
-            >
-                Horarios
-            </a>
-
-            <a
-                href="/salones.html"
-                class="sidebar-link"
-            >
-                Salones
-            </a>
-
-            <a
-                href="/mensualidades.html"
-                class="sidebar-link"
-            >
-                Mensualidades
-            </a>
-
-            <a
-                href="/pagos.html"
-                class="sidebar-link"
-            >
-                Pagos
-            </a>
-
-            <a
-                href="/inscripciones.html"
-                class="sidebar-link"
-            >
-                Inscripciones
-            </a>
-
+            <a href="/admin.html" class="sidebar-link">Panel</a>
+            <a href="/clases.html" class="sidebar-link">Clases</a>
+            <a href="/clases_programadas.html" class="sidebar-link active">Clases Programadas</a>
+            <a href="/alumnos.html" class="sidebar-link">Alumnos</a>
+            <a href="/profesores.html" class="sidebar-link">Profesores</a>
+            <a href="/horarios.html" class="sidebar-link">Horarios</a>
+            <a href="/salones.html" class="sidebar-link">Salones</a>
+            <a href="/mensualidades.html" class="sidebar-link">Mensualidades</a>
+            <a href="/pagos.html" class="sidebar-link">Pagos</a>
+            <a href="/inscripciones.html" class="sidebar-link">Inscripciones</a>
         </nav>
-
     </aside>
-
-    <!-- =========================
-         CONTENIDO PRINCIPAL
-    ========================== -->
 
     <main class="main-content">
 
         <header class="content-header">
-
-            <h1>
-                Gestión de Clases Programadas
-            </h1>
-
-            <p>
-                Asigna cursos, profesores, horarios y salones.
-            </p>
-
+            <h1>Gestión de Clases Programadas</h1>
+            <p>Asigna clases, profesores, horarios y salones.</p>
         </header>
 
-        <!-- =========================
-             FORMULARIO
-        ========================== -->
-
         <section class="form-section">
-
             <div class="form-card">
 
-                <form
-                    id="formClaseProgramada"
-                    class="clase-form"
-                >
+                <form id="formClaseProgramada" class="clase-form">
 
-                    <input
-                        type="hidden"
-                        id="id_clase_programada_edicion"
-                    >
+                    <input type="hidden" id="id_clase_programada_edicion">
 
                     <div class="form-grid">
 
-                        <!-- CLASE -->
-
                         <div class="form-group">
-
-                            <label>
-                                Curso
-                            </label>
-
-                            <select
-                                id="id_clase"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un curso
-                                </option>
-
+                            <label>Clase</label>
+                            <select id="id_clase" required>
+                                <option value="">Selecciona una clase</option>
                             </select>
-
                         </div>
 
-                        <!-- PROFESOR -->
-
                         <div class="form-group">
-
-                            <label>
-                                Profesor
-                            </label>
-
-                            <select
-                                id="id_profesor"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un profesor
-                                </option>
-
+                            <label>Profesor</label>
+                            <select id="id_profesor" required>
+                                <option value="">Selecciona un profesor</option>
                             </select>
-
                         </div>
 
-                        <!-- HORARIO -->
-
                         <div class="form-group">
-
-                            <label>
-                                Horario
-                            </label>
-
-                            <select
-                                id="id_horario"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un horario
-                                </option>
-
+                            <label>Horario disponible</label>
+                            <select id="id_horario" required>
+                                <option value="">Selecciona un horario</option>
                             </select>
-
                         </div>
 
-                        <!-- SALÓN -->
-
                         <div class="form-group">
-
-                            <label>
-                                Salón
-                            </label>
-
-                            <select
-                                id="id_salon"
-                                required
-                            >
-
-                                <option value="">
-                                    Selecciona un salón
-                                </option>
-
+                            <label>Salón</label>
+                            <select id="id_salon" required>
+                                <option value="">Selecciona un salón</option>
                             </select>
-
                         </div>
 
                     </div>
 
-                    <!-- BOTONES -->
-
                     <div class="form-buttons">
-
-                        <button
-                            type="submit"
-                            id="btnGuardar"
-                            class="btn-primary"
-                        >
+                        <button type="submit" id="btnGuardar" class="btn-primary">
                             Guardar Clase Programada
                         </button>
 
@@ -277,47 +98,30 @@
                         >
                             Cancelar
                         </button>
-
                     </div>
 
                 </form>
 
             </div>
-
         </section>
-
-        <!-- =========================
-             TABLA
-        ========================== -->
 
         <section class="table-section">
 
-            <h3 class="table-title">
-                Clases programadas registradas
-            </h3>
+            <h3 class="table-title">Clases programadas registradas</h3>
 
             <div class="table-card">
 
                 <table class="custom-table">
 
                     <thead>
-
                         <tr>
-
                             <th>ID</th>
-
-                            <th>Curso</th>
-
+                            <th>Clase</th>
                             <th>Profesor</th>
-
                             <th>Horario</th>
-
                             <th>Salón</th>
-
                             <th>Acciones</th>
-
                         </tr>
-
                     </thead>
 
                     <tbody id="tablaClasesProgramadas"></tbody>

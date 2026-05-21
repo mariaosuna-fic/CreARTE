@@ -65,7 +65,7 @@ async function cargarAlumnosSelect() {
 
 async function cargarClasesProgramadasSelect() {
     try {
-        const respuesta = await fetch(`${API_URL}/clases-programadas`, {
+        const respuesta = await fetch(`${API_URL}/clases_programadas`, {
             headers: {
                 'Authorization': `Bearer ${token}`
             }

@@ -54,7 +54,6 @@ formMensualidad.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const datos = {
-        folio_recibo: document.getElementById('folio_recibo').value,
         concepto: document.getElementById('concepto').value,
         monto: document.getElementById('monto').value,
         fecha_limite: document.getElementById('fecha_limite').value,
@@ -214,6 +213,8 @@ async function eliminarMensualidad(id) {
 
 function resetearFormulario() {
     formMensualidad.reset();
+
+    document.getElementById('folio_recibo').value = '';
 
     idMensualidadEditando = null;
 

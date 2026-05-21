@@ -40,7 +40,7 @@
 
         <header class="content-header">
             <h1>Gestión de Mensualidades</h1>
-            <p>Administra mensualidades y adeudos de alumnos.</p>
+            <p>Consulta adeudos generados automáticamente desde inscripciones.</p>
         </header>
 
         <section class="form-section">
@@ -54,22 +54,42 @@
 
                         <div class="form-group">
                             <label>Folio recibo</label>
-                            <input type="text" id="folio_recibo" placeholder="Ej. REC-001" required>
+                            <input
+                                type="text"
+                                id="folio_recibo"
+                                placeholder="Se genera automáticamente"
+                                readonly
+                            >
                         </div>
 
                         <div class="form-group">
                             <label>Concepto</label>
-                            <input type="text" id="concepto" placeholder="Ej. Mensualidad mayo" required>
+                            <input
+                                type="text"
+                                id="concepto"
+                                placeholder="Ej. Mensualidad mayo"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
                             <label>Monto</label>
-                            <input type="number" id="monto" placeholder="800" required>
+                            <input
+                                type="number"
+                                id="monto"
+                                min="1"
+                                placeholder="800"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
                             <label>Fecha límite</label>
-                            <input type="date" id="fecha_limite" required>
+                            <input
+                                type="date"
+                                id="fecha_limite"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
@@ -83,12 +103,25 @@
 
                         <div class="form-group">
                             <label>Mes</label>
-                            <input type="number" id="mes" placeholder="5" required>
+                            <input
+                                type="number"
+                                id="mes"
+                                min="1"
+                                max="12"
+                                placeholder="5"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
                             <label>Año</label>
-                            <input type="number" id="anio" placeholder="2026" required>
+                            <input
+                                type="number"
+                                id="anio"
+                                min="2025"
+                                placeholder="2026"
+                                required
+                            >
                         </div>
 
                         <div class="form-group">
@@ -153,5 +186,4 @@
 <script src="/js/mensualidades.js"></script>
 
 </body>
-
 </html>

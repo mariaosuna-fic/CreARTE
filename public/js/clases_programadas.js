@@ -27,23 +27,42 @@ document.addEventListener('DOMContentLoaded', () => {
     cargarClasesProgramadas();
 });
 
+
+// ==========================
+// CARGAR SELECTS
+// ==========================
+
 async function cargarSelects() {
+
     await cargarCursos();
+
     await cargarProfesores();
+
     await cargarHorarios();
+
     await cargarSalones();
+
 }
 
+
+// ==========================
+// CURSOS
+// ==========================
+
 async function cargarCursos() {
+
     const respuesta = await fetch(`${API_URL}/clases`, {
+
         headers: {
             'Authorization': `Bearer ${token}`
         }
+
     });
 
     const clases = await respuesta.json();
 
-    const select = document.getElementById('id_clase');
+    const select =
+        document.getElementById('id_clase');
 
     select.innerHTML = `
         <option value="">
@@ -52,24 +71,37 @@ async function cargarCursos() {
     `;
 
     clases.forEach(clase => {
+
         select.innerHTML += `
             <option value="${clase.id_clase}">
-                ${clase.nombre_clase} - ${clase.nivel}
+                ${clase.nombre_clase}
+                - ${clase.nivel}
             </option>
         `;
+
     });
+
 }
 
+
+// ==========================
+// PROFESORES
+// ==========================
+
 async function cargarProfesores() {
+
     const respuesta = await fetch(`${API_URL}/profesores`, {
+
         headers: {
             'Authorization': `Bearer ${token}`
         }
+
     });
 
     const profesores = await respuesta.json();
 
-    const select = document.getElementById('id_profesor');
+    const select =
+        document.getElementById('id_profesor');
 
     select.innerHTML = `
         <option value="">
@@ -78,24 +110,37 @@ async function cargarProfesores() {
     `;
 
     profesores.forEach(profesor => {
+
         select.innerHTML += `
             <option value="${profesor.id_profesor}">
-                ${profesor.nombre || 'Profesor'} - ${profesor.especialidad || ''}
+                ${profesor.nombre || 'Profesor'}
+                - ${profesor.especialidad || ''}
             </option>
         `;
+
     });
+
 }
 
+
+// ==========================
+// HORARIOS
+// ==========================
+
 async function cargarHorarios() {
+
     const respuesta = await fetch(`${API_URL}/horarios`, {
+
         headers: {
             'Authorization': `Bearer ${token}`
         }
+
     });
 
     const horarios = await respuesta.json();
 
-    const select = document.getElementById('id_horario');
+    const select =
+        document.getElementById('id_horario');
 
     select.innerHTML = `
         <option value="">
@@ -104,24 +149,39 @@ async function cargarHorarios() {
     `;
 
     horarios.forEach(horario => {
+
         select.innerHTML += `
             <option value="${horario.id_horario}">
-                ${horario.dia} - ${horario.hora_inicio} a ${horario.hora_fin}
+                ${horario.dia}
+                - ${horario.hora_inicio}
+                a
+                ${horario.hora_fin}
             </option>
         `;
+
     });
+
 }
 
+
+// ==========================
+// SALONES
+// ==========================
+
 async function cargarSalones() {
+
     const respuesta = await fetch(`${API_URL}/salones`, {
+
         headers: {
             'Authorization': `Bearer ${token}`
         }
+
     });
 
     const salones = await respuesta.json();
 
-    const select = document.getElementById('id_salon');
+    const select =
+        document.getElementById('id_salon');
 
     select.innerHTML = `
         <option value="">
@@ -130,80 +190,158 @@ async function cargarSalones() {
     `;
 
     salones.forEach(salon => {
+
         select.innerHTML += `
             <option value="${salon.id_salon}">
-                ${salon.nombre_salon} - Capacidad: ${salon.capacidad}
+                ${salon.nombre_salon}
+                - Capacidad:
+                ${salon.capacidad}
             </option>
         `;
+
     });
+
 }
 
+
+// ==========================
+// GUARDAR / ACTUALIZAR
+// ==========================
+
 formClaseProgramada.addEventListener('submit', async (e) => {
+
     e.preventDefault();
 
     const datos = {
-        id_clase: document.getElementById('id_clase').value,
-        id_profesor: document.getElementById('id_profesor').value,
-        id_horario: document.getElementById('id_horario').value,
-        id_salon: document.getElementById('id_salon').value
+
+        id_clase:
+            document.getElementById('id_clase').value,
+
+        id_profesor:
+            document.getElementById('id_profesor').value,
+
+        id_horario:
+            document.getElementById('id_horario').value,
+
+        id_salon:
+            document.getElementById('id_salon').value
+
     };
 
-    let url = `${API_URL}/clases-programadas`;
+    let url =
+        `${API_URL}/clases_programadas`;
+
     let metodo = 'POST';
 
     if (idClaseProgramadaEditando !== null) {
-        url = `${API_URL}/clases-programadas/${idClaseProgramadaEditando}`;
+
+        url =
+            `${API_URL}/clases_programadas/${idClaseProgramadaEditando}`;
+
         metodo = 'PUT';
+
     }
 
     try {
+
         const respuesta = await fetch(url, {
+
             method: metodo,
+
             headers: {
+
                 'Content-Type': 'application/json',
+
                 'Authorization': `Bearer ${token}`
+
             },
+
             body: JSON.stringify(datos)
+
         });
 
-        const resultado = await respuesta.json();
+        const resultado =
+            await respuesta.json();
 
-        alert(resultado.mensaje || 'Operación realizada');
+        alert(
+            resultado.mensaje ||
+            'Operación realizada'
+        );
 
         if (!respuesta.ok) return;
 
         resetearFormulario();
+
         cargarClasesProgramadas();
 
     } catch (error) {
+
         console.error(error);
-        alert('Error al guardar clase programada');
+
+        alert(
+            'Error al guardar clase programada'
+        );
+
     }
+
 });
 
-async function cargarClasesProgramadas() {
-    try {
-        const respuesta = await fetch(`${API_URL}/clases-programadas`, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        });
 
-        const clasesProgramadas = await respuesta.json();
+// ==========================
+// OBTENER TABLA
+// ==========================
+
+async function cargarClasesProgramadas() {
+
+    try {
+
+        const respuesta = await fetch(
+            `${API_URL}/clases_programadas`,
+            {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            }
+        );
+
+        const clasesProgramadas =
+            await respuesta.json();
 
         tablaClasesProgramadas.innerHTML = '';
 
         clasesProgramadas.forEach(cp => {
+
             tablaClasesProgramadas.innerHTML += `
                 <tr>
-                    <td>${cp.id_clase_programada}</td>
-                    <td>${cp.id_clase}</td>
-                    <td>${cp.id_profesor}</td>
-                    <td>${cp.id_horario}</td>
-                    <td>${cp.id_salon}</td>
+
                     <td>
+                        ${cp.id_clase_programada}
+                    </td>
+
+                    <td>
+                        ${cp.nombre_clase}
+                    </td>
+
+                    <td>
+                        ${cp.profesor}
+                    </td>
+
+                    <td>
+                        ${cp.dia}
+                        ${cp.hora_inicio}
+                        -
+                        ${cp.hora_fin}
+                    </td>
+
+                    <td>
+                        ${cp.nombre_salon}
+                    </td>
+
+                    <td>
+
                         <button
                             class="btn-table-edit"
+
                             onclick="editarClaseProgramada(
                                 ${cp.id_clase_programada},
                                 ${cp.id_clase},
@@ -217,75 +355,167 @@ async function cargarClasesProgramadas() {
 
                         <button
                             class="btn-table-delete"
-                            onclick="eliminarClaseProgramada(${cp.id_clase_programada})"
+
+                            onclick="eliminarClaseProgramada(
+                                ${cp.id_clase_programada}
+                            )"
                         >
                             Eliminar
                         </button>
+
                     </td>
+
                 </tr>
             `;
+
         });
 
     } catch (error) {
+
         console.error(error);
-        alert('Error al cargar clases programadas');
+
+        alert(
+            'Error al cargar clases programadas'
+        );
+
     }
+
 }
 
-function editarClaseProgramada(id, idClase, idProfesor, idHorario, idSalon) {
+
+// ==========================
+// EDITAR
+// ==========================
+
+function editarClaseProgramada(
+    id,
+    idClase,
+    idProfesor,
+    idHorario,
+    idSalon
+) {
+
     idClaseProgramadaEditando = id;
 
-    document.getElementById('id_clase').value = idClase;
-    document.getElementById('id_profesor').value = idProfesor;
-    document.getElementById('id_horario').value = idHorario;
-    document.getElementById('id_salon').value = idSalon;
+    document.getElementById('id_clase').value =
+        idClase;
 
-    btnGuardar.textContent = 'Actualizar Clase Programada';
-    btnCancelar.style.display = 'inline-block';
+    document.getElementById('id_profesor').value =
+        idProfesor;
+
+    document.getElementById('id_horario').value =
+        idHorario;
+
+    document.getElementById('id_salon').value =
+        idSalon;
+
+    btnGuardar.textContent =
+        'Actualizar Clase Programada';
+
+    btnCancelar.style.display =
+        'inline-block';
 
     window.scrollTo({
+
         top: 0,
+
         behavior: 'smooth'
+
     });
+
 }
 
+
+// ==========================
+// ELIMINAR
+// ==========================
+
 async function eliminarClaseProgramada(id) {
-    if (!confirm('¿Seguro que deseas eliminar esta clase programada?')) return;
+
+    if (
+        !confirm(
+            '¿Seguro que deseas eliminar esta clase programada?'
+        )
+    ) return;
 
     try {
-        const respuesta = await fetch(`${API_URL}/clases_programadas/${id}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': `Bearer ${token}`
+
+        const respuesta = await fetch(
+
+            `${API_URL}/clases_programadas/${id}`,
+
+            {
+
+                method: 'DELETE',
+
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+
             }
-        });
 
-        const resultado = await respuesta.json();
+        );
 
-        alert(resultado.mensaje || 'Clase programada eliminada');
+        const resultado =
+            await respuesta.json();
+
+        alert(
+            resultado.mensaje ||
+            'Clase programada eliminada'
+        );
 
         cargarClasesProgramadas();
 
     } catch (error) {
+
         console.error(error);
-        alert('Error al eliminar clase programada');
+
+        alert(
+            'Error al eliminar clase programada'
+        );
+
     }
+
 }
 
+
+// ==========================
+// RESET
+// ==========================
+
 function resetearFormulario() {
+
     formClaseProgramada.reset();
 
     idClaseProgramadaEditando = null;
 
-    btnGuardar.textContent = 'Guardar Clase Programada';
+    btnGuardar.textContent =
+        'Guardar Clase Programada';
 
-    btnCancelar.style.display = 'none';
+    btnCancelar.style.display =
+        'none';
+
 }
 
-btnCancelar.addEventListener('click', resetearFormulario);
+btnCancelar.addEventListener(
+    'click',
+    resetearFormulario
+);
+
+
+// ==========================
+// CERRAR SESIÓN
+// ==========================
 
 function cerrarSesion() {
+
     localStorage.clear();
-    alert('Sesión cerrada correctamente');
-    window.location.href = '/login.html';
+
+    alert(
+        'Sesión cerrada correctamente'
+    );
+
+    window.location.href =
+        '/login.html';
+
 }
