@@ -1,3 +1,5 @@
+const API_URL = 'https://crearte-or0f.onrender.com';
+
 const token = localStorage.getItem('token');
 
 const rol = localStorage.getItem('rol');
@@ -29,7 +31,7 @@ async function cargarDatosAlumno() {
     try {
 
         const respuesta = await fetch(
-            '/alumno_panel/panel',
+            `${API_URL}/alumno_panel/panel`,
             {
                 method: 'GET',
                 headers: {
