@@ -10,9 +10,7 @@ const jwt = require('jsonwebtoken');
 // ======================
 
 router.post('/registro', async (req, res) => {
-
     try {
-
         let { nombre, correo, contraseña, rol } = req.body;
 
         if (!nombre || !correo || !contraseña || !rol) {
@@ -47,7 +45,7 @@ router.post('/registro', async (req, res) => {
 
         const contraseñaEncriptada = await bcrypt.hash(contraseña, 10);
 
-        const sql = `
+        const sqlUsuario = `
             INSERT INTO usuario
             (
                 nombre,
@@ -60,41 +58,95 @@ router.post('/registro', async (req, res) => {
         `;
 
         conexion.query(
-            sql,
-            [
-                nombre,
-                correo,
-                contraseñaEncriptada,
-                rol
-            ],
-            (error, resultado) => {
-
+            sqlUsuario,
+            [nombre, correo, contraseñaEncriptada, rol],
+            (error, resultadoUsuario) => {
                 if (error) {
                     console.error(error);
 
                     return res.status(500).json({
-                        mensaje: 'Error al registrar usuario'
+                        mensaje: 'Error al registrar usuario',
+                        error: error.sqlMessage
                     });
                 }
 
-                res.json({
-                    mensaje: 'Usuario registrado correctamente',
-                    id_usuario: resultado.insertId
-                });
+                const id_usuario = resultadoUsuario.insertId;
 
+                if (rol === 'alumno') {
+                    const sqlAlumno = `
+                        INSERT INTO alumno
+                        (
+                            matricula,
+                            telefono,
+                            fecha_registro,
+                            id_usuario
+                        )
+                        VALUES (?, ?, CURDATE(), ?)
+                    `;
+
+                    const matricula = `ALU${id_usuario}`;
+
+                    conexion.query(
+                        sqlAlumno,
+                        [matricula, '', id_usuario],
+                        (errorAlumno) => {
+                            if (errorAlumno) {
+                                console.error(errorAlumno);
+
+                                return res.status(500).json({
+                                    mensaje: 'Usuario creado, pero no se pudo registrar como alumno',
+                                    error: errorAlumno.sqlMessage
+                                });
+                            }
+
+                            return res.json({
+                                mensaje: 'Alumno registrado correctamente',
+                                id_usuario
+                            });
+                        }
+                    );
+
+                } else if (rol === 'profesor') {
+                    const sqlProfesor = `
+                        INSERT INTO profesor
+                        (
+                            especialidad,
+                            disponibilidad,
+                            id_usuario
+                        )
+                        VALUES (?, ?, ?)
+                    `;
+
+                    conexion.query(
+                        sqlProfesor,
+                        ['', '', id_usuario],
+                        (errorProfesor) => {
+                            if (errorProfesor) {
+                                console.error(errorProfesor);
+
+                                return res.status(500).json({
+                                    mensaje: 'Usuario creado, pero no se pudo registrar como profesor',
+                                    error: errorProfesor.sqlMessage
+                                });
+                            }
+
+                            return res.json({
+                                mensaje: 'Profesor registrado correctamente',
+                                id_usuario
+                            });
+                        }
+                    );
+                }
             }
         );
 
     } catch (error) {
-
         console.error(error);
 
         res.status(500).json({
             mensaje: 'Error del servidor'
         });
-
     }
-
 });
 
 // ======================
@@ -102,7 +154,6 @@ router.post('/registro', async (req, res) => {
 // ======================
 
 router.post('/login', async (req, res) => {
-
     const { correo, contraseña } = req.body;
 
     if (!correo || !contraseña) {
@@ -120,12 +171,12 @@ router.post('/login', async (req, res) => {
         sql,
         [correo],
         async (error, resultados) => {
-
             if (error) {
                 console.error(error);
 
                 return res.status(500).json({
-                    mensaje: 'Error al iniciar sesión'
+                    mensaje: 'Error al iniciar sesión',
+                    error: error.sqlMessage
                 });
             }
 
@@ -172,10 +223,8 @@ router.post('/login', async (req, res) => {
                 usuario,
                 token
             });
-
         }
     );
-
 });
 
 module.exports = router;

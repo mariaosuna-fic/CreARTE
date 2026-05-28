@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
 
     <meta
@@ -10,46 +9,34 @@
         content="width=device-width, initial-scale=1.0"
     >
 
-    <title>
-        Alumnos - CREARTE
-    </title>
+    <title>Alumnos - CREARTE</title>
 
     <link
         rel="stylesheet"
         href="/css/clases.css"
     >
-
 </head>
 
 <body class="admin-body">
 
 <script>
-
     const token = localStorage.getItem('token');
     const rol = localStorage.getItem('rol');
 
     if (!token || rol !== 'admin') {
-
         alert('Debes iniciar sesión como administrador');
-
         window.location.href = '/login.html';
-
     }
-
 </script>
-
-<!-- NAVBAR -->
 
 <header class="navbar-admin">
 
     <div class="logo-container-admin">
-
         <img
             src="/assets/logo crearte azul.svg"
             alt="CREARTE"
             class="logo-admin"
         >
-
     </div>
 
     <a
@@ -62,19 +49,15 @@
 
 </header>
 
-<!-- LAYOUT -->
-
 <div class="layout-container">
-
-    <!-- SIDEBAR -->
 
     <aside class="sidebar-admin">
 
         <nav class="sidebar-nav">
             <a href="/admin.html" class="sidebar-link">Panel</a>
             <a href="/clases.html" class="sidebar-link">Clases</a>
-            <a href="/clases_programadas.html" class="sidebar-link active">Clases Programadas</a>
-            <a href="/alumnos.html" class="sidebar-link">Alumnos</a>
+            <a href="/clases_programadas.html" class="sidebar-link">Clases Programadas</a>
+            <a href="/alumnos.html" class="sidebar-link active">Alumnos</a>
             <a href="/profesores.html" class="sidebar-link">Profesores</a>
             <a href="/horarios.html" class="sidebar-link">Horarios</a>
             <a href="/salones.html" class="sidebar-link">Salones</a>
@@ -85,26 +68,15 @@
 
     </aside>
 
-    <!-- MAIN -->
-
     <main class="main-content">
 
-        <!-- HEADER -->
-
         <header class="content-header">
-
-            <h1>
-                Gestión de Alumnos
-            </h1>
+            <h1>Gestión de Alumnos</h1>
 
             <p>
-                Administra los alumnos registrados
-                en CREARTE.
+                Administra los alumnos registrados en CREARTE.
             </p>
-
         </header>
-
-        <!-- FORMULARIO -->
 
         <section class="form-section">
 
@@ -115,10 +87,7 @@
                     <div class="form-grid">
 
                         <div class="form-group">
-
-                            <label>
-                                Nombre completo
-                            </label>
+                            <label>Nombre completo</label>
 
                             <input
                                 type="text"
@@ -126,14 +95,10 @@
                                 placeholder="Ej. Ana López"
                                 required
                             >
-
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Correo electrónico
-                            </label>
+                            <label>Correo electrónico</label>
 
                             <input
                                 type="email"
@@ -141,14 +106,10 @@
                                 placeholder="Ej. ana@gmail.com"
                                 required
                             >
-
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Contraseña temporal
-                            </label>
+                            <label>Contraseña temporal</label>
 
                             <input
                                 type="password"
@@ -156,29 +117,21 @@
                                 placeholder="Ej. ana123"
                                 required
                             >
-
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Matrícula
-                            </label>
+                            <label>Matrícula</label>
 
                             <input
                                 type="text"
                                 id="matricula"
-                                placeholder="Ej. A001"
+                                placeholder="Ej. ALU001"
                                 required
                             >
-
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Teléfono
-                            </label>
+                            <label>Teléfono</label>
 
                             <input
                                 type="text"
@@ -186,37 +139,28 @@
                                 placeholder="Ej. 6671234567"
                                 required
                             >
-
                         </div>
 
                         <div class="form-group">
-
-                            <label>
-                                Fecha de registro
-                            </label>
+                            <label>Fecha de registro</label>
 
                             <input
                                 type="date"
                                 id="fecha_registro"
                                 required
                             >
-
                         </div>
 
                     </div>
 
                     <div class="form-buttons">
-
                         <button
                             type="submit"
                             id="btnGuardar"
                             class="btn-primary"
                         >
-
                             Guardar Alumno
-
                         </button>
-
                     </div>
 
                 </form>
@@ -224,8 +168,6 @@
             </div>
 
         </section>
-
-        <!-- TABLA -->
 
         <section class="table-section">
 
@@ -238,33 +180,19 @@
                 <table class="custom-table">
 
                     <thead>
-
                         <tr>
-
                             <th>ID Alumno</th>
-
                             <th>Nombre</th>
-
                             <th>Correo</th>
-
                             <th>Matrícula</th>
-
                             <th>Teléfono</th>
-
                             <th>Fecha Registro</th>
-
-                            <th>ID Usuario</th>
-
                             <th>Acciones</th>
-
                         </tr>
-
                     </thead>
 
                     <tbody id="tablaAlumnos">
-
                         <!-- JS -->
-
                     </tbody>
 
                 </table>
@@ -278,17 +206,11 @@
 </div>
 
 <script>
-
     function cerrarSesion() {
-
         localStorage.clear();
-
         alert('Sesión cerrada correctamente');
-
         window.location.href = '/login.html';
-
     }
-
 </script>
 
 <script src="/js/alumnos.js"></script>
