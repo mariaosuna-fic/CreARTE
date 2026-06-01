@@ -120,6 +120,7 @@ El proyecto está diseñado bajo una arquitectura cliente-servidor, donde el fro
 
 ## 3.6. Estructura de la Aplicación
 
+```text
 CreARTE/
 ├── backend/
 │   ├── database/
@@ -146,6 +147,7 @@ CreARTE/
 │   ├── clases.html
 │   └── ...
 └── README.md
+```
 
 ---
 
