@@ -311,7 +311,47 @@ PORT=3000
 
 Las credenciales reales de conexión no se colocan directamente en el repositorio público por seguridad.
 
-### 6.2.6. Ejecutar el servidor en desarrollo
+### 6.2.6. Conexión local con MySQL
+
+Para ejecutar el sistema de manera local, es necesario contar con MySQL instalado o tener acceso a una base de datos MySQL.
+
+El proyecto incluye un script SQL en la ruta:
+
+```text
+backend/database/script_datos.sql
+```
+
+Este archivo se debe ejecutar en MySQL Workbench o en otra herramienta de administración de MySQL para crear la base de datos `CREARTE` y sus tablas principales.
+
+Después de crear la base de datos, se debe crear un archivo `.env` dentro de la carpeta `backend` con los datos de conexión local:
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=contraseña_de_mysql
+DB_NAME=CREARTE
+DB_PORT=3306
+JWT_SECRET=clave_secreta_para_tokens
+PORT=3000
+```
+
+El archivo `.env` no se sube al repositorio porque contiene información sensible. Cada persona que ejecute el proyecto localmente debe crear su propio archivo `.env` con los datos de su instalación de MySQL.
+
+Una vez configurada la base de datos y el archivo `.env`, se puede iniciar el backend con:
+
+```bash
+node server.js
+```
+
+o:
+
+```bash
+npx nodemon server.js
+```
+
+Si la conexión es correcta, el backend podrá consultar, registrar, actualizar y eliminar información en la base de datos local.
+
+### 6.2.7. Ejecutar el servidor en desarrollo
 
 ```bash
 node server.js
@@ -323,7 +363,7 @@ También puede ejecutarse con nodemon:
 npx nodemon server.js
 ```
 
-### 6.2.7. Abrir la aplicación
+### 6.2.8. Abrir la aplicación
 
 Una vez iniciado el servidor local, se puede acceder desde el navegador mediante la ruta configurada para el proyecto.
 
@@ -331,7 +371,7 @@ Una vez iniciado el servidor local, se puede acceder desde el navegador mediante
 http://localhost:3000
 ```
 
-### 6.2.8. Servidor remoto
+### 6.2.9. Servidor remoto
 
 El backend desplegado en Render puede consultarse mediante la siguiente dirección:
 
@@ -345,7 +385,7 @@ https://crearte-or0f.onrender.com
 
 Esta sección describe la forma en que el usuario puede ingresar y utilizar las funciones principales del sistema CREARTE.
 
-## Flujo general del usuario
+## 7.1. Flujo general del usuario
 
 1. El usuario entra a la página principal.
 2. Puede revisar información de la academia y cursos.
@@ -354,7 +394,7 @@ Esta sección describe la forma en que el usuario puede ingresar y utilizar las 
 5. Según su rol, accede a las funciones correspondientes.
 6. El administrador puede gestionar clases, alumnos, profesores, horarios, salones, inscripciones, mensualidades y pagos.
 
-## 7.1. Acceso a la página principal
+## 7.2. Acceso a la página principal
 
 El usuario debe ingresar al sitio web del sistema:
 
@@ -365,7 +405,7 @@ https://cre-arte.vercel.app/
 La página principal funciona como la primera vista del sistema CREARTE. Desde esta sección, los usuarios pueden conocer información general sobre la academia, sus cursos y las opciones principales de navegación.
  
 
-## 7.2. Registro de usuario
+## 7.3. Registro de usuario
 
 Para crear una cuenta nueva, el usuario debe:
 
@@ -377,7 +417,7 @@ Para crear una cuenta nueva, el usuario debe:
 
 La información registrada se envía al backend y se almacena en la base de datos MySQL.
 
-## 7.3. Inicio de sesión
+## 7.4. Inicio de sesión
 
 Para ingresar al sistema, el usuario debe:
 
@@ -389,7 +429,7 @@ Para ingresar al sistema, el usuario debe:
 
 Si los datos son correctos, el sistema permite el acceso de acuerdo con el rol del usuario.
 
-## Credenciales de administrador (prueba)
+### Credenciales de administrador (prueba)
 
 Para acceder al panel administrativo del sistema, se puede utilizar el siguiente usuario de prueba:
 
@@ -398,7 +438,7 @@ Correo: carlos1@gmail.com
 Contraseña: carlos1
 ``` 
 
-## 7.4. Módulo CRUD seleccionado: Clases
+## 7.5. Módulo CRUD seleccionado: Clases
 
 Para cumplir con el requerimiento de creación, lectura, actualización y eliminación de registros, se seleccionó la entidad **Clase**.
 
@@ -431,7 +471,7 @@ Este módulo permite administrar las clases disponibles dentro de la academia CR
 6. Para editar, seleccionar la clase registrada y modificar sus datos.
 7. Para eliminar, seleccionar la opción correspondiente y confirmar la eliminación.
 
-## 7.5. Consulta de cursos
+## 7.6. Consulta de cursos
 
 Los usuarios pueden visualizar los cursos disponibles de la academia, como:
 
@@ -440,7 +480,7 @@ Los usuarios pueden visualizar los cursos disponibles de la academia, como:
 - Danza.
 - Escultura.
 
-## 7.6. Gestión administrativa
+## 7.7. Gestión administrativa
 
 El sistema está pensado para facilitar el control de información académica y administrativa, permitiendo que los datos se almacenen de forma organizada en la base de datos.
 
