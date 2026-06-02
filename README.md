@@ -198,13 +198,13 @@ Base de Datos MySQL
 
 El sistema CREARTE se encuentra desplegado utilizando diferentes servicios en la nube para separar las responsabilidades de cada componente.
 
-text
+```text
 Frontend (Vercel)
         ↓
 Backend/API (Render)
         ↓
 Base de Datos MySQL (Aiven)
-
+```
 
 ### Vercel
 
