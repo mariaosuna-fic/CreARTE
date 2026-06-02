@@ -8,6 +8,7 @@
 **Repositorio:** https://github.com/mariaosuna-fic/CreARTE  
 **Sitio web:** https://cre-arte.vercel.app/  
 **Backend:** https://crearte-or0f.onrender.com  
+**Base de datos MySQL:** Aiven https://aiven.io/
 
 ## Integrantes del Equipo
 
@@ -193,7 +194,33 @@ Base de Datos MySQL
 | Backend | Procesa las solicitudes del frontend, maneja la lógica del sistema y se comunica con la base de datos. |
 | Base de Datos | Almacena la información de usuarios, alumnos, profesores, clases, horarios, pagos e inscripciones. |
 
-## 5.3. Funcionamiento general
+## 5.3. Infraestructura y Despliegue
+
+El sistema CREARTE se encuentra desplegado utilizando diferentes servicios en la nube para separar las responsabilidades de cada componente.
+
+text
+Frontend (Vercel)
+        ↓
+Backend/API (Render)
+        ↓
+Base de Datos MySQL (Aiven)
+
+
+### Vercel
+
+Vercel se utiliza para alojar el frontend del sistema, incluyendo las páginas HTML, hojas de estilo CSS y archivos JavaScript que conforman la interfaz de usuario.
+
+### Render
+
+Render se utiliza para alojar el backend desarrollado con Node.js y Express.js. El backend procesa las solicitudes realizadas por el frontend y se comunica con la base de datos.
+
+### Aiven
+
+Aiven se utiliza como proveedor de servicios en la nube para la base de datos MySQL del proyecto. La base de datos almacena la información relacionada con usuarios, alumnos, profesores, clases, horarios, inscripciones y pagos.
+
+La conexión entre Render y Aiven se realiza mediante variables de entorno configuradas de forma segura, evitando exponer credenciales directamente en el código fuente del proyecto.
+
+## 5.4. Funcionamiento general
 
 ```text
 1. El usuario interactúa con la interfaz web.
@@ -205,13 +232,13 @@ Base de Datos MySQL
 7. El frontend muestra el resultado al usuario.
 ```
 
-## 5.4. Diagrama de clases
+## 5.5. Diagrama de clases
 
 El siguiente diagrama representa la estructura lógica y las relaciones principales entre las entidades del sistema CREARTE.
 
 ![Diagrama de clases](./public/assets/diagrama-clases.png)
 
-### 5.4.1. Diagrama de clases - Ejemplo
+### 5.5.1. Diagrama de clases - Ejemplo
 
 El sistema CreARTE funciona como una plataforma administrativa para una academia de arte.
 
@@ -251,7 +278,7 @@ El sistema CREARTE puede utilizarse de dos formas: mediante la versión desplega
 5. Verificar que se haya creado la base de datos `CREARTE`.
 6. Colocar los datos de conexión en el archivo `.env`.
 
-## 6.1. Opción 1: Uso del sistema desplegado
+## 6.1. Opción 1: Uso del sistema desplegado (nube)
 
 La forma más sencilla de revisar el sistema es mediante los enlaces desplegados.
 
@@ -708,3 +735,4 @@ El sistema cumple con los requerimientos solicitados, ya que incluye código del
 - Documentación oficial de JWT.
 - Documentación oficial de bcrypt.
 - Diseño del sistema en Figma.
+- Documentación oficial de Aiven.
