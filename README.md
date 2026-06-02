@@ -8,6 +8,7 @@
 **Repositorio:** https://github.com/mariaosuna-fic/CreARTE  
 **Sitio web:** https://cre-arte.vercel.app/  
 **Backend:** https://crearte-or0f.onrender.com  
+**Base de datos MySQL:** Aiven https://aiven.io/
 
 ## Integrantes del Equipo
 
@@ -25,13 +26,25 @@ CREARTE es un sistema web desarrollado para apoyar la administración académica
 
 El sistema busca reducir el uso de registros manuales, evitar errores en la administración de datos y permitir que la información pueda consultarse de forma más rápida, clara y ordenada desde una plataforma web.
 
+## Cobertura o Alcance
+
+El sistema CREARTE cubre la gestión básica de una academia de artes, incluyendo usuarios, alumnos, profesores, clases, horarios, salones, inscripciones, asistencias, mensualidades y pagos.
+
+El sistema contempla funciones administrativas y de consulta desde una aplicación web. No incluye por ahora facturación fiscal, pagos en línea reales ni integración con plataformas externas de pago.
+
 ---
 
 # 2. Resumen del Sistema
 
+## Objetivo General
+
 CREARTE permite gestionar la información principal de una academia artística mediante una aplicación web conectada a una base de datos MySQL. El sistema cuenta con una interfaz visual para los usuarios y un backend encargado de procesar las solicitudes, conectarse con la base de datos y responder a las operaciones realizadas desde el frontend.
 
+## Funcionalidades Principales
+
 Entre sus funciones principales se encuentran el registro de usuarios, inicio de sesión, administración de clases, consulta de cursos y manejo de información académica relacionada con alumnos, profesores y pagos.
+
+## Arquitectura General 
 
 El proyecto está diseñado bajo una arquitectura cliente-servidor, donde el frontend se encarga de la interacción con el usuario y el backend procesa la lógica del sistema mediante rutas y servicios conectados a la base de datos.
 
@@ -97,6 +110,46 @@ El proyecto está diseñado bajo una arquitectura cliente-servidor, donde el fro
 | Base de datos relacional | La información se organiza en tablas relacionadas dentro de MySQL. |
 | Despliegue web | El frontend se encuentra publicado en Vercel y el backend en Render. |
 
+## 3.5. Dependencias principales del backend
+
+- express: creación del servidor y rutas.
+- mysql2: conexión con la base de datos MySQL.
+- cors: permite comunicación entre frontend y backend.
+- dotenv: manejo de variables de entorno.
+- bcrypt: cifrado de contraseñas.
+- jsonwebtoken: generación y validación de tokens JWT.
+
+## 3.6. Estructura de la Aplicación
+
+```text
+CreARTE/
+├── backend/
+│   ├── database/
+│   │   ├── db.js
+│   │   └── script_datos.sql
+│   ├── middlewares/
+│   │   └── auth.js
+│   ├── routes/
+│   │   ├── autenticacion.routes.js
+│   │   ├── clases.routes.js
+│   │   ├── alumnos.routes.js
+│   │   ├── profesores.routes.js
+│   │   ├── pagos.routes.js
+│   │   └── ...
+│   ├── package.json
+│   └── server.js
+├── public/
+│   ├── css/
+│   ├── js/
+│   ├── img/
+│   ├── index.html
+│   ├── login.html
+│   ├── registro.html
+│   ├── clases.html
+│   └── ...
+└── README.md
+```
+
 ---
 
 # 4. Diseño del Sistema
@@ -141,7 +194,33 @@ Base de Datos MySQL
 | Backend | Procesa las solicitudes del frontend, maneja la lógica del sistema y se comunica con la base de datos. |
 | Base de Datos | Almacena la información de usuarios, alumnos, profesores, clases, horarios, pagos e inscripciones. |
 
-## 5.3. Funcionamiento general
+## 5.3. Infraestructura y Despliegue
+
+El sistema CREARTE se encuentra desplegado utilizando diferentes servicios en la nube para separar las responsabilidades de cada componente.
+
+```text
+Frontend (Vercel)
+        ↓
+Backend/API (Render)
+        ↓
+Base de Datos MySQL (Aiven)
+```
+
+### Vercel
+
+Vercel se utiliza para alojar el frontend del sistema, incluyendo las páginas HTML, hojas de estilo CSS y archivos JavaScript que conforman la interfaz de usuario.
+
+### Render
+
+Render se utiliza para alojar el backend desarrollado con Node.js y Express.js. El backend procesa las solicitudes realizadas por el frontend y se comunica con la base de datos.
+
+### Aiven
+
+Aiven se utiliza como proveedor de servicios en la nube para la base de datos MySQL del proyecto. La base de datos almacena la información relacionada con usuarios, alumnos, profesores, clases, horarios, inscripciones y pagos.
+
+La conexión entre Render y Aiven se realiza mediante variables de entorno configuradas de forma segura, evitando exponer credenciales directamente en el código fuente del proyecto.
+
+## 5.4. Funcionamiento general
 
 ```text
 1. El usuario interactúa con la interfaz web.
@@ -153,13 +232,13 @@ Base de Datos MySQL
 7. El frontend muestra el resultado al usuario.
 ```
 
-## 5.4. Diagrama de clases
+## 5.5. Diagrama de clases
 
 El siguiente diagrama representa la estructura lógica y las relaciones principales entre las entidades del sistema CREARTE.
 
 ![Diagrama de clases](./public/assets/diagrama-clases.png)
 
-### 5.4.1. Diagrama de clases - Ejemplo
+### 5.5.1. Diagrama de clases - Ejemplo
 
 El sistema CreARTE funciona como una plataforma administrativa para una academia de arte.
 
@@ -180,7 +259,26 @@ El diagrama de clases representa cómo se relacionan todos estos elementos dentr
 
 El sistema CREARTE puede utilizarse de dos formas: mediante la versión desplegada en internet o ejecutando el proyecto de manera local para desarrollo.
 
-## 6.1. Opción 1: Uso del sistema desplegado
+## Requisitos de software
+
+- Node.js instalado.
+- npm instalado.
+- MySQL o servicio de base de datos MySQL disponible.
+- MySQL Workbench o alguna herramienta para administrar la base de datos.
+- Navegador web moderno.
+- Git instalado.
+- Visual Studio Code u otro editor de código.
+
+## Configuración de la base de datos
+
+1. Abrir MySQL Workbench.
+2. Crear una conexión a MySQL.
+3. Abrir el archivo `backend/database/script_datos.sql`.
+4. Ejecutar el script completo.
+5. Verificar que se haya creado la base de datos `CREARTE`.
+6. Colocar los datos de conexión en el archivo `.env`.
+
+## 6.1. Opción 1: Uso del sistema desplegado (nube)
 
 La forma más sencilla de revisar el sistema es mediante los enlaces desplegados.
 
@@ -240,7 +338,47 @@ PORT=3000
 
 Las credenciales reales de conexión no se colocan directamente en el repositorio público por seguridad.
 
-### 6.2.6. Ejecutar el servidor en desarrollo
+### 6.2.6. Conexión local con MySQL
+
+Para ejecutar el sistema de manera local, es necesario contar con MySQL instalado o tener acceso a una base de datos MySQL.
+
+El proyecto incluye un script SQL en la ruta:
+
+```text
+backend/database/script_datos.sql
+```
+
+Este archivo se debe ejecutar en MySQL Workbench o en otra herramienta de administración de MySQL para crear la base de datos `CREARTE` y sus tablas principales.
+
+Después de crear la base de datos, se debe crear un archivo `.env` dentro de la carpeta `backend` con los datos de conexión local:
+
+```env
+DB_HOST=localhost
+DB_USER=root
+DB_PASSWORD=contraseña_de_mysql
+DB_NAME=CREARTE
+DB_PORT=3306
+JWT_SECRET=clave_secreta_para_tokens
+PORT=3000
+```
+
+El archivo `.env` no se sube al repositorio porque contiene información sensible. Cada persona que ejecute el proyecto localmente debe crear su propio archivo `.env` con los datos de su instalación de MySQL.
+
+Una vez configurada la base de datos y el archivo `.env`, se puede iniciar el backend con:
+
+```bash
+node server.js
+```
+
+o:
+
+```bash
+npx nodemon server.js
+```
+
+Si la conexión es correcta, el backend podrá consultar, registrar, actualizar y eliminar información en la base de datos local.
+
+### 6.2.7. Ejecutar el servidor en desarrollo
 
 ```bash
 node server.js
@@ -252,7 +390,7 @@ También puede ejecutarse con nodemon:
 npx nodemon server.js
 ```
 
-### 6.2.7. Abrir la aplicación
+### 6.2.8. Abrir la aplicación
 
 Una vez iniciado el servidor local, se puede acceder desde el navegador mediante la ruta configurada para el proyecto.
 
@@ -260,7 +398,7 @@ Una vez iniciado el servidor local, se puede acceder desde el navegador mediante
 http://localhost:3000
 ```
 
-### 6.2.8. Servidor remoto
+### 6.2.9. Servidor remoto
 
 El backend desplegado en Render puede consultarse mediante la siguiente dirección:
 
@@ -274,7 +412,16 @@ https://crearte-or0f.onrender.com
 
 Esta sección describe la forma en que el usuario puede ingresar y utilizar las funciones principales del sistema CREARTE.
 
-## 7.1. Acceso a la página principal
+## 7.1. Flujo general del usuario
+
+1. El usuario entra a la página principal.
+2. Puede revisar información de la academia y cursos.
+3. Puede registrarse como alumno o profesor.
+4. Puede iniciar sesión.
+5. Según su rol, accede a las funciones correspondientes.
+6. El administrador puede gestionar clases, alumnos, profesores, horarios, salones, inscripciones, mensualidades y pagos.
+
+## 7.2. Acceso a la página principal
 
 El usuario debe ingresar al sitio web del sistema:
 
@@ -285,7 +432,7 @@ https://cre-arte.vercel.app/
 La página principal funciona como la primera vista del sistema CREARTE. Desde esta sección, los usuarios pueden conocer información general sobre la academia, sus cursos y las opciones principales de navegación.
  
 
-## 7.2. Registro de usuario
+## 7.3. Registro de usuario
 
 Para crear una cuenta nueva, el usuario debe:
 
@@ -297,7 +444,7 @@ Para crear una cuenta nueva, el usuario debe:
 
 La información registrada se envía al backend y se almacena en la base de datos MySQL.
 
-## 7.3. Inicio de sesión
+## 7.4. Inicio de sesión
 
 Para ingresar al sistema, el usuario debe:
 
@@ -309,16 +456,16 @@ Para ingresar al sistema, el usuario debe:
 
 Si los datos son correctos, el sistema permite el acceso de acuerdo con el rol del usuario.
 
-## Credenciales de administrador (prueba)
+### Credenciales de administrador (prueba)
 
 Para acceder al panel administrativo del sistema, se puede utilizar el siguiente usuario de prueba:
 
 ```text
 Correo: carlos1@gmail.com
 Contraseña: carlos1
-
-## 7.4. Módulo CRUD seleccionado: Clases
 ``` 
+
+## 7.5. Módulo CRUD seleccionado: Clases
 
 Para cumplir con el requerimiento de creación, lectura, actualización y eliminación de registros, se seleccionó la entidad **Clase**.
 
@@ -351,7 +498,7 @@ Este módulo permite administrar las clases disponibles dentro de la academia CR
 6. Para editar, seleccionar la clase registrada y modificar sus datos.
 7. Para eliminar, seleccionar la opción correspondiente y confirmar la eliminación.
 
-## 7.5. Consulta de cursos
+## 7.6. Consulta de cursos
 
 Los usuarios pueden visualizar los cursos disponibles de la academia, como:
 
@@ -360,7 +507,7 @@ Los usuarios pueden visualizar los cursos disponibles de la academia, como:
 - Danza.
 - Escultura.
 
-## 7.6. Gestión administrativa
+## 7.7. Gestión administrativa
 
 El sistema está pensado para facilitar el control de información académica y administrativa, permitiendo que los datos se almacenen de forma organizada en la base de datos.
 
@@ -464,6 +611,37 @@ Para proteger la información almacenada, el sistema considera las siguientes me
 - Evitar exponer datos sensibles directamente en el código público.
 - Validación de datos antes de enviarlos a la base de datos.
 
+## 8.9. Consultas principales a la base de datos
+
+### Consultar clases disponibles
+```sql
+SELECT * FROM clase;
+```
+
+### Consultar alumnos registrados
+```sql
+SELECT 
+  alumno.id_alumno,
+  usuario.nombre,
+  usuario.correo,
+  alumno.matricula,
+  alumno.telefono
+FROM alumno
+INNER JOIN usuario ON alumno.id_usuario = usuario.id_usuario;
+```
+
+### Consultar pagos realizados
+```sql
+SELECT 
+  pago.id_pago,
+  pago.fecha_pago,
+  pago.monto_pagado,
+  pago.metodo_pago,
+  mensualidad.concepto
+FROM pago
+INNER JOIN mensualidad ON pago.id_mensualidad = mensualidad.id_mensualidad;
+```
+
 ---
 
 # 9. Evidencia Visual del Sistema
@@ -484,7 +662,7 @@ En esta sección se muestran capturas de pantalla relacionadas con el funcionami
 
 ## 9.4. CRUD de clases
 
-![CRUD de clases](./public/assets/crud-clases.png)
+![CRUD de clases](./public/assets/CRUD-administrador.png)
 
 ## 9.5. Base de datos
 
@@ -492,8 +670,69 @@ En esta sección se muestran capturas de pantalla relacionadas con el funcionami
 
 ---
 
-# 10. Conclusión
+# 10. Mantenimiento y Actualizaciones
+
+## 10.1. Plan de actualización
+
+El sistema puede actualizarse mediante cambios en el repositorio de GitHub. Para cada mejora se recomienda:
+
+1. Crear o modificar los archivos necesarios.
+2. Probar los cambios localmente.
+3. Subir los cambios al repositorio.
+4. Verificar el funcionamiento del frontend en Vercel.
+5. Verificar el funcionamiento del backend en Render.
+
+## 10.2. Copias de seguridad y recuperación
+
+Se recomienda realizar respaldos periódicos de la base de datos MySQL exportando el archivo `.sql` desde MySQL Workbench.
+
+En caso de pérdida de información, se puede restaurar la base de datos ejecutando nuevamente el respaldo más reciente.
+
+## 10.3. Solución de problemas
+
+- Si el backend no responde, revisar el servicio en Render.
+- Si la base de datos no conecta, revisar las variables del archivo `.env`.
+- Si el frontend no carga datos, revisar que la URL del backend sea correcta.
+- Si el login falla, revisar que el usuario exista y que la contraseña esté registrada correctamente.
+
+---
+
+# 11. Seguridad
+
+## 11.1. Manejo de datos sensibles
+
+Las credenciales de conexión a la base de datos no se almacenan directamente en el código fuente. Se utilizan variables de entorno dentro de un archivo `.env`, el cual no debe subirse al repositorio público.
+
+## 11.2. Cifrado de contraseñas
+
+Las contraseñas de los usuarios se cifran utilizando bcrypt antes de almacenarse en la base de datos.
+
+## 11.3. Autenticación
+
+El sistema utiliza inicio de sesión mediante correo y contraseña. Al iniciar sesión correctamente, el backend genera un token JWT para identificar al usuario.
+
+## Control de acceso
+
+El sistema contempla roles de usuario: administrador, alumno y profesor. Cada rol debe tener acceso solamente a las funciones correspondientes.
+
+---
+
+# 12. Conclusión
 
 CREARTE es un sistema web diseñado para apoyar la administración académica y administrativa de una academia de artes. El proyecto integra una interfaz principal, registro e inicio de sesión de usuarios, módulo CRUD para la entidad Clase, conexión con base de datos MySQL y documentación técnica para su instalación, ejecución y uso.
 
-El sistema cumple con los requerimientos solicitados, ya que incluye código del proyecto, documentación del sistema, información del producto, integrantes del equipo, requisitos, arquitectura, instalación, uso y modelado de base de datos.
+El sistema cumple con los requerimientos solicitados, ya que incluye código del proyecto, documentación del sistema, información del producto, integrantes del equipo, requisitos, arquitectura, instalación, uso, modelado de base de datos, mantenimiento, referencias, consultas SQL y seguridad completa.
+
+---
+
+# Referencias y Recursos
+
+- Documentación oficial de Node.js.
+- Documentación oficial de Express.js.
+- Documentación oficial de MySQL.
+- Documentación oficial de Vercel.
+- Documentación oficial de Render.
+- Documentación oficial de JWT.
+- Documentación oficial de bcrypt.
+- Diseño del sistema en Figma.
+- Documentación oficial de Aiven.
